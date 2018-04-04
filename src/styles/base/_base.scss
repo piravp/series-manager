@@ -1,0 +1,18 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.6rem;
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+
+//File naming convention: Any scss files which is not the entry point (styles.scss) is called a partial - partial styles 
+//                        start with an underscore. 
+// Store base styles
+// e.g. Global font family
