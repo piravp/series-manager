@@ -41,6 +41,7 @@ export default class SeriesListRenderer extends React.Component {
                 this.setState({
                     result: response
                 });
+                //console.log(response);
             });
         }
 

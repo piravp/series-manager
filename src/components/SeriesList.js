@@ -14,10 +14,10 @@ export default class SeriesList extends React.Component {
                             <th></th>    
                             <th>Show</th>
                             <th>Rating</th>
-                            <th>Vote Count</th>
+                            <th>First Air Date</th>
                         </tr>
                         {this.props.shows.map((item, index) => {
-                                return <ListItem index={index+1} key={item.id} poster_path={item.poster_path} name={item.name} vote_avg={item.vote_average} vote_count={item.vote_count}/>
+                                return <ListItem index={index+1} key={item.id} poster_path={item.poster_path} name={item.name} vote_avg={item.vote_average} air_date={item.first_air_date}/>
                             })
                         }
                     </tbody>
