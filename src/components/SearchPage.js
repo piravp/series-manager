@@ -1,10 +1,55 @@
 import React from 'react';
 
-const SearchPage = () => (
-    <div>
-        <p>This is the search page.</p>
+import SeriesList from './SeriesList';
+import Header from './Header';
+import SeriesListRenderer from './SeriesListRenderer';
+import SearchBar from './SearchBar';
+import TMDBConfiguration from './TMDBConfiguration';
 
-    </div>
-);
 
- export default SearchPage;
+export default class SearchPage extends React.Component {
+    
+    state = {
+        searchTerm: "",
+        submitted: false
+    }
+    
+    handleSearch = (e) => {
+        const value = e.target.value;
+
+        if(this.state.submitted) {
+            this.setState({
+                   searchTerm: value, 
+                   submitted: false
+            });
+        }
+        
+        this.setState({ searchTerm: value });
+    };
+
+    handleOnSearchSubmit = (e) => {
+        e.preventDefault();
+        this.setState({ submitted: true });
+    }
+
+    render() {
+        return (
+            <div>
+                <SearchBar handleSearch={this.handleSearch} 
+                         searchTerm={this.state.searchTerm}
+                         handleOnSearchSubmit={this.handleOnSearchSubmit}/>
+
+
+                <SeriesListRenderer searchTerm={this.state.searchTerm} 
+                                    submitted={this.state.submitted}
+                                    resetSubmitted={() => this.setState({ submitted: false })}/>
+
+
+
+
+            </div>
+        )
+    }
+};
+
+//<TMDBConfiguration />
