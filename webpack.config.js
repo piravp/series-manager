@@ -19,7 +19,8 @@ module.exports = {
     },
     devtool: 'cheap-module-eval-source-map',
     devServer: {
-        contentBase: path.join(__dirname, 'public')
+        contentBase: path.join(__dirname, 'public'),
+        historyApiFallback: true
     }
 };
 
@@ -27,3 +28,4 @@ module.exports = {
 // css-loader:      Teach webpack how to take a CSS file and turn it into a JavaScript representation
 // sass-loader:     Works just like the babel-loader works for jsx. This module is going to convert scss/sass to regular
 //                  css. It's using the node-sass module behind the scenes (just like babel-loader uses babel-core).
+//historyApiFallback: Tell the devServer to always serve the index.html for any 404 (so we'll handle any route client-side)
