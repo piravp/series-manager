@@ -2,3 +2,4 @@ node_modules/
 public/bundle.js
 *.png
 .vscode/
+config.json
