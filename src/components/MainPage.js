@@ -33,8 +33,6 @@ export default class MainPage extends React.Component {
     render() {
         return (
             <div>
-                <Header  />
-
                 <Toolbar handleSearch={this.handleSearch} 
                          searchTerm={this.state.searchTerm}
                          handleOnSearchSubmit={this.handleOnSearchSubmit}/>

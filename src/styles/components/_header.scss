@@ -1,7 +1,15 @@
-.header h1 {
+.header-style {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 8rem 0rem 10rem 0rem;
-    font-size: 200%;
+    
+    h1 {
+        font-size: 200%;
+    }
+}
+
+
+.is-active {
+    font-weight: bold;
 }
