@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ListItem from './ListItem';
+import SeriesListItem from './SeriesListItem';
 
 export default class SeriesList extends React.Component {
     render() {

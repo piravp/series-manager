@@ -1,7 +1,6 @@
 import React from 'react';
 
 import SeriesList from './SeriesList';
-import Header from './Header';
 import SeriesListRenderer from './SeriesListRenderer';
 import SearchBar from './SearchBar';
 

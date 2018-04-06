@@ -5,7 +5,7 @@ import axios from 'axios';
 import SeriesList from './SeriesList';
 
 // Config
-import CONFIG from '../../config.json'
+import CONFIG from '../../../config.json'
 
 // Constants
 const API_KEY = CONFIG.api_key;

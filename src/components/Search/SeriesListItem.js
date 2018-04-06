@@ -2,7 +2,7 @@ import React from 'react';
 
 const IMAGE_BASE_URI = 'http://image.tmdb.org/t/p/w185/';
 
-const ListItem = ({index, poster_path, name, vote_avg, air_date}) => (
+const SeriesListItem = ({index, poster_path, name, vote_avg, air_date}) => (
        
         <tr>
             <td>{index}</td>
@@ -16,4 +16,4 @@ const ListItem = ({index, poster_path, name, vote_avg, air_date}) => (
 
 );
 
-export default ListItem;
+export default SeriesListItem;

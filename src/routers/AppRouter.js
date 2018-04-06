@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
 // Custom components
 import HomePage from '../components/HomePage';
-import Header from '../components/Header';
+import Header from '../components/Header/Header';
 import NotFoundPage from '../components/NotFoundPage';
-import SearchPage from '../components/SearchPage';
+import SearchPage from '../components/Search/SearchPage';
 
 
 const AppRouter = () => (
