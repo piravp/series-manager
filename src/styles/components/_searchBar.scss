@@ -1,6 +1,11 @@
-.searchContainer > p {
+.searchBarContainer {
     display: flex;
-    padding: 5rem 0 0 0;
     justify-content: center;
-    color: rgb(141, 137, 137);
+
+    input {
+        min-width: 50rem;
+        min-height: 2rem;
+        text-align: center; 
+    }
 }
+

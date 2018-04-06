@@ -49,7 +49,7 @@ export default class SeriesListRenderer extends React.Component {
 
     render() {
         return (
-            <div className="searchContainer">
+            <div className="seriesListResultContainer">
                 {
                     this.state.result.length > 0 ? <SeriesList shows={this.state.result}/> : <p>Uh-oh, no results to show. Perform a search to get going!</p>
                 }

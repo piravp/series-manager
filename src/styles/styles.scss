@@ -1,6 +1,7 @@
 @import './base/base';
-@import './components/series-list';
+@import './components/seriesList';
 @import './components/listItem';
 @import './components/header';
-@import './components/toolbar';
 @import './components/searchBar';
+@import './components/seriesListRenderer';
+@import './components/filterToolbar'
