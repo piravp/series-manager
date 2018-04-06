@@ -7,6 +7,24 @@ const incrementCount = ({ incrementBy = 1 } = {}) => ({
         incrementBy
 });
 
+const decrementCount = ({ decrementBy = 1 } = {}) => ({
+    type: 'DECREMENT',
+    decrementBy
+});
+
+const resetCount = () => ({
+    type: 'RESET',
+    reset: 0
+});
+
+const setCount = ({ count }) => ({
+    type: 'SET',
+    count
+});
+
+// Reducers
+// 1. Reducers are pure functions
+// 2. Never change state or action
 
 // Similar to setState
 // We set the default state using ={count:0}
@@ -18,11 +36,11 @@ const store = createStore ((state = { count: 0 }, action) => {
             };
         case 'DECREMENT':
             return {
-                count: state.count - 1
+                count: state.count - action.decrementBy
             };
         case 'RESET':
             return {
-                count: 0
+                count: action.reset
             };
         case 'SET':
             return {
@@ -54,18 +72,13 @@ const unsubscribe = store.subscribe(() => {
 store.dispatch(incrementCount({ incrementBy: 5 }));
 store.dispatch(incrementCount());
 
-store.dispatch({
-    type: 'RESET'   // Convenction to use capital letter for the action type
-});
+store.dispatch(resetCount());
 
-store.dispatch({
-    type: 'DECREMENT'   // Convenction to use capital letter for the action type
-});
+store.dispatch(decrementCount());
 
-store.dispatch({
-    type: 'SET',
-    count: 10
-});
+store.dispatch(decrementCount({ decrementBy: -10 }));
+
+store.dispatch(setCount({ count: 10 }));
 
 
 

@@ -4,7 +4,6 @@ import SeriesList from './SeriesList';
 import Header from './Header';
 import SeriesListRenderer from './SeriesListRenderer';
 import SearchBar from './SearchBar';
-import TMDBConfiguration from './TMDBConfiguration';
 
 
 export default class SearchPage extends React.Component {
