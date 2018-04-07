@@ -15,7 +15,7 @@ const store = configureStore();
 
 
 store.dispatch(addShow({
-    id: 3456,
+    id: 34516,
 
     name: 'Person of Interest',
     vote_avg: '8.6',
@@ -35,7 +35,7 @@ const firstShow = store.dispatch(addShow({
 }));
 
 store.dispatch(addShow({ 
-    id:13294, 
+    id:131294, 
 
     name:'Homeland', 
     vote_avg: '7.8',
@@ -47,7 +47,7 @@ store.dispatch(addShow({
 
 
 setTimeout(() => store.dispatch(addShow({
-    id:654, 
+    id:6514, 
 
     name:'Herrens veier', 
     vote_avg: '8.7',

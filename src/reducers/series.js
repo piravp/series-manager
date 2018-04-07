@@ -9,7 +9,7 @@ const seriesReducer = (state = seriesReducerDefaultState, action) => {
         case 'REMOVE_SHOW':
             return state.filter(show => show.id !== action.id);
         case 'REMOVE_ALL_SHOWS':
-            return [];            ;
+            return [];
         default:
             return state;
     }

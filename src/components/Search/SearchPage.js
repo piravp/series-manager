@@ -48,4 +48,3 @@ export default class SearchPage extends React.Component {
     }
 };
 
-//<TMDBConfiguration />

@@ -37,7 +37,7 @@ export default class SeriesListRenderer extends React.Component {
         // User pressed enter
         if(this.props.submitted){
             this.getSearchResults((response) => {
-                
+
                 this.setState({
                     result: response
                 });
