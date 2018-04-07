@@ -7,7 +7,8 @@ const SearchBar = (props) => (
         <form onSubmit={props.handleOnSearchSubmit}>
             <input  placeholder="Search for your series here" 
                     onChange={props.handleSearch}
-                    value={props.searchTerm}>
+                    value={props.searchTerm}
+                    autoFocus>
         
             </input>
         </form>
