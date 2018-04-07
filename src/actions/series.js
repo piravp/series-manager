@@ -1,10 +1,11 @@
 // ADD_SHOW
-export const addShow = ({ id, name, description, first_aired, createdAt } = {}) => ({
+export const addShow = ({ id, name, /*description,*/ vote_avg, first_aired, createdAt } = {}) => ({
     type: 'ADD_SHOW',
     show: {
         id,
         name,
-        description,
+        vote_avg,
+        /*description,*/
         first_aired,
         createdAt
     }
@@ -15,4 +16,10 @@ export const removeShow = ({ id } = {}) => ({
     type: 'REMOVE_SHOW',
     id
 });
+
+// REMOVE_ALL_SHOWS
+export const removeAllShows = () => ({
+    type: 'REMOVE_ALL_SHOWS'
+});
+
 

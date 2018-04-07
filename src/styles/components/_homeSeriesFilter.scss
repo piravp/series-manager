@@ -1,0 +1,22 @@
+.homeSeriesFilterContainer {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    
+    justify-content: space-around;
+    
+
+    input {
+        align-self: flex-start;
+        margin-left: 1.0rem;
+        text-align: center;
+        min-width: 30rem;
+
+    }
+
+    button {
+        align-self: flex-end;
+        margin-right: 1.0rem;        
+    }
+}

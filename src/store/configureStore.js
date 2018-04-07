@@ -13,7 +13,7 @@ export default () => {
     // and value:reducer which is supposed to manage that
     combineReducers({ 
         series: seriesReducer,
-        filter: filtersReducer 
+        filters: filtersReducer 
     }),
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
