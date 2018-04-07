@@ -44,7 +44,7 @@ store.dispatch(addShow({
     createdAt: 599 
 }));
 
-//store.dispatch(setTextFilter({ text: 'Homeland' }));
+
 
 setTimeout(() => store.dispatch(addShow({
     id:654, 
@@ -56,12 +56,11 @@ setTimeout(() => store.dispatch(addShow({
     createdAt: 2322 
 })), 1000)
 
-const jsx = (
+const app = (
     <Provider store={store}>
         <AppRouter />
     </Provider>
 );
 
-console.log(store.getState());
 
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(app, document.getElementById('app'));

@@ -4,16 +4,19 @@ const getVisibleSeries = (series, { text, sortBy }) => {
         const textMatch = show.name.toLowerCase().includes(text.toLowerCase());
         return textMatch;
     }).sort((a, b) => {
-        if(sortBy === 'date'){
-            // Synkende rekkefølge (nyest først)
-            console.log(a.createdAt < b.createdAt)
-            return a.createdAt < b.createdAt ? 1 : -1
-        } 
-        else if (sortBy === 'name'){
-            // Stigende rekkefølge
-            //console.log(a.name > b.name)
-            //return a.name.localeCompare(b.name);
-            return a.name > b.name;
+        switch(sortBy){
+            case 'name_ascending':
+                return a.name > b.name;
+            case 'name_descending':
+                return a.name < b.name;
+            case 'date_ascending':
+                return a.createdAt > b.createdAt; // ? 1 : -1
+            case 'date_descending':
+                return a.createdAt < b.createdAt;
+            case 'rating_ascending':
+                return a.vote_avg > b.vote_avg;
+            case 'rating_descending':
+                return a.vote_avg < b.vote_avg;
         }
     });
 };
