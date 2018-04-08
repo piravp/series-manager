@@ -9,7 +9,7 @@ import HomeSeriesFilter from './HomeSeriesFilter';
 const HomePage = (props) => (
         <div>
             <HomeSeriesFilter />
-            <div className="tableContainer">
+            <div className="homeTableContainer">
                 {
                     props.series.length===1 ? 
                         <p>Showing 1 show.</p> :

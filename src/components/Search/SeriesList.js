@@ -48,13 +48,7 @@ class SeriesList extends Component {
       ),
   }];
 
-  paginationConfig = {
-    simple: false,
-    defaultCurrent: 1,
-    total: this.state.totalShows,
-    position: 'both',
-    showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} shows.`
-  }
+
 
   onChange = (pagination, filters, sorter) => {
     console.log('params', pagination, filters, sorter);
@@ -77,20 +71,29 @@ class SeriesList extends Component {
     </div>
   );
 
+  paginationConfig = {
+    simple: false,
+    defaultCurrent: 1,
+    total: this.state.totalShows,
+    position: 'both',
+    showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} shows.`
+  }
+
+  tableProps = {
+    columns: this.columns,
+    className: "antdTableContainer",
+    dataSource: this.props.shows,
+    rowKey:  record => record.id ,
+    pagination: this.paginationConfig,
+    onChange: this.onChange,
+    expandRowByClick: true,
+    expandedRowRender: this.onExpandedRowRender
+  };
+
   render() {
     return (
-    //<div className="tableContainer">
-
     <div>
-      <Table  columns={this.columns} 
-              className="custom-antd-table-container"
-              dataSource={this.props.shows} 
-              rowKey={ record => record.id }
-              pagination={this.paginationConfig}
-              onChange={this.onChange}
-              expandRowByClick={true}
-              expandedRowRender={this.onExpandedRowRender} />
-
+      <Table {...this.tableProps} />
     </div>
     );
 }};
@@ -98,23 +101,3 @@ class SeriesList extends Component {
 
 //export default SeriesList;
 export default connect()(SeriesList);
-
-
-// <table>
-// <tbody>
-//     {/*Row*/}
-//     <tr className="col-labels">
-//         <th>#</th>
-//         <th></th>    
-//         <th>Show</th>
-//         <th>Rating</th>
-//         <th>First Air Date</th>
-//         <th>Add to list</th>
-//     </tr>
-//     {props.shows.map((item, index) => {
-//             return <SeriesListItem index={index+1} key={item.id} id={item.id} poster_path={item.poster_path} name={item.name} vote_avg={item.vote_average} air_date={item.first_air_date}/>
-//         })
-//     }
-// </tbody>
-// </table>
-
