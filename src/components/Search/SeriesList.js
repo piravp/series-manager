@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Icon, Divider } from 'antd';
+import { Table, Icon, Divider, message } from 'antd';
 import 'antd/lib/table/style/css'; // or antd/lib/button/style/css for css format file
 
 import SeriesListItem from './SeriesListItem';
@@ -43,7 +43,8 @@ class SeriesList extends Component {
                 vote_avg: record.vote_average,
                 first_aired: record.first_air_date,
                 createdAt: 20
-            }))
+            }));
+            message.success(`Successfully added ${record.name} to your list.`, 2)
           }}>
             Add
           </a>

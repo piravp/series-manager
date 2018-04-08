@@ -29,7 +29,9 @@ export default class SeriesListRenderer extends React.Component {
               }).catch(function(error){
                 console.log(error);
               });
-              //this.props.resetSubmitted();
+              // Prevent requests being sent right after the user pressed enter
+              // by resetting the submitted inside SearchPage's state
+              this.props.resetSubmitted();
 
         }
     };
@@ -45,7 +47,6 @@ export default class SeriesListRenderer extends React.Component {
                 //console.log(response);
             });
         }
-
     };
 
     render() {
