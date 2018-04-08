@@ -25,11 +25,12 @@ export default class SeriesListRenderer extends React.Component {
             axios.get(SEARCH+this.props.searchTerm).then(function(response){
                 result = response.data.results;
                 callback(result);
+                
               }).catch(function(error){
                 console.log(error);
               });
-              this.props.resetSubmitted();
-              return result;
+              //this.props.resetSubmitted();
+
         }
     };
     

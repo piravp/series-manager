@@ -10,8 +10,15 @@ const IMAGE_BASE_URI = 'http://image.tmdb.org/t/p/w185/';
 
 class SeriesList extends Component {
   state = {
-    totalShows: this.props.shows.length
-  }
+    totalShows: this.props.shows.length,
+    paginationConfig: {
+      simple: false,
+      defaultCurrent: 1,
+      position: 'both',
+      showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} shows.`
+    }
+
+  };
   
     columns = [{
       title: 'Poster', dataIndex: 'poster_path', key: 'poster_path',
@@ -52,11 +59,10 @@ class SeriesList extends Component {
 
   onChange = (pagination, filters, sorter) => {
     console.log('params', pagination, filters, sorter);
+    this.setState({ totalShows: '' })
   }
 
-  handleSizeChange = (e) => {
-    size = e.target.value;
-  }
+
 
   onExpandedRowRender = (record) => (
     <div className="expandedRowDetails">
@@ -71,29 +77,18 @@ class SeriesList extends Component {
     </div>
   );
 
-  paginationConfig = {
-    simple: false,
-    defaultCurrent: 1,
-    total: this.state.totalShows,
-    position: 'both',
-    showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} shows.`
-  }
-
-  tableProps = {
-    columns: this.columns,
-    className: "antdTableContainer",
-    dataSource: this.props.shows,
-    rowKey:  record => record.id ,
-    pagination: this.paginationConfig,
-    onChange: this.onChange,
-    expandRowByClick: true,
-    expandedRowRender: this.onExpandedRowRender
-  };
-
   render() {
+
     return (
     <div>
-      <Table {...this.tableProps} />
+        <Table  columns={this.columns}
+                className="antdTableContainer"
+                dataSource={this.props.shows}
+                rowKey={record => record.id} 
+                pagination={this.state.paginationConfig}
+                onChange={this.onChange}
+                expandRowByClick={true}
+                expandedRowRender={this.onExpandedRowRender}/>
     </div>
     );
 }};
@@ -101,3 +96,26 @@ class SeriesList extends Component {
 
 //export default SeriesList;
 export default connect()(SeriesList);
+
+// <Table {...this.tableProps} />
+
+// <Table     columns={this.columns}
+// className="antdTableContainer"
+// dataSource={this.props.shows}
+// rowKey={record => record.id} 
+// pagination={this.paginationConfig}
+// onChange={this.onChange}
+// expandRowByClick={true}
+// expandedRowRender={this.onExpandedRowRender}/>
+
+
+// tableProps: {
+//   columns: this.columns,
+//   className: "antdTableContainer",
+//   dataSource: this.props.shows,
+//   rowKey: record => record.id,
+//   pagination: this.paginationConfig,
+//   onChange: this.onChange,
+//   expandRowByClick: true,
+//   expandedRowRender : this.onExpandedRowRender
+// },
