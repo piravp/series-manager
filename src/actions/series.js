@@ -22,4 +22,11 @@ export const removeAllShows = () => ({
     type: 'REMOVE_ALL_SHOWS'
 });
 
+// GET_SHOW_DETAILS
+export const getShowDetails = ({ id }) => ({
+    type: 'GET_SHOW_DETAILS',
+    id
+});
+
+
 
