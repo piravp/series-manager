@@ -1,5 +1,5 @@
 // ADD_SHOW
-export const addShow = ({ id, name, /*description,*/ vote_avg, first_aired, createdAt } = {}) => ({
+export const addShow = ({ id, name, /*description,*/ vote_avg, first_aired, createdAt, poster_path=null } = {}) => ({
     type: 'ADD_SHOW',
     show: {
         id,
@@ -7,7 +7,8 @@ export const addShow = ({ id, name, /*description,*/ vote_avg, first_aired, crea
         vote_avg,
         /*description,*/
         first_aired,
-        createdAt
+        createdAt,
+        poster_path,
     }
 });
 

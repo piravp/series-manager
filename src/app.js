@@ -15,33 +15,36 @@ const store = configureStore();
 
 
 store.dispatch(addShow({
-    id: 34516,
+    id: 1411,
 
     name: 'Person of Interest',
     vote_avg: '8.6',
     /*description: 'An ex CIA officer, John Reese is employed by the creator of a top secret government program.',*/
     first_aired: '2011-08-20',
-    createdAt: 20
+    createdAt: 20,
+    poster_path: 'https://image.tmdb.org/t/p/w300/wJ1D6uvKmc5sqqdYfyNmWMMxS22.jpg'
 }));
 
 const firstShow = store.dispatch(addShow({ 
-    id:734, 
+    id: 32692, 
 
     name:'Blue Bloods', 
     vote_avg: '8.0',
     /*description:'New Yorks finest police offiers.',*/ 
     first_aired:'2013-09-19',
-    createdAt: 1209 
+    createdAt: 1209,
+    poster_path: 'https://image.tmdb.org/t/p/w300/4xWYZ0q6RlKnStWJlpz535uElfd.jpg'  
 }));
 
 store.dispatch(addShow({ 
-    id:131294, 
+    id:1407, 
 
     name:'Homeland', 
     vote_avg: '7.8',
     /*description:'Hysterical woman.', */
     first_aired:'2012-09-21',
-    createdAt: 599 
+    createdAt: 599,
+    poster_path: 'https://image.tmdb.org/t/p/w300/lT8o38ubu9uzcjZbkDtwsVizDeQ.jpg'
 }));
 
 

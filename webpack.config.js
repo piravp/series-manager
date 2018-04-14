@@ -15,6 +15,13 @@ module.exports = {
         }, {
             test: /\.s?css$/,
             use: ['style-loader', 'css-loader', 'sass-loader']
+        }, {
+            test: /\.(?:png|jpg|svg)$/,
+            loader: 'url-loader',
+            query: {
+                // Inline images smaller than 10kb as data URIs
+                limit: 10000
+            }
         }]
     },
     devtool: 'cheap-module-eval-source-map',
@@ -29,3 +36,4 @@ module.exports = {
 // sass-loader:     Works just like the babel-loader works for jsx. This module is going to convert scss/sass to regular
 //                  css. It's using the node-sass module behind the scenes (just like babel-loader uses babel-core).
 //historyApiFallback: Tell the devServer to always serve the index.html for any 404 (so we'll handle any route client-side)
+// url-loader: uploads local images to the server allowing you to use those in the application

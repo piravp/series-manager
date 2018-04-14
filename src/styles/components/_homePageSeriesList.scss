@@ -8,3 +8,20 @@
     align-items: center;
     
 }
+
+.cardsContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 5rem;
+    flex-wrap: wrap;
+}
+
+.singleCard {
+    padding: 5rem;
+}
+
+.ant-card.ant-card-bordered.ant-card-hoverable {
+    min-width: 25rem;
+    border-radius: 1rem;
+
+}

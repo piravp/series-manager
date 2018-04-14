@@ -54,12 +54,14 @@ class SeriesList extends Component {
       render: (text, record) => (
         <span>
           <a onClick={(e) => {
+            console.log(record);
             this.props.dispatch(addShow({
                 id: record.id,
                 name: record.name,
                 vote_avg: record.vote_average,
                 first_aired: record.first_air_date,
-                createdAt: 20
+                createdAt: 20,
+                poster_path: `${IMAGE_BASE_URI}${record.poster_path}`
             }));
             console.log(record);
             message.success(`Successfully added ${record.name} to your list.`, 2)
