@@ -18,7 +18,7 @@ const NOT_AVAILABLE = (
 let genresDict2 = {};
 class SeriesList extends Component {
   state = {
-      totalShows: this.props.shows.length,
+
       paginationConfig: {
         simple: false,
         defaultCurrent: 1,
@@ -53,7 +53,7 @@ class SeriesList extends Component {
       title: 'Action', key: 'action',
       render: (text, record) => (
         <span>
-          <a href="#" onClick={(e) => {
+          <a onClick={(e) => {
             this.props.dispatch(addShow({
                 id: record.id,
                 name: record.name,
@@ -78,7 +78,7 @@ class SeriesList extends Component {
 
   onChange = (pagination, filters, sorter) => {
     console.log('params', pagination, filters, sorter);
-    this.setState({ totalShows: '' })
+    
   }
 
   onExpandedRowRender = (record) => (
@@ -111,7 +111,7 @@ class SeriesList extends Component {
         genresDict.forEach(element => {
           genresDict2[element[Object.keys(element)[0]]]=element[Object.keys(element)[1]]
         });
-        console.log(genresDict2);
+        //console.log("Genres" + genresDict2);
       })
   }
 

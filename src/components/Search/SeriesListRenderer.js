@@ -19,19 +19,22 @@ export default class SeriesListRenderer extends React.Component {
         loading: false
     }
 
-    getSearchResults = (callback) => {
+    getSearchResults = (callback, page=1) => {
         
+        const { searchTerm } = this.props;
+
         // If search term is provided
-        if(this.props.searchTerm){
+        if(searchTerm){
             let result = "";
-            axios.get(SEARCH+this.props.searchTerm).then(function(response){
-                result = response.data.results;
-                callback(result);
-                
+            axios.get(`${SEARCH}${searchTerm}&page=${page}`).then(function(response){
+                //result = response.data.results;
+                //callback(result);
+                callback(response);
+                console.log("Shows: ",response);
               }).catch(function(error){
                 console.log(error);
               });
-              // Prevent requests being sent right after the user pressed enter
+              // Prevent requests being sent continously right after the user pressed enter
               // by resetting the submitted inside SearchPage's state
               this.props.resetSubmitted();
 
@@ -44,12 +47,29 @@ export default class SeriesListRenderer extends React.Component {
             this.setState({ loading: true });
             
             this.getSearchResults((response) => {
-
+                
                 this.setState({
-                    result: response,
-                    loading: false
+                    result: response.data.results,
+                    totalResults: response.data.total_results,
+                    totalPages: response.data.total_pages
                 });
                 //console.log(response);
+
+                // Check if there are more than 10 results = (1 page)
+                if (response.data.total_results > 10) {
+                    // Query rest of the results in a loop
+                    for (let i=2; i <= response.data.total_pages; i++ ){
+                        this.getSearchResults((response) => {
+                
+                            this.setState((prevState) => { 
+                                return {
+                                    result: prevState.result.concat(response.data.results)
+                            }});
+                        }, i);
+                    }
+                };
+                // Hide spinner
+                this.setState({ loading: false }) ;
             });
         }
     };
