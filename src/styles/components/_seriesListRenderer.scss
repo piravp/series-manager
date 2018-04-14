@@ -1,6 +1,16 @@
+// Center
 .seriesListResultContainer > p {
     display: flex;
+    flex-direction: row;
     padding: 5rem 0 0 0;
     justify-content: center;
     color: rgb(141, 137, 137);
+}
+
+.ant-spin-spinning {
+    display: flex;
+    padding: 5rem;
+    justify-content: center;
+    align-self: center;
+    
 }

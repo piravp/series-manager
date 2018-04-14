@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Spin } from 'antd';
 
 // Custom components
 import SeriesList from './SeriesList';
@@ -14,7 +15,8 @@ const SEARCH = `${BASE_URL}/search/tv?api_key=${API_KEY}&language=en-US&query=`;
 export default class SeriesListRenderer extends React.Component {
     
     state = {
-        result: []
+        result: [],
+        loading: false
     }
 
     getSearchResults = (callback) => {
@@ -39,10 +41,13 @@ export default class SeriesListRenderer extends React.Component {
     componentDidUpdate() {
         // User pressed enter
         if(this.props.submitted){
+            this.setState({ loading: true });
+            
             this.getSearchResults((response) => {
 
                 this.setState({
-                    result: response
+                    result: response,
+                    loading: false
                 });
                 //console.log(response);
             });
@@ -52,6 +57,7 @@ export default class SeriesListRenderer extends React.Component {
     render() {
         return (
             <div className="seriesListResultContainer">
+            {this.state.loading && <Spin className="spinner"/>}
                 {
                     this.state.result.length > 0 ? <SeriesList shows={this.state.result}/> : <p>Uh-oh, no results to show. Perform a search to get going!</p>
                 }
