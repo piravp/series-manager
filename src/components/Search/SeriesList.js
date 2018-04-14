@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Icon, Divider, message } from 'antd';
+import { Table, Icon, Divider, message, Menu, Dropdown } from 'antd';
 import 'antd/lib/table/style/css'; // or antd/lib/button/style/css for css format file
 import ISO6391 from 'iso-639-1';
 
 import SeriesListItem from './SeriesListItem';
 import { addShow } from '../../actions/series';
 import { doRequest } from '../../utils/utilities'
+import DetailsModal  from './DetailsModal';
 
 const IMAGE_BASE_URI = 'https://image.tmdb.org/t/p/w300/';
 const NOT_AVAILABLE = (
   <p className="dataNotAvailable">Not available</p>
 );
-  // Prevent re-request if 
+
+
 let genresDict2 = {};
 class SeriesList extends Component {
   state = {
@@ -22,10 +24,21 @@ class SeriesList extends Component {
         defaultCurrent: 1,
         position: 'both',
         showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} shows.`
-      }
+      },
+      showModal: false
+
 
   };
   
+  menu = (
+    <Menu>
+      <Menu.Item>
+        <a onClick={(e) => this.setState({ showModal: true }) }>More info</a>
+      </Menu.Item>
+    </Menu>
+  );
+  
+
     columns = [{
       title: 'Poster', dataIndex: 'poster_path', key: 'poster_path',
       render: img_path => img_path && <img src={`${IMAGE_BASE_URI}${img_path}`} width="60"></img>,
@@ -54,9 +67,11 @@ class SeriesList extends Component {
             Add
           </a>
           <Divider type="vertical" />
-          <a href="#" className="ant-dropdown-link">
+          <Dropdown overlay={this.menu}>
+          <a className="ant-dropdown-link" onClick={(e) => console.log('pressed dropdown')} >
             More actions <Icon type="down" />
           </a>
+          </Dropdown>
         </span>
       ),
   }];
@@ -100,17 +115,21 @@ class SeriesList extends Component {
       })
   }
 
+  
   render() {
     return (
-      <div>
+      <div className="seriesListContainer">
+
           <Table  columns={this.columns}
                   className="antdTableContainer"
                   dataSource={this.props.shows}
                   rowKey={record => record.id} 
                   pagination={this.state.paginationConfig}
                   onChange={this.onChange}
-                  expandRowByClick={true}
+
                   expandedRowRender={this.onExpandedRowRender}/>
+
+          {this.state.showModal && <DetailsModal closeModalInParent={() => this.setState({ showModal: false })}/>}
       </div>
     );
 }};
