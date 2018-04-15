@@ -3,6 +3,7 @@ import { Card, Radio } from 'antd';
 const { Meta } = Card;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
+import queryString from 'query-string';
 
 import config from '../../../config.json';
 const { BACKDROP_IMG_300 } = config;
@@ -53,17 +54,21 @@ export default class SimilarShow extends Component {
                                 {
                                     if(index < this.state.n) {
                                         return (
-                                            <Card
-                                            key={show.id}
-                                            hoverable
-                                            style={{ width: 240 }}
-                                            cover={<img alt="example" src={show.backdrop_path && `${BACKDROP_IMG_300}${show.backdrop_path}`} />}
-                                            >
-                                                <Meta
-                                                    title={show.name}
-                                                    description={show.overview}
-                                                />
-                                            </Card>
+                                            <a key={show.id} href={`/search?${queryString.stringify({ query: show.name})}`}>
+                                                <Card
+                                                hoverable
+                                                style={{ width: 240 }}
+                                                cover={<img alt="example" src={show.backdrop_path && `${BACKDROP_IMG_300}${show.backdrop_path}`} />}
+                                                >
+                                                    <Meta
+                                                        title={show.name}
+                                                        description={show.overview}
+                                                    />
+                                                <span style={{color: '#40a9ff'}}>Find out more</span>
+                                                </Card>
+
+                                            </a>
+                                            
                                         )
                                     }
 
