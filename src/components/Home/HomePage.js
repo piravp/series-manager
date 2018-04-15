@@ -23,9 +23,9 @@ class HomePage extends Component {
             <div className="homePageContainer">
             <HomeSeriesFilter />
             <div className="cardsContainer">
-                {this.props.series.map((show) => (
+                {this.props.series.length !== 0 ? this.props.series.map((show) => (
 
-                <div className="singleCard" key={show.id} onClick={(e) => this.setState({ showModal: true, modalShowId: show.id })  }>
+                <div className="singleCard animated flipInY" key={show.id} onClick={(e) => this.setState({ showModal: true, modalShowId: show.id })  }>
                         <Card
                             hoverable
                             style={{ width: 240 }}
@@ -38,7 +38,7 @@ class HomePage extends Component {
                         </Card>
                          
                 </div>
-                ))}
+                )) : <p>You haven't added any series to your list - navigate to <a href="/search">&nbsp;Search&nbsp;</a> and find your next designated show!</p>}
                 {this.state.showModal && <HomeDetailsModal className="modalModal" modalShowId={this.state.modalShowId} closeModalInParent={() => this.setState({ showModal: false, modalShowId: undefined })}/>}
              </div>
                  
