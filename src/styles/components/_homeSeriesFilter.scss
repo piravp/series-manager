@@ -1,22 +1,31 @@
 .homeSeriesFilterContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-content: center;
-    align-items: center;
-    
-    justify-content: space-around;
-    
 
     input {
         align-self: flex-start;
         margin-left: 1.0rem;
         text-align: center;
-        min-width: 30rem;
-
+        min-width: 33rem;
+        margin: 0rem 2rem 0rem 2rem;
+        height: 4rem;
     }
 
+
+}
+
+.homeSeriesFilterContainer > .homeSeriesFilterChildContainer {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    
     button {
-        align-self: flex-end;
-        margin-right: 1.0rem;        
+        margin-left: 5rem;
     }
+}
+
+.searchbarInHome {
+    max-width: 50rem;
 }
