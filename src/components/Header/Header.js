@@ -1,18 +1,42 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Divider } from 'antd';
+import { Divider, Menu, Icon } from 'antd';
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
-const Header = () => (
-    <div className="header-style">
-        <header>
-            <h1>The Designated Show</h1>
+class Header extends React.Component {
+    state = {
+      current: 'home',
+    }
+    handleClick = (e) => {
+      this.setState({
+        current: e.key
+      });
+    }
+    render() {
+      return (
+        <div className="headerParentContainer">
+          <h1>The Designated Show</h1>
+          <div className="headerContainer">
+            <Menu
+              theme="dark"
+              onClick={this.handleClick}
+              selectedKeys={[this.state.current]}
+              mode="horizontal"
+            >
+              <Menu.Item key="home">
+                <NavLink to="/" activeClassName="is-active" exact>Home</NavLink>
+              </Menu.Item>
+              <Menu.Item key="search">
+                <NavLink to="/search" activeClassName="is-active" exact>Search</NavLink>
+              </Menu.Item>
+            </Menu>
+          </div>
+          
+        </div>
 
-            <NavLink to="/" activeClassName="is-active" exact>Home</NavLink>
-            <Divider type="vertical" />
-            <NavLink to="/search" activeClassName="is-active" exact>Search</NavLink>
-            
-        </header>
-    </div>
-);
+      );
+    }
+  }
 
 export default Header;

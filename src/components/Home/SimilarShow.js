@@ -22,7 +22,6 @@ export default class SimilarShow extends Component {
     }
     
     onChange = (e) => {
-        console.log(`radio checked:${e.target.value}`);
         this.setState({ n: e.target.value })
     }
 
