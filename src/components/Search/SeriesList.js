@@ -4,11 +4,12 @@ import { Table, Icon, Divider, message, Menu, Dropdown } from 'antd';
 import 'antd/lib/table/style/css'; // or antd/lib/button/style/css for css format file
 import ISO6391 from 'iso-639-1';
 
-import SeriesListItem from './SeriesListItem';
+// Custom components
 import { addShow } from '../../actions/series';
 import { doRequest } from '../../utils/utilities'
 import DetailsModal  from './DetailsModal';
 
+// Declare local constants
 const IMAGE_BASE_URI = 'https://image.tmdb.org/t/p/w300/';
 const NOT_AVAILABLE = (
   <p className="dataNotAvailable">Not available</p>
@@ -137,28 +138,6 @@ class SeriesList extends Component {
 }};
 
 
-//export default SeriesList;
 export default connect()(SeriesList);
 
-// <Table {...this.tableProps} />
 
-// <Table     columns={this.columns}
-// className="antdTableContainer"
-// dataSource={this.props.shows}
-// rowKey={record => record.id} 
-// pagination={this.paginationConfig}
-// onChange={this.onChange}
-// expandRowByClick={true}
-// expandedRowRender={this.onExpandedRowRender}/>
-
-
-// tableProps: {
-//   columns: this.columns,
-//   className: "antdTableContainer",
-//   dataSource: this.props.shows,
-//   rowKey: record => record.id,
-//   pagination: this.paginationConfig,
-//   onChange: this.onChange,
-//   expandRowByClick: true,
-//   expandedRowRender : this.onExpandedRowRender
-// },
