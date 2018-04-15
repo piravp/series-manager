@@ -5,7 +5,7 @@ import { doRequest } from '../../utils/utilities';
 import config from '../../../config.json';
 const { PROFILE_IMG_185, api_key: API_KEY } = config;
 const DETAILS_BASE_URL = `https://api.themoviedb.org/3/tv/`
-
+import SimilarShow from './SimilarShow';
 
 const NOT_AVAILABLE = (
     <span className="dataNotAvailable">Not available</span>
@@ -17,8 +17,10 @@ export default class HomeDetailsModal extends Component {
       detailedResponse: {
           generalDetails: undefined,
           credits: undefined,
-          keywords: undefined
-      }
+          keywords: undefined,
+          similarShows: undefined
+      },
+      showSimilarShows: false
     }
     
     getDetailedResponse = () => {
@@ -62,6 +64,18 @@ export default class HomeDetailsModal extends Component {
         });
 
         // Find similar shows (https://developers.themoviedb.org/3/tv/get-tv-recommendations)
+        doRequest(`${DETAILS_BASE_URL}${this.props.modalShowId}/similar?api_key=${API_KEY}&language=en-US`, (response) => {
+            //console.log(response);
+            this.setState((prevState) => { 
+                return {
+                    detailedResponse: {
+                        ...prevState.detailedResponse,
+                        similarShows: response.results
+                    } 
+                }
+            });
+        });
+
 
         // Find trailer (https://developers.themoviedb.org/3/tv/get-tv-videos)
     }
@@ -169,7 +183,17 @@ export default class HomeDetailsModal extends Component {
                     )) : NOT_AVAILABLE
                 }
             </div>
+            <Divider type="horizontal" />
+            <div className="similarShowsParentContainer" >
+                <h3>Similar Shows</h3>
+                <Button onClick={(e) => this.setState((prevState) => {
+                    return {
+                        showSimilarShows: !prevState.showSimilarShows
+                    }
+                })}>{this.state.showSimilarShows ? "Hide similar shows" : "Show similar shows"}</Button>
+            </div>
 
+            {this.state.showSimilarShows && <SimilarShow similarShows={this.state.detailedResponse.similarShows}/>}
         </div>
         </Modal>
       </div>

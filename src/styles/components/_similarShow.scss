@@ -1,0 +1,12 @@
+.chooseSimilarShowsToShow-radioGroup{
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 0rem 1.4rem 0rem;
+}
+
+.similarShowInnerContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
