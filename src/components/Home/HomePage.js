@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card } from 'antd';
+import { Card, BackTop } from 'antd';
 const { Meta } = Card;
 
 import HomeListItem from './HomeListItem';
@@ -33,7 +33,7 @@ class HomePage extends Component {
                         >
                         <Meta
                             title={show.name}
-                            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+                            description={show.description}
                         />
                         </Card>
                          
@@ -41,7 +41,7 @@ class HomePage extends Component {
                 )) : <p>You haven't added any series to your list - navigate to <a href="/search">&nbsp;Search&nbsp;</a> and find your next designated show!</p>}
                 {this.state.showModal && <HomeDetailsModal className="modalModal" modalShowId={this.state.modalShowId} closeModalInParent={() => this.setState({ showModal: false, modalShowId: undefined })}/>}
              </div>
-                 
+             <BackTop />
         </div>
         )
     }

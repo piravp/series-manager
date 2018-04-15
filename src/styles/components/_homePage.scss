@@ -33,3 +33,13 @@
     min-width: 25rem;
     border-radius: 1rem;
 }
+
+
+//Limit lines in card description
+.ant-card-meta-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 10; // max no lines to show
+    -webkit-box-orient: vertical;
+}
