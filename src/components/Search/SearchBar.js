@@ -16,7 +16,7 @@ const SearchBar = (props) => (
                 autoFocus
                 enterButton/>
         </form>
-
+        
 
     </div>
 );

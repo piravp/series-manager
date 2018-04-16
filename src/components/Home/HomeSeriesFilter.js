@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Select } from 'antd'; 
+import { Input, Button, Select, Icon } from 'antd'; 
 const Search = Input.Search;
 const Option = Select.Option;
 
@@ -62,7 +62,7 @@ const HomeSeriesFilter = (props) => (
                 </Button>
         </div>
     </div>
-);
+);                
 
 const mapStateToProps = (state) => {
     return {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Card, BackTop } from 'antd';
 const { Meta } = Card;
 
-import HomeListItem from './HomeListItem';
+
 import selectSeries from '../../selectors/series';
 import HomeSeriesFilter from './HomeSeriesFilter';
 import HomeDetailsModal from './HomeDetailsModal';

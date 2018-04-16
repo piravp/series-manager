@@ -4,7 +4,6 @@ import queryString from 'query-string';
 import SeriesList from './SeriesList';
 import SeriesListRenderer from './SeriesListRenderer';
 import SearchBar from './SearchBar';
-import FilterToolbar from './FilterToolbar';
 
 
 export default class SearchPage extends React.Component {
@@ -48,7 +47,7 @@ export default class SearchPage extends React.Component {
     render() {
         return (
             <div>
-                <FilterToolbar />
+
                 
                 <SearchBar handleSearch={this.handleSearch} 
                          searchTerm={this.state.searchTerm}

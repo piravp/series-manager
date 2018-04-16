@@ -14,7 +14,7 @@ export const doRequest = (URL, callback) => {
         });
 };
 
-//TODO: Run a genre set-up the first time
+//TODO: Run a genre set-up the first time (need to use localStorage or something like that)
 export const getGenre = (genreList, id) => {
     // Temporarily store genre object retrieved from api
     let genresDict = [];
