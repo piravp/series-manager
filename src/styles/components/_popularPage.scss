@@ -1,0 +1,60 @@
+.mainPopularContainer {
+    padding: 0rem 0rem 8rem 0rem;
+}
+
+.sliderContainer {
+    padding: 2rem 0rem 4rem 0rem;
+}
+
+.slick-slide {
+    min-height: 15rem;
+}
+
+.slick-slide.slick-active.slick-current {
+    background-color: white;
+}
+
+.slick-slide.slick-active.slick-current > div  {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.slick-slide.slick-active.slick-current > div > div > h3 {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+// PopularItemContainer
+.popularItemContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+// PopularItemContainer
+.popularItemContainer > div > h2 {
+    font-weight: bolder;
+}
+
+.popularItemContainer > div > p {
+    padding-top: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; // max no lines to show
+    -webkit-box-orient: vertical;
+    width: 60rem;
+}
+
+// Active dot in navigation pane in bottom
+.slick-dots li.slick-active button:before {
+    font-size: 1.1rem;
+}
+
+.slick-dots li button:before {
+    font-size: 0.8rem;
+}
+//slick-slide slick-active slick-cloned slick-current //<<<---- TODO

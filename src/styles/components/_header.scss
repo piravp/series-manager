@@ -6,21 +6,32 @@
     background-color: #001529;
 }
 
-.ant-menu-item > a:before {
-    min-width: 5rem;
+.ant-menu-item .ant-menu-item-selected {
+    min-width: 50rem;
 }
 
 .headerParentContainer > h1 {
     display: flex;
     justify-content: center;
     
-    font-weight: bolder;
-    font-family: 'Tangerine', serif;
-    font-size: 8rem;
-    margin: 1rem 0rem 1rem 0rem;
+    font-weight: 400;
+    font-family: 'Oswald', serif;
+    font-size: 5.5rem;
+    margin: 2rem 0rem 2rem 0rem;
 
 }
 
 .ant-menu-dark.ant-menu-horizontal > .ant-menu-item, .ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 12rem;
+    max-height: 3rem;
     border-radius: 1.5rem;
+    padding-bottom: 0.4rem;
+}
+
+
+.is-active{
+    font-weight: 500;
 }

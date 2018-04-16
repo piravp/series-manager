@@ -8,8 +8,10 @@ import ISO6391 from 'iso-639-1';
 import { addShow } from '../../actions/series';
 import { doRequest } from '../../utils/utilities'
 import DetailsModal  from './DetailsModal';
+import config from '../../../config.json';
 
 // Declare local constants
+const { api_key: API_KEY } = config;
 const IMAGE_BASE_URI = 'https://image.tmdb.org/t/p/w300/';
 const NOT_AVAILABLE = (
   <p className="dataNotAvailable">Not available</p>
@@ -109,7 +111,7 @@ class SeriesList extends Component {
       let genresDict = [];
 
       //Do a GET request to get the id:genre-name mapping. Then create a dictionary using this.
-      Object.keys(genresDict2).length===0 && doRequest(`https://api.themoviedb.org/3/genre/tv/list?api_key=fa9ece8f7749c68617390fd3ecdb6bc4`, ({genres}) => {
+      Object.keys(genresDict2).length===0 && doRequest(`https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}`, ({genres}) => {
         genresDict = genres;
         genresDict.forEach(element => {
           genresDict2[element[Object.keys(element)[0]]]=element[Object.keys(element)[1]]

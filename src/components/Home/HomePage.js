@@ -38,7 +38,7 @@ class HomePage extends Component {
                         </Card>
                          
                 </div>
-                )) : <p>You haven't added any series to your list - navigate to <a href="/search">&nbsp;Search&nbsp;</a> and find your next designated show!</p>}
+                )) : <p>There are no series here - navigate to <a href="/search">&nbsp;Search&nbsp;</a> and add your next designated show!</p>}
                 {this.state.showModal && <HomeDetailsModal className="modalModal" modalShowId={this.state.modalShowId} closeModalInParent={() => this.setState({ showModal: false, modalShowId: undefined })}/>}
              </div>
              <BackTop />

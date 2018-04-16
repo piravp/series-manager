@@ -30,6 +30,9 @@ class Header extends React.Component {
               <Menu.Item key="search">
                 <NavLink to="/search" activeClassName="is-active" exact>Search</NavLink>
               </Menu.Item>
+              <Menu.Item key="popular">
+                <NavLink to="/popular" activeClassName="is-active" exact>Popular</NavLink>
+              </Menu.Item>
             </Menu>
           </div>
           
