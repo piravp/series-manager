@@ -1,0 +1,38 @@
+.footerContainer {
+    // TODO: Static margin, needs to be fixed. Probably not the best solution for mobile users etc.
+    margin-top: 50rem;
+}
+
+.footerContainer > footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: #001529;
+    padding: 3rem 2rem 4rem 2rem;
+    color: white;
+}
+
+.footerContainer > footer > .footerRow {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5rem;
+
+
+    h4 {
+        color: white;
+        font-weight: bold;
+        align-self: center;
+    }
+
+    a {
+        color: white;
+    }
+
+}
+
+.footerContainer > footer > .footerRow > a:hover {
+    color: #40a9ff;
+}
+
+
+

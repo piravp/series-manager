@@ -7,6 +7,7 @@ import Header from '../components/Header/Header';
 import NotFoundPage from '../components/NotFoundPage';
 import SearchPage from '../components/Search/SearchPage';
 import PopularPage from '../components/Popular/PopularPage';
+import Footer from '../components/Header/Footer';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -18,6 +19,7 @@ const AppRouter = () => (
                 <Route path="/popular" component={PopularPage} />
                 <Route component={NotFoundPage} />
             </Switch>
+            <Footer />
         </div>
     </BrowserRouter>
 );
