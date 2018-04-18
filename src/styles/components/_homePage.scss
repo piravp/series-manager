@@ -36,3 +36,13 @@
     -webkit-line-clamp: 10; // max no lines to show
     -webkit-box-orient: vertical;
 }
+
+.singleCardRemoveButton {
+    display: flex;
+    margin-top: 2rem;
+    align-self: center;
+}
+
+.ant-card-meta-detail {
+    cursor: pointer;
+}

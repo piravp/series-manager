@@ -24,7 +24,7 @@ const popoverContent = (
 
 class HomeSeriesFilter extends Component {
     state = {
-        showAddShowModal: true
+        showAddShowModal: false
     }
     
     // componentDidUpdate() {

@@ -64,7 +64,8 @@ class SeriesList extends Component {
                 vote_avg: record.vote_average,
                 first_aired: record.first_air_date,
                 createdAt: 20,
-                poster_path: `${IMAGE_BASE_URI}${record.poster_path}`
+                poster_path: `${IMAGE_BASE_URI}${record.poster_path}`,
+                description: record.overview
             }));
             console.log(record);
             message.success(`Successfully added ${record.name} to your list.`, 2)

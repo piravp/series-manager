@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, BackTop } from 'antd';
+import { Card, BackTop, Button } from 'antd';
 const { Meta } = Card;
 
 
 import selectSeries from '../../selectors/series';
 import HomeSeriesFilter from './HomeSeriesFilter';
 import HomeDetailsModal from './HomeDetailsModal';
+import { removeShow } from '../../actions/series'
 
 //import NOT_AVAILABLE_IMAGE from '../../../public/assets/no-image-available.png';
 import NOT_AVAILABLE_IMAGE from '../../../public/assets/no-image-icon-15.png';
@@ -18,6 +19,10 @@ class HomePage extends Component {
         modalShowId: undefined
     }
 
+    removeCard = (id) => {
+        this.props.dispatch(removeShow({id: id}))
+    };
+
     render() {
         return (
             <div className="homePageContainer">
@@ -25,17 +30,24 @@ class HomePage extends Component {
             <div className="cardsContainer">
                 {this.props.series.length !== 0 ? this.props.series.map((show) => (
 
-                <div className="singleCard animated flipInY" key={show.id} onClick={(e) => this.setState({ showModal: true, modalShowId: show.id })  }>
+                <div className="singleCard animated flipInY" key={show.id} >
+
                         <Card
-                            hoverable
+                            
                             style={{ width: 240 }}
-                            cover={<img alt="example" src={show.poster_path ? show.poster_path : NOT_AVAILABLE_IMAGE} />}
+                            cover={<img alt="image" src={show.poster_path ? show.poster_path : NOT_AVAILABLE_IMAGE} />}
                         >
-                        <Meta
-                            title={show.name}
-                            description={show.description}
-                        />
+                            <div onClick={(e) => this.setState({ showModal: true, modalShowId: show.id })  }>
+                                <Meta
+                                    title={show.name}
+                                    description={show.description}
+                                />
+                            </div>
+                            <div className="singleCardRemoveButton">
+                                <Button type="danger" size="default" ghost onClick={(e) => this.removeCard(show.id)}>Remove</Button>
+                            </div>
                         </Card>
+                        
                          
                 </div>
                 )) : <p>There are no series here - navigate to <a href="/search">&nbsp;Search&nbsp;</a> and add your next designated show!</p>}
