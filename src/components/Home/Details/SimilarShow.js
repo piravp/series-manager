@@ -5,7 +5,7 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 import queryString from 'query-string';
 
-import config from '../../../config.json';
+import config from '../../../../config.json';
 const { BACKDROP_IMG_300 } = config;
 
 

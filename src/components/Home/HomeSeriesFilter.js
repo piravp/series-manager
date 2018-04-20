@@ -14,7 +14,7 @@ import {
     sortByRatingAscending,
     sortByRatingDescending } from '../../actions/filters';
 import { removeAllShows } from '../../actions/series';
-import AddShowModal from './AddShowModal';
+import AddShowModal from './AddShow/AddShowModal';
 
 const popoverContent = (
     <div>

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Card, Button } from 'antd';
 const { Meta } = Card;
 
-import HomeDetailsModal from './HomeDetailsModal';
-import { removeShow } from '../../actions/series'
+import HomeDetailsModal from '../Details/HomeDetailsModal';
+import { removeShow } from '../../../actions/series';
 
-//import NOT_AVAILABLE_IMAGE from '../../../public/assets/no-image-available.png';
-import NOT_AVAILABLE_IMAGE from '../../../public/assets/no-image-icon-15.png';
+//import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-available.png';
+import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-icon-15.png';
 
 export default class CardView extends Component {
     state = {

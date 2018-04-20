@@ -4,8 +4,8 @@ import { BackTop } from 'antd';
 
 import selectSeries from '../../selectors/series';
 import HomeSeriesFilter from './HomeSeriesFilter';
-import CardView from './CardView';
-import InfiniteListView from './InfiniteListView';
+import CardView from './View/CardView';
+import InfiniteListView from './View/InfiniteListView';
 
 class HomePage extends Component {
     state = {

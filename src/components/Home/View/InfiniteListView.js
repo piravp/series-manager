@@ -2,7 +2,7 @@ import React from 'react';
 import { List, message, Avatar, Spin, Icon } from 'antd';
 
 import InfiniteScroll from 'react-infinite-scroller';
-import config from '../../../config.json';
+import config from '../../../../config.json';
 
 // Declare local constants
 const { api_key: API_KEY } = config;

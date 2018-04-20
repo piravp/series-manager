@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Button, Divider, Tag } from 'antd'; 
-import { doRequest } from '../../utils/utilities';
+import { doRequest } from '../../../utils/utilities';
 
-import config from '../../../config.json';
+import config from '../../../../config.json';
 const { PROFILE_IMG_185, api_key: API_KEY } = config;
 const DETAILS_BASE_URL = `https://api.themoviedb.org/3/tv/`
 import SimilarShow from './SimilarShow';
