@@ -103,7 +103,7 @@ export default class HomeDetailsModal extends Component {
       visible: false,
     });
 
-    this.props.closeModalInParent();
+    this.props.handleCloseModalInParent();
   }
   handleCancel = (e) => {
     console.log(e);
@@ -112,7 +112,7 @@ export default class HomeDetailsModal extends Component {
     });
 
     //Update state in parent
-    this.props.closeModalInParent();
+    this.props.handleCloseModalInParent();
   }
   render() {
       const { generalDetails, credits, keywords } = this.state.detailedResponse;

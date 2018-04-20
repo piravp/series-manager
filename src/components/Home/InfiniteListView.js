@@ -15,7 +15,7 @@ const IconText = ({ type, text }) => (
   </span>
 );
 
-export default class InfiniteList extends React.Component {
+export default class InfiniteListView extends React.Component {
   state = {
     data: [],
     pendingData: [],
@@ -83,6 +83,8 @@ export default class InfiniteList extends React.Component {
       console.log(error, 'err')
     }
     
+
+
     // If there exists more items than items pr. page limit
     //if(this.state.data.length > this.state.currentPage){
     // if(this.state.pendingData.length > 0){      
@@ -108,14 +110,7 @@ export default class InfiniteList extends React.Component {
     } catch(err) {
       console.log('error', err)
     }
-
-
-
-    
-    
-
   };
-
 
 
   handleInfiniteOnLoad = (page) => {
