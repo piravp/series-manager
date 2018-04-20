@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Select, Icon, Popover } from 'antd'; 
+import { Input, Button, Select, Icon, Popover, Tooltip } from 'antd'; 
 const Search = Input.Search;
 const Option = Select.Option;
-
+import CollapsenMenu from './CollapsedMenu';
 
 import { 
     setTextFilter, 
@@ -36,6 +36,22 @@ class HomeSeriesFilter extends Component {
         <div className="homeSeriesFilterContainer">
 
             <div className="homeSeriesFilterChildContainer">
+
+                    <div className="chooseView">
+                        <div onClick={e => this.props.handleChangeView('list')} hidden={this.props.currentView==='list' ? true : false}>
+                            <Tooltip title="List view">
+                                <a><Icon type="bars" style={{ fontSize: 24 }}/></a>
+                            </Tooltip>
+                        </div>
+                        <div onClick={e => this.props.handleChangeView('card')} hidden={this.props.currentView==='card' ? true : false}>
+                            <Tooltip title="Card view">
+                                <a><Icon type="appstore-o" style={{ fontSize: 24 }}/></a>
+                            </Tooltip>
+                        </div>
+                    </div>
+
+
+
                 <Select defaultValue="name_ascending" style={{ width: 190 }} disabled={this.props.seriesListItems === 0} onChange={value => {
                     switch(value){
                         case 'name_ascending':
@@ -68,7 +84,8 @@ class HomeSeriesFilter extends Component {
                     }}
                     autoFocus/>
 
-
+                
+                <div>
                     <Button onClick={(e) => {
                         this.props.dispatch(removeAllShows())
                     }}
@@ -80,8 +97,10 @@ class HomeSeriesFilter extends Component {
                     <Popover content={popoverContent} title="Add new show?">
                         <Button type="primary" icon="plus-circle-o" onClick={(e) => this.setState({ showAddShowModal: true })}>Add new</Button>
                     </Popover>
+                </div>
             </div>
             {this.state.showAddShowModal && <AddShowModal closeModalInParent={() => this.setState({ showAddShowModal: false })}/>}
+            <CollapsenMenu />
         </div>
     )}
 };                 

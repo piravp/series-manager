@@ -65,6 +65,7 @@ class SeriesList extends Component {
                 first_aired: record.first_air_date,
                 createdAt: 20,
                 poster_path: `${IMAGE_BASE_URI}${record.poster_path}`,
+                backdrop_path: record.backdrop_path,
                 description: record.overview
             }));
             console.log(record);

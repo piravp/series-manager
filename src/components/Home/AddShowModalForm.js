@@ -65,7 +65,7 @@ import {
                 wrapperCol={{ span: 18 }}
             >
                 {getFieldDecorator('description', {
-                    rules: [{ required: true, message: 'Please provide a description abour your series.!' }],
+                    rules: [{ required: false, message: 'Please provide a description abour your series.!' }],
                 })(
                     <TextArea placeholder="Write a description about the series." autosize={{ minRows: 2, maxRows: 6 }} />
                 )}
