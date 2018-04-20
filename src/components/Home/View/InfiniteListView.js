@@ -25,6 +25,7 @@ export default class InfiniteListView extends React.Component {
     loadNEachTime: 1
   }
 
+  // Loaded when component mounts or if data changes 
   loadLimitedData(list){
     let filteredList = []
     let series_list = [...list];
@@ -33,8 +34,6 @@ export default class InfiniteListView extends React.Component {
         const shifted = series_list.shift();
         filteredList = [...filteredList, shifted];
     }
-    console.log('filteredDataList', filteredList);
-    console.log('pending_data', series_list);
     this.setState(prevState => {
       return {
         ...this.state,
@@ -46,6 +45,7 @@ export default class InfiniteListView extends React.Component {
 
   };
 
+  // Load more data which has already been fetched and stored in the state
   loadMoreData(loadNMore){
     let newDataList = []
     let newPendingData = [...this.state.pendingData];
@@ -54,9 +54,6 @@ export default class InfiniteListView extends React.Component {
         const shifted = newPendingData.shift();
         newDataList = [...newDataList, shifted];
     }
-    console.log('newDataList', newDataList);
-    console.log('newPendingData', newPendingData);
-    console.log('-----');
     this.setState(prevState => {
       return {
         ...this.state,
@@ -66,8 +63,9 @@ export default class InfiniteListView extends React.Component {
       }
     })
 
+    // Let the user know that all the data has been loaded
     if (newPendingData.length === 0) {
-      message.warning('No more series to load');
+      message.info('No more series to load');
       this.setState({
         hasMore: false,
         loading: false,
@@ -80,18 +78,9 @@ export default class InfiniteListView extends React.Component {
     try {
       this.loadLimitedData(this.props.series);
     } catch (err) {
-      console.log(error, 'err')
+      // Do nothing
     }
     
-
-
-    // If there exists more items than items pr. page limit
-    //if(this.state.data.length > this.state.currentPage){
-    // if(this.state.pendingData.length > 0){      
-    //   this.setState({ hasMore: true })
-    // } else {
-    //   this.setState({ hasMore: false })
-    // }
   }
 
   // If new data or filtering is activated
@@ -108,26 +97,17 @@ export default class InfiniteListView extends React.Component {
         this.loadLimitedData(this.props.series);
       }
     } catch(err) {
-      console.log('error', err)
+      // Do nothing
     }
   };
 
 
   handleInfiniteOnLoad = (page) => {
-    // let data = this.state.data;
     this.setState({
       loading: true,
     });
-    // if (this.state.pendingData.length < this.state.loadNEachTime) {
-    //   message.warning('No more series to load');
-    //   this.setState({
-    //     hasMore: false,
-    //     loading: false,
-    //   });
-    //   return;
-    // }
 
-    this.loadMoreData(1);
+    this.loadMoreData(1);               // EDIT HERE how many items is loaded at once when scrolling is triggered
     this.setState({
       ...this.state,
       loading: false,
@@ -175,44 +155,3 @@ export default class InfiniteListView extends React.Component {
     );
   }
 }
-
-
-
-// handleInfiniteOnLoad = () => {
-//   let data = this.state.data;
-//   this.setState({
-//     loading: true,
-//   });
-//   if (data.length > 2) {
-//     message.warning('No more series to load');
-//     this.setState({
-//       hasMore: false,
-//       loading: false,
-//     });
-//     return;
-//   }
-//   this.getData((res) => {
-//     data = data.concat(res.results);
-//     this.setState({
-//       data,
-//       loading: false,
-//     });
-//   });
-// }
-
-
-// <List
-//   dataSource={this.state.data}
-//   renderItem={item => (
-//     <List.Item key={item.id}>
-//       <List.Item.Meta
-//         avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-//         title={<a href="https://ant.design">{item.name.last}</a>}
-//         description={item.email}
-//       />
-//       <div>Content</div>
-//     </List.Item>
-//   )}
-// >
-//   {this.state.loading && this.state.hasMore && <Spin className="demo-loading" />}
-// </List>
