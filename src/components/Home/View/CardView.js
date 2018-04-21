@@ -4,6 +4,8 @@ const { Meta } = Card;
 
 import HomeDetailsModal from '../Details/HomeDetailsModal';
 import { removeShow } from '../../../actions/series';
+import config from '../../../../config.json'
+const { POSTER_IMG_185 } = config;
 
 //import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-available.png';
 import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-icon-15.png';
@@ -22,7 +24,7 @@ export default class CardView extends Component {
     
     // If redux state changes due to filtering or something else
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
+        console.log("props:", nextProps)
         
         this.setState({
             ...this.state,
@@ -46,12 +48,12 @@ export default class CardView extends Component {
         return (
             <div className="cardsContainer">
             {this.state.series && this.state.series.length !== 0 ? this.state.series.map((show) => (
-                
+           
             <div className="singleCard animated flipInY" key={show.id} >
         
                     <Card
-                        style={{ width: 240 }}
-                        cover={<img alt="image" src={show.poster_path ? show.poster_path : NOT_AVAILABLE_IMAGE} />}
+                        style={{ width: 280 }}
+                        cover={show.poster_path ? <img alt="image" src={ show.poster_path && `${POSTER_IMG_185}${show.poster_path}`} /> : null}
                     >
                         <div onClick={(e) => this.handleCardClick(show.id) }>
                             <Meta
@@ -67,7 +69,7 @@ export default class CardView extends Component {
                      
             </div>
             )) : <p>There are no series here - navigate to <a href="/search">&nbsp;Search&nbsp;</a> and add your next designated show!</p>}
-            {this.state.showModal && <HomeDetailsModal className="modalModal" modalShowId={this.state.modalShowId} handleCloseModalInParent={() => this.handleCloseModalInParent }/>}
+            {this.state.showModal && <HomeDetailsModal className="modalModal" modalShowId={this.state.modalShowId} handleCloseModalInParent={this.handleCloseModalInParent }/>}
          </div>
         );
     }

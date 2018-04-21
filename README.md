@@ -28,4 +28,8 @@ yarn run dev-server
 
 
 
-Finally, navigate to http://localhost:8080.
+Nice! Navigate to http://localhost:8080 to see the result.
+
+
+### Known issues
+* Sometimes opening the `HomeDetailsModal` doesn't fetch the details. The current fix is to close and open the modal again (may require several attempts).

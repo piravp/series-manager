@@ -11,8 +11,7 @@ import DetailsModal  from './DetailsModal';
 import config from '../../../config.json';
 
 // Declare local constants
-const { api_key: API_KEY } = config;
-const IMAGE_BASE_URI = 'https://image.tmdb.org/t/p/w300/';
+const { api_key: API_KEY, BACKDROP_IMG_300, LOGO_IMG_92 } = config;
 const NOT_AVAILABLE = (
   <p className="dataNotAvailable">Not available</p>
 );
@@ -44,7 +43,7 @@ class SeriesList extends Component {
 
     columns = [{
       title: 'Poster', dataIndex: 'poster_path', key: 'poster_path',
-      render: img_path => img_path && <img src={`${IMAGE_BASE_URI}${img_path}`} width="60"></img>,
+      render: img_path => img_path && <img src={`${LOGO_IMG_92}${img_path}`} width="92"></img>,
     }, {
       title: 'Name', dataIndex: 'name', key: 'name',
       render: text => <a href="#">{text}</a>,
@@ -64,7 +63,7 @@ class SeriesList extends Component {
                 vote_avg: record.vote_average,
                 first_aired: record.first_air_date,
                 createdAt: 20,
-                poster_path: `${IMAGE_BASE_URI}${record.poster_path}`,
+                poster_path: record.poster_path,
                 backdrop_path: record.backdrop_path,
                 description: record.overview
             }));
@@ -90,7 +89,7 @@ class SeriesList extends Component {
 
   onExpandedRowRender = (record) => (
     <div className="expandedRowDetails">
-      {record.poster_path && <img src={`${IMAGE_BASE_URI}${record.poster_path}`}></img>}
+      {record.poster_path && <img src={`${BACKDROP_IMG_300}${record.poster_path}`}></img>}
       <div className="expandedRowDetails-inner">
         <h3>Description</h3>
         {record.overview ? <p>{record.overview}</p> : NOT_AVAILABLE}

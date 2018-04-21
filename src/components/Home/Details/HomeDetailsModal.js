@@ -3,7 +3,7 @@ import { Modal, Button, Divider, Tag } from 'antd';
 import { doRequest } from '../../../utils/utilities';
 
 import config from '../../../../config.json';
-const { PROFILE_IMG_185, api_key: API_KEY } = config;
+const { POSTER_IMG_154, PROFILE_IMG_185, api_key: API_KEY } = config;
 const DETAILS_BASE_URL = `https://api.themoviedb.org/3/tv/`
 import SimilarShow from './SimilarShow';
 
@@ -26,7 +26,7 @@ export default class HomeDetailsModal extends Component {
     getDetailedResponse = () => {
         //Get general details
         doRequest(`${DETAILS_BASE_URL}${this.props.modalShowId}?api_key=${API_KEY}&language=en-US`, (response) => {
-            //console.log(response);
+            console.log(response);
             this.setState({ 
                 detailedResponse: {
                     generalDetails: response
@@ -92,30 +92,30 @@ export default class HomeDetailsModal extends Component {
     }
 
     //------------For testing purposes
-    componentDidUpdate() {
-        console.log('State: ', this.state)
-    };
+    // componentDidUpdate() {
+    //     console.log('State: ', this.state)
+    // };
     //-------------------------------
 
   handleOk = (e) => {
-    console.log(e);
     this.setState({
-      visible: false,
+      visible: false
     });
 
     this.props.handleCloseModalInParent();
   }
   handleCancel = (e) => {
-    console.log(e);
+    //console.log(e);
+
     this.setState({
-      visible: false,
+      visible: false
     });
 
     //Update state in parent
     this.props.handleCloseModalInParent();
   }
   render() {
-      const { generalDetails, credits, keywords } = this.state.detailedResponse;
+      const { generalDetails, credits, keywords, poster_path } = this.state.detailedResponse;
     return (
       <div className="detailContainer">
         <Modal
@@ -126,11 +126,14 @@ export default class HomeDetailsModal extends Component {
         >
         {/**/}
         <div className="modalElementsContainer">
-            <div>
-                <h3>Description</h3>
-                <p>{generalDetails ? generalDetails.overview : NOT_AVAILABLE}</p>
-                <Divider type="horizontal" />
+            <div className="descriptionImageContainer">
+                {generalDetails ? <img src={`${POSTER_IMG_154}${generalDetails.poster_path}`}/> : null}
+                <div className="descriptionContainer">
+                    <h3>Description</h3>
+                    <p>{generalDetails ? generalDetails.overview : NOT_AVAILABLE}</p>
+                </div>
             </div>
+            <Divider type="horizontal" />
             <div className="generalInfoModal">
                 <div>
                     <h3>Seasons</h3>

@@ -57,7 +57,8 @@ export default class SimilarShow extends Component {
                                                 <Card
                                                 hoverable
                                                 style={{ width: 240 }}
-                                                cover={<img alt="example" src={show.backdrop_path && `${BACKDROP_IMG_300}${show.backdrop_path}`} />}
+                                                cover={show.backdrop_path ? <img src={`${BACKDROP_IMG_300}${show.backdrop_path}`}/> : null}
+                                                
                                                 >
                                                     <Meta
                                                         title={show.name}

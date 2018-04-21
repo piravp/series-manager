@@ -31,6 +31,17 @@
     }
 }
 
+
+.descriptionImageContainer {
+    display: flex;
+    flex-direction: row;
+
+    .descriptionContainer{
+        margin-left: 3rem;
+    }
+}
+
+
 .generalInfoModal{
     display: flex;
     flex-direction: row;
@@ -46,13 +57,19 @@
 .creditsCastContainer{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
 }
 
 .keywordContainer {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+
+    .ant-tag {
+        margin-bottom: 1.2rem;
+    }
 }
 
 .similarShowsParentContainer {

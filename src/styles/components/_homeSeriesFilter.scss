@@ -22,11 +22,21 @@
     justify-content: center;
     align-items: center;
     
-    button {
+    // Remove button
+    .ant-btn.ant-btn-danger.ant-btn-background-ghost {
         margin-left: 5rem;
+    }
+
+    // Add button
+    .ant-btn.ant-btn-default {
+        margin-left: 2rem;
     }
 }
 
 .searchbarInHome {
     max-width: 50rem;
+}
+
+.chooseView {
+    margin-right: 3rem;
 }

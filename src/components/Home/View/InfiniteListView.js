@@ -5,8 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import config from '../../../../config.json';
 
 // Declare local constants
-const { api_key: API_KEY } = config;
-const IMAGE_BASE_URI = 'https://image.tmdb.org/t/p/w300/';
+const { api_key: API_KEY, BACKDROP_IMG_185 } = config;
 
 const IconText = ({ type, text }) => (
   <span>
@@ -14,6 +13,7 @@ const IconText = ({ type, text }) => (
     {text}
   </span>
 );
+
 
 export default class InfiniteListView extends React.Component {
   state = {
@@ -42,7 +42,6 @@ export default class InfiniteListView extends React.Component {
         pendingData: prevState.pendingData.concat(series_list)
       }
     })
-
   };
 
   // Load more data which has already been fetched and stored in the state
@@ -72,7 +71,7 @@ export default class InfiniteListView extends React.Component {
       });
       return;
     }
-  }
+  };
 
   componentDidMount() {
     try {
@@ -80,7 +79,6 @@ export default class InfiniteListView extends React.Component {
     } catch (err) {
       // Do nothing
     }
-    
   }
 
   // If new data or filtering is activated
@@ -112,9 +110,9 @@ export default class InfiniteListView extends React.Component {
       ...this.state,
       loading: false,
     });
-    
-
   }
+
+
   render() {
     return (
       <div className="demo-infinite-container">
@@ -133,12 +131,13 @@ export default class InfiniteListView extends React.Component {
             if(this.props) {
               return (
                 <List.Item
+                  className="animated fadeInLeft"
                   key={item && item.name}
                   actions={item && [<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
-                  extra={item && item.backdrop_path ? <img width={272} alt="logo" src={item && item.backdrop_path} /> : null}
+                  extra={item && item.backdrop_path ? <img width={272} alt="logo" src={item && `${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
                 >
                   {item && <List.Item.Meta
-                    avatar={<Avatar src={item && item.backdrop_path} />}
+                    avatar={<Avatar src={item && `${BACKDROP_IMG_185}${item.backdrop_path}`} />}
                     title={<a href="/">{item && item.name}</a>}
                     description="something something som"
                   />}

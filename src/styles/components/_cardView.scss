@@ -4,9 +4,20 @@
     padding: 5rem;
     flex-wrap: wrap;
     justify-content: center;
+
+    // Center card image
+    .ant-card-cover{
+        display: flex;
+        justify-content: center;
+    }
+
+    // Set appropriate width to img in card
+    .ant-card-cover > img {
+        width: 180px;
+    }
 }
 
-// No cards found (=no series)
+// Error message when no cards/series found
 .cardsContainer > p {
     padding: 5rem 0 0 0;
     color: #8d8989;
@@ -17,7 +28,7 @@
 }
 
 .ant-card.ant-card-bordered.ant-card-hoverable {
-    min-width: 25rem;
+    //min-width: 25rem;
     border-radius: 1rem;
 }
 
