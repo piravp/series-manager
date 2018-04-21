@@ -1,30 +1,30 @@
-import { createStore, combineReducers } from 'redux';
-import seriesReducer from '../reducers/series';
-import { filtersReducer, filtersReducerDefaultState } from '../reducers/filters';
+import { createStore } from 'redux';
+import { filtersReducerDefaultState } from '../reducers/filters';
+import rootReducer from '../reducers/root';
 import { loadState, saveState } from '../utils/localStorage';
+import throttle from 'lodash/throttle';
 
+const configureStore = () => {
 
-export default () => {
-
-    // Store creation
-    const store = createStore( 
-    // Takes in an object with key-value pair with key:root reducer name
-    // and value:reducer which is supposed to manage that
-    combineReducers({ 
-        series: seriesReducer,
-        filters: filtersReducer 
-    }),
-    {
+    const preloadedState = {
         filters: filtersReducerDefaultState,
         series: loadState()
-    }
-    ,
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
+    };
 
-    store.subscribe(() => {
+    const storeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+    // Initialize store
+    const store = createStore(rootReducer, preloadedState, storeEnhancer);
+
+    // Save state every 2 s
+    store.subscribe(throttle(() => {
         saveState( store.getState().series );
-    });
+    }, 2000));
 
     return store;
 }
+
+// Create store
+const store = configureStore();
+
+export default store;

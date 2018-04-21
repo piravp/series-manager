@@ -4,14 +4,12 @@ import { Provider } from 'react-redux';
 
 // Custom components
 import AppRouter from './routers/AppRouter';
-import configureStore from './store/configureStore';
+import store from './store/configureStore';
 import { addShow } from './actions/series'
 import { setTextFilter } from './actions/filters'
 
 // Styles
 import './styles/styles.scss';
-
-const store = configureStore();
 
 
 // store.dispatch(addShow({
