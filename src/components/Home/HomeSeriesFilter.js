@@ -15,6 +15,7 @@ import {
     sortByRatingDescending } from '../../actions/filters';
 import { removeAllShows } from '../../actions/series';
 import AddShowModal from './AddShow/AddShowModal';
+import { clearStorage } from '../../utils/localStorage';
 
 const popoverContent = (
     <div>
@@ -88,6 +89,7 @@ class HomeSeriesFilter extends Component {
                 <div>
                     <Button onClick={(e) => {
                         this.props.dispatch(removeAllShows())
+                        clearStorage
                     }}
                     disabled={this.props.seriesListItems === 0}
                     type="danger"
