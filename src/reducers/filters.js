@@ -1,9 +1,9 @@
 // Filter reducer
-const filtersReducerDefaultState = {
+export const filtersReducerDefaultState = {
     text: '',
     "sortBy": 'name_ascending'
 };
-const filtersReducer = (state = filtersReducerDefaultState, action) => {
+export const filtersReducer = (state = filtersReducerDefaultState, action) => {
     switch (action.type){
         case 'SET_TEXT_FILTER':
             return {
@@ -45,4 +45,3 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
     }
 }; 
 
-export default filtersReducer;
