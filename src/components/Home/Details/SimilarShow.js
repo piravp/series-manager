@@ -5,9 +5,7 @@ const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 import queryString from 'query-string';
 
-import config from '../../../../config.json';
-const { BACKDROP_IMG_300 } = config;
-
+import { BACKDROP_IMG_300 } from '../../../../config';
 
 const NOT_AVAILABLE = (
     <span className="dataNotAvailable">Not available</span>

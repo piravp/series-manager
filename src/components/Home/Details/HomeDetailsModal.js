@@ -3,10 +3,10 @@ import { Modal, Button, Divider, Tag } from 'antd';
 import { doRequest } from '../../../utils/utilities';
 
 import config from '../../../../config.json';
-const { POSTER_IMG_154, PROFILE_IMG_185, api_key: API_KEY } = config;
-const DETAILS_BASE_URL = `https://api.themoviedb.org/3/tv/`
+import { POSTER_IMG_154, PROFILE_IMG_185, DETAILS_BASE_URL } from '../../../../config';
 import SimilarShow from './SimilarShow';
 
+const { api_key: API_KEY } = config;
 const NOT_AVAILABLE = (
     <span className="dataNotAvailable">Not available</span>
 );

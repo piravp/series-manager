@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 import { Tag } from 'antd';
 
-// Custom components
+// Import local constants and components
+import { PROFILE_IMG_185, POPULAR_BASE_URL } from '../../../config';
 import config from '../../../config.json';
 import { doRequest, getGenre } from '../../utils/utilities';
 
 // Declare local constants
-const { PROFILE_IMG_185, api_key: API_KEY } = config;
-const POPULAR_BASE_URL = `https://api.themoviedb.org/3/tv/popular`
+const { api_key: API_KEY } = config;
 
+// Methods
 const randomHexColor = () => {
     return '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
 };

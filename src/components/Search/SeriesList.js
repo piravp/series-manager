@@ -9,9 +9,11 @@ import { addShow } from '../../actions/series';
 import { doRequest } from '../../utils/utilities'
 import DetailsModal  from './DetailsModal';
 import config from '../../../config.json';
+import { BACKDROP_IMG_300, LOGO_IMG_92 } from '../../../config';
+
 
 // Declare local constants
-const { api_key: API_KEY, BACKDROP_IMG_300, LOGO_IMG_92 } = config;
+const { api_key: API_KEY } = config;
 const NOT_AVAILABLE = (
   <p className="dataNotAvailable">Not available</p>
 );

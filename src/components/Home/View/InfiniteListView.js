@@ -5,9 +5,11 @@ import InfiniteScroll from 'react-infinite-scroller';
 import config from '../../../../config.json';
 import HomeDetailsModal from '../Details/HomeDetailsModal';
 import { removeShow } from '../../../actions/series';
+import { BACKDROP_IMG_185 } from '../../../../config';
 
 // Declare local constants
-const { api_key: API_KEY, BACKDROP_IMG_185 } = config;
+const { api_key: API_KEY } = config;
+
 
 const IconText = ({ type, text = "", classNameProp, callbackFunc }) => (
   <span className={classNameProp} onClick={(e) => callbackFunc()}>

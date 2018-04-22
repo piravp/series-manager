@@ -14,7 +14,7 @@ git@github.com:piravp/series-manager.git
 TDS uses The Movie Database API (TMDB). [Register](https://www.themoviedb.org/account/signup) an account and [aquire](https://developers.themoviedb.org/3/getting-started/introduction) an `API_KEY`.
 
 #### Copy key into the project
-Create a file called `config.json` and copy your API_KEY with the key-value pair. Be sure to name the variable in lower case. 
+Create a file called `config.json` in the root folder and copy your API_KEY with the key-value pair. Be sure to name the variable in lower case. 
 ```node
 {
     "api_key": <<your-key>>

@@ -4,8 +4,8 @@ const { Meta } = Card;
 
 import HomeDetailsModal from '../Details/HomeDetailsModal';
 import { removeShow } from '../../../actions/series';
-import config from '../../../../config.json'
-const { POSTER_IMG_185 } = config;
+import { POSTER_IMG_185 } from '../../../../config';
+
 
 //import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-available.png';
 import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-icon-15.png';
