@@ -166,7 +166,7 @@ export default class InfiniteListView extends React.Component {
               if (this.props) {
                 return (
                   <List.Item
-                    className="animated fadeInLeft"
+                    className="animated fadeInLeft animation-delay-200"
                     key={item && item.name}
                     actions={item &&  [
                       <IconText type="star-o" text="156" />, 

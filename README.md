@@ -1,4 +1,9 @@
 # The Designated Show
+
+
+[![license](https://img.shields.io/github/license/piravp/series-manager.svg)](https://github.com/piravp/series-manager/blob/master/LICENSE.md)
+
+
 The Designated Show is a series manager aimed at the professional binge-watcher. TDS lets you find and keep track of all the series you have going on. 
 
 ## 1. Download TDS
