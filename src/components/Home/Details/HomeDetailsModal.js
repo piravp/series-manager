@@ -77,7 +77,7 @@ export default class HomeDetailsModal extends Component {
         });
 
 
-        // Find trailer (https://developers.themoviedb.org/3/tv/get-tv-videos)
+        // TODO: Find trailer (https://developers.themoviedb.org/3/tv/get-tv-videos)
     }
 
     componentDidMount(){
@@ -169,7 +169,7 @@ export default class HomeDetailsModal extends Component {
             <h3>Cast</h3>
             <div className="creditsCastContainer">
             {credits ? credits.map(person => (
-                <div  key={person.id}>
+                <div key={`${person.id}${person.profile_path}`}>
                     
                     <p>{person.name} as {person.character}</p>
                     {person.profile_path && <img src={`${PROFILE_IMG_185}${person.profile_path}`} width="60"></img>}

@@ -1,14 +1,16 @@
 import React from 'react';
-import { List, message, Avatar, Spin, Icon } from 'antd';
-
+import { List, message, Avatar, Spin, Icon, Tooltip } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
+
 import config from '../../../../config.json';
+import HomeDetailsModal from '../Details/HomeDetailsModal';
+import { removeShow } from '../../../actions/series';
 
 // Declare local constants
 const { api_key: API_KEY, BACKDROP_IMG_185 } = config;
 
-const IconText = ({ type, text }) => (
-  <span>
+const IconText = ({ type, text = "", classNameProp, callbackFunc }) => (
+  <span className={classNameProp} onClick={(e) => callbackFunc()}>
     <Icon type={type} style={{ marginRight: 8 }} />
     {text}
   </span>
@@ -22,17 +24,21 @@ export default class InfiniteListView extends React.Component {
     loading: false,
     hasMore: false,
     currentPage: 2,
-    loadNEachTime: 1
+    loadNEachTime: 1,
+    modal: {
+      showModal: false,
+      modalShowId: undefined
+    }
   }
 
   // Loaded when component mounts or if data changes 
-  loadLimitedData(list){
+  loadLimitedData(list) {
     let filteredList = []
     let series_list = [...list];
-    for(let i=0; i < this.state.currentPage; i++){
-        // get first item
-        const shifted = series_list.shift();
-        filteredList = [...filteredList, shifted];
+    for (let i = 0; i < this.state.currentPage; i++) {
+      // get first item
+      const shifted = series_list.shift();
+      filteredList = [...filteredList, shifted];
     }
     this.setState(prevState => {
       return {
@@ -45,13 +51,13 @@ export default class InfiniteListView extends React.Component {
   };
 
   // Load more data which has already been fetched and stored in the state
-  loadMoreData(loadNMore){
+  loadMoreData(loadNMore) {
     let newDataList = []
     let newPendingData = [...this.state.pendingData];
-    for(let i=0; i < loadNMore; i++){
-        // get first item
-        const shifted = newPendingData.shift();
-        newDataList = [...newDataList, shifted];
+    for (let i = 0; i < loadNMore; i++) {
+      // get first item
+      const shifted = newPendingData.shift();
+      newDataList = [...newDataList, shifted];
     }
     this.setState(prevState => {
       return {
@@ -84,17 +90,17 @@ export default class InfiniteListView extends React.Component {
   // If new data or filtering is activated
   componentDidUpdate(prevProps) {
     try {
-      if(prevProps.series !== this.props.series) {
+      if (prevProps.series !== this.props.series) {
         // Reset data and pendingData first
         this.setState({
           ...this.state,
           data: [],
           pendingData: []
         });
-  
+
         this.loadLimitedData(this.props.series);
       }
-    } catch(err) {
+    } catch (err) {
       // Do nothing
     }
   };
@@ -113,7 +119,34 @@ export default class InfiniteListView extends React.Component {
   }
 
 
+  handleRemoveShow = (id) => {
+    this.props.dispatch(removeShow({ id: id }))
+  };
+
+  handleCardClick = (id) => {
+    this.setState({ 
+      modal: {
+        showModal: true, modalShowId: id 
+      }});
+  };
+
+  handleCloseModalInParent = () => {
+    this.setState({ 
+      modal: {
+        showModal: false, modalShowId: undefined 
+      }});
+  };
+
+
   render() {
+    const titleContent = (item) => (
+      <Tooltip title="See details" mouseEnterDelay={0.1}>
+        <a onClick={(e) => this.handleCardClick(item.id)}>
+          {item && item.name}
+        </a>
+        </Tooltip>
+    );
+
     return (
       <div className="demo-infinite-container">
         <InfiniteScroll
@@ -123,33 +156,37 @@ export default class InfiniteListView extends React.Component {
           hasMore={!this.state.loading && this.state.hasMore}
           useWindow={true}
         >
-        <List
-          itemLayout="vertical"
-          size="large"
-          dataSource={this.state.data}
-          renderItem={item => {
-            if(this.props) {
-              return (
-                <List.Item
-                  className="animated fadeInLeft"
-                  key={item && item.name}
-                  actions={item && [<IconText type="star-o" text="156" />, <IconText type="like-o" text="156" />, <IconText type="message" text="2" />]}
-                  extra={item && item.backdrop_path ? <img width={272} alt="logo" src={item && `${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
-                >
-                  {item && <List.Item.Meta
-                    avatar={<Avatar src={item && `${BACKDROP_IMG_185}${item.backdrop_path}`} />}
-                    title={<a href="/">{item && item.name}</a>}
-                    description="something something som"
-                  />}
-                  {item && item.description}
-                </List.Item>
-              )
-            }
-          }}
-        >
-          {this.state.loading && this.state.hasMore && <Spin className="demo-loading" />}
-        </List>
+          <List
+            itemLayout="vertical"
+            size="large"
+            dataSource={this.state.data}
+            renderItem={item => {
+              if (this.props) {
+                return (
+                  <List.Item
+                    className="animated fadeInLeft"
+                    key={item && item.name}
+                    actions={item &&  [
+                      <IconText type="star-o" text="156" />, 
+                      <IconText classNameProp="removeIconText" type="close" text="Remove" callbackFunc={() => this.handleRemoveShow(item.id)}/>
+                    ]}
+                    extra={item && item.backdrop_path ? <img width={272} alt="logo" src={item && `${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
+                  >
+                    {item && <List.Item.Meta
+                      avatar={<Avatar src={item && `${BACKDROP_IMG_185}${item.backdrop_path}`} />}
+                      title={titleContent(item)}
+                      description="something something som"
+                    />}
+                    {item && item.description}
+                  </List.Item>
+                )
+              }
+            }}
+          >
+            {this.state.loading && this.state.hasMore && <Spin className="demo-loading" />}
+          </List>
         </InfiniteScroll>
+        {this.state.modal.showModal && <HomeDetailsModal className="modalModal" modalShowId={this.state.modal.modalShowId} handleCloseModalInParent={this.handleCloseModalInParent }/>}
       </div>
     );
   }

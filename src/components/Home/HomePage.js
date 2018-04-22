@@ -9,7 +9,7 @@ import InfiniteListView from './View/InfiniteListView';
 
 class HomePage extends Component {
     state = {
-        view: 'card'
+        view: 'list'
     }
 
     handleChangeView = (viewType) => {
@@ -25,7 +25,7 @@ class HomePage extends Component {
             <HomeSeriesFilter handleChangeView={this.handleChangeView} currentView={this.state.view}/>
             {
                 this.state.view === 'list' ? 
-                <InfiniteListView series={this.props.series}/> : 
+                <InfiniteListView series={this.props.series} {...this.props}/> : 
                 <CardView {...this.props} />
             }
             <BackTop />
