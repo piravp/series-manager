@@ -9,7 +9,19 @@ https://github.com/piravp/series-manager.git
 # SSH
 git@github.com:piravp/series-manager.git
 ```
-## 2. Getting Started
+## 2. Connect to TMDB
+#### Get API key
+TDS uses The Movie Database API (TMDB). [Register](https://www.themoviedb.org/account/signup) an account and [aquire](https://developers.themoviedb.org/3/getting-started/introduction) an `API_KEY`.
+
+#### Copy key into the project
+Create a file called `config.json` and copy your API_KEY with the key-value pair. Be sure to name the variable in lower case. 
+```node
+{
+    "api_key": <<your-key>>
+}
+```
+
+## 3. Getting Started
 #### Install dependencies
 ```sh
 # npm
@@ -27,8 +39,7 @@ yarn run dev-server
 ```
 
 
-
-Nice! Navigate to http://localhost:8080 to see the result.
+Nice! You can now navigate to http://localhost:8080 to see the result.
 
 
 ### Known issues
