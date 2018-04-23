@@ -1,11 +1,13 @@
 import React from 'react';
 import { List, message, Avatar, Spin, Icon, Tooltip } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
+import moment from 'moment';
 
 import config from '../../../../config.json';
 import HomeDetailsModal from '../Details/HomeDetailsModal';
 import { removeShow } from '../../../actions/series';
 import { BACKDROP_IMG_185 } from '../../../../config';
+import { removeShowTimeline } from '../../../actions/timeline';
 
 // Declare local constants
 const { api_key: API_KEY } = config;
@@ -121,8 +123,9 @@ export default class InfiniteListView extends React.Component {
   }
 
 
-  handleRemoveShow = (id) => {
+  handleRemoveShow = (id, name) => {
     this.props.dispatch(removeShow({ id: id }))
+    this.props.dispatch(removeShowTimeline({ id, name, removedAt: moment().format('YYYY-MM-DD HH:mm:ss') }))
   };
 
   handleCardClick = (id) => {
@@ -170,7 +173,7 @@ export default class InfiniteListView extends React.Component {
                     key={item && item.name}
                     actions={ [
                       <IconText type="star-o" text="156" />, 
-                      <IconText classNameProp="removeIconText" type="close" text="Remove" callbackFunc={() => this.handleRemoveShow(item.id)}/>
+                      <IconText classNameProp="removeIconText" type="close" text="Remove" callbackFunc={() => this.handleRemoveShow(item.id, item.name)}/>
                     ]}
                     extra={item && item.backdrop_path ? <img width={272} alt="logo" src={`${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
                   >

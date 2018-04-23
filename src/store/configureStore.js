@@ -6,10 +6,18 @@ import throttle from 'lodash/throttle';
 
 const configureStore = () => {
 
-    const preloadedState = {
-        filters: filtersReducerDefaultState,
-        series: loadState()
-    };
+    console.log(loadState());
+    
+    const loadedState = loadState();
+    let preloadedState = undefined;
+    if(loadedState) {
+        preloadedState = 
+        {
+            filters: filtersReducerDefaultState,
+            series: loadedState.shows,
+            timeline: loadedState.timeline
+        };
+    }
 
     const storeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
@@ -18,7 +26,10 @@ const configureStore = () => {
 
     // Save state every 2 s
     store.subscribe(throttle(() => {
-        saveState( store.getState().series );
+        saveState({
+            shows: store.getState().series,
+            timeline: store.getState().timeline 
+        });
     }, 2000));
 
     return store;

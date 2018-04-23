@@ -36,7 +36,7 @@ export default class CardView extends Component {
 
     handleRemoveCard = (id, name) => {
         this.props.dispatch(removeShow({id: id}))
-        this.props.dispatch(removeShowTimeline({ id, name, removedAt: moment().format('YYYY-MM-DD hh:mm:ss') }))
+        this.props.dispatch(removeShowTimeline({ id, name, removedAt: moment().format('YYYY-MM-DD HH:mm:ss') }))
     };
 
     handleCardClick = (id) => {

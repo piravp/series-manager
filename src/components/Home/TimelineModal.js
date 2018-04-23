@@ -35,9 +35,9 @@ class TimelineModal extends React.Component {
     const { id, name, type } = timelineEvent;
     switch (type){
         case 'add_show':
-            return <Timeline.Item key={timelineEvent.createdAt+id} color='green'>You added the show {name} at {timelineEvent.createdAt}.</Timeline.Item>;
+            return <Timeline.Item key={timelineEvent.createdAt+id} color='green'>You added the show <b>{name}</b> at {timelineEvent.createdAt}.</Timeline.Item>;
         case 'remove_show':
-            return <Timeline.Item key={timelineEvent.removedAt+id} color='red'>You removed {name} at {timelineEvent.removedAt}.</Timeline.Item>;
+            return <Timeline.Item key={timelineEvent.removedAt+id} color='red'>You removed <b>{name}</b> at {timelineEvent.removedAt}.</Timeline.Item>;
     }
   }
 

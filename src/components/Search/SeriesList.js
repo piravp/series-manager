@@ -75,7 +75,7 @@ class SeriesList extends Component {
             this.props.dispatch(addShowToTimeline({
                 id: record.id,
                 name: record.name,
-                createdAt: moment().format('YYYY-MM-DD hh:mm:ss')
+                createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
             }));
           }}>
             Add
