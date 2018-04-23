@@ -7,7 +7,7 @@ const series = [{
     description: "Some text",
     vote_avg: 7.67,
     first_aired: "2011-09-22",
-    createdAt: 20,
+    createdAt: '2018-03-22 17:49:03',
     poster_path: "https://image.tmdb.org/t/p/w300//7XFZOcYiBuFDrhqGrEoawF0T30l.jpg",
 }, {
     id: 32,
@@ -16,7 +16,7 @@ const series = [{
     description: "Some text",
     vote_avg: 8.2,
     first_aired: "2011-08-19",
-    createdAt: 2,
+    createdAt: '2018-01-20 19:43:20',
     poster_path: "https://image.tmdb.org/t/p/w300//7XFZxcvrDrhqGrEoawF0T30l.jpg",
 }];
 

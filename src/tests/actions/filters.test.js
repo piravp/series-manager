@@ -1,7 +1,7 @@
 import { 
     setTextFilter,
-    sortByDateAscending,
-    sortByDateDescending,
+    sortByDateAddedOldestFirst,
+    sortByDateAddedNewestFirst,
     sortByNameAscending,
     sortByNameDescending,
     sortByRatingAscending,
@@ -31,17 +31,17 @@ test('Should setup setTextFilter object for empty string', () => {
 
 // --------------------- DATE ----------------------
 // sortByDateAscending
-test('Should setup sortByDateAscending object', () => {
-    const action = sortByDateAscending();
+test('Should setup sortByDateAddedOldestFirst object', () => {
+    const action = sortByDateAddedOldestFirst();
 
-    expect(action).toEqual({ type: 'SORT_BY_DATE_ASCENDING' })
+    expect(action).toEqual({ type: 'SORT_BY_DATE_ADDED_OLDEST_FIRST' })
 });
 
 // sortByDateDescending
-test('Should setup sortByDateDescending object', () => {
-    const action = sortByDateDescending();
+test('Should setup sortByDateAddedNewestFirst object', () => {
+    const action = sortByDateAddedNewestFirst();
 
-    expect(action).toEqual({ type: 'SORT_BY_DATE_DESCENDING' })
+    expect(action).toEqual({ type: 'SORT_BY_DATE_ADDED_NEWEST_FIRST' })
 });
 
 // --------------------- NAME ----------------------
