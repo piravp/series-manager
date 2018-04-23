@@ -16,7 +16,9 @@ class Header extends React.Component {
     render() {
       return (
         <div className="headerParentContainer">
-          <h1>The Designated Show</h1>
+          <div className="topHeader">
+            <h1>The Designated Show</h1>
+          </div>
           <div className="headerContainer">
             <Menu
               theme="dark"

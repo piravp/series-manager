@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Table, Icon, Divider, message, Menu, Dropdown } from 'antd';
 import 'antd/lib/table/style/css'; // or antd/lib/button/style/css for css format file
 import ISO6391 from 'iso-639-1';
+import moment from 'moment';
 
 // Custom components
 import { addShow } from '../../actions/series';
@@ -64,10 +65,10 @@ class SeriesList extends Component {
                 name: record.name,
                 vote_avg: record.vote_average,
                 first_aired: record.first_air_date,
-                createdAt: 20,
                 poster_path: record.poster_path,
                 backdrop_path: record.backdrop_path,
-                description: record.overview
+                description: record.overview,
+                createdAt: moment().format("YYYY-MM-DD hh:mm:ss")
             }));
             console.log(record);
             message.success(`Successfully added ${record.name} to your list.`, 2)

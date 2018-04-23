@@ -23,7 +23,7 @@ const PopularItem = (props) => {
             <div>
 
                 <h2>{index}. {name}</h2>
-                <img src={`https://image.tmdb.org/t/p/w185/${poster_path}`} />
+                <img alt={name} src={`${PROFILE_IMG_185}${poster_path}`} />
             </div>
             <div className="popularItemTags">
                 {genre_ids && genre_ids.map(id => (

@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 // Get visible series
 const getVisibleSeries = (series, { text, sortBy }) => {
     return series.filter((show) => {
@@ -9,10 +11,10 @@ const getVisibleSeries = (series, { text, sortBy }) => {
                 return a.name > b.name;
             case 'name_descending':
                 return a.name < b.name;
-            case 'date_ascending':
-                return a.createdAt > b.createdAt; // ? 1 : -1
-            case 'date_descending':
-                return a.createdAt < b.createdAt;
+            case 'date_added_oldest_first':
+                return moment(a.createdAt).format("YYYY-MM-DD hh:mm:ss") > moment(b.createdAt).format("YYYY-MM-DD hh:mm:ss"); // ? 1 : -1
+            case 'date_added_newest_first':
+                return moment(a.createdAt).format("YYYY-MM-DD hh:mm:ss") < moment(b.createdAt).format("YYYY-MM-DD hh:mm:ss");
             case 'rating_ascending':
                 return a.vote_avg > b.vote_avg;
             case 'rating_descending':

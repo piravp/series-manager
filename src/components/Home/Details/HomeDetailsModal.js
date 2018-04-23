@@ -127,7 +127,7 @@ export default class HomeDetailsModal extends Component {
         {/**/}
         <div className="modalElementsContainer">
             <div className="descriptionImageContainer">
-                {generalDetails ? <img src={`${POSTER_IMG_154}${generalDetails.poster_path}`}/> : null}
+                {generalDetails && generalDetails.poster_path && <img src={`${POSTER_IMG_154}${generalDetails.poster_path}`}/>}
                 <div className="descriptionContainer">
                     <h3>Description</h3>
                     <p>{generalDetails ? generalDetails.overview : NOT_AVAILABLE}</p>

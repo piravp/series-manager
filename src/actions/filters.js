@@ -4,14 +4,14 @@ export const setTextFilter = ({ text = '' } = {}) => ({
     text
 });
 
-// SORT_BY_DATE_ASCENDING
-export const sortByDateAscending = () => ({
-    type: 'SORT_BY_DATE_ASCENDING'
+// SORT_BY_DATE_ADDED_OLDEST_FIRST
+export const sortByDateAddedOldestFirst = () => ({
+    type: 'SORT_BY_DATE_ADDED_OLDEST_FIRST'
 });
 
-// SORT_BY_DATE_DESCENDING
-export const sortByDateDescending = () => ({
-    type: 'SORT_BY_DATE_DESCENDING'
+// SORT_BY_DATE_ADDED_NEWEST_FIRST
+export const sortByDateAddedNewestFirst = () => ({
+    type: 'SORT_BY_DATE_ADDED_NEWEST_FIRST'
 });
 
 // SORT_BY_NAME_ASCENDING

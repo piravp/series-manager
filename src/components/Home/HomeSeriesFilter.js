@@ -7,8 +7,8 @@ import CollapsenMenu from './CollapsedMenu';
 
 import { 
     setTextFilter, 
-    sortByDateAscending,
-    sortByDateDescending, 
+    sortByDateAddedNewestFirst,
+    sortByDateAddedOldestFirst, 
     sortByNameAscending, 
     sortByNameDescending,
     sortByRatingAscending,
@@ -53,28 +53,28 @@ class HomeSeriesFilter extends Component {
 
 
 
-                <Select defaultValue="name_ascending" style={{ width: 190 }} disabled={this.props.seriesListItems === 0} onChange={value => {
+                <Select defaultValue="date_added_new_first" style={{ width: 190 }} disabled={this.props.seriesListItems === 0} onChange={value => {
                     switch(value){
                         case 'name_ascending':
                             return this.props.dispatch(sortByNameAscending());
                         case 'name_descending':
                             return this.props.dispatch(sortByNameDescending());
-                        case 'date_ascending':
-                            return this.props.dispatch(sortByDateAscending());
-                        case 'date_descending':
-                            return this.props.dispatch(sortByDateDescending());
+                        case 'date_added_old_first':
+                            return this.props.dispatch(sortByDateAddedOldestFirst());
+                        case 'date_added_new_first':
+                            return this.props.dispatch(sortByDateAddedNewestFirst());
                         case 'rating_ascending':
                             return this.props.dispatch(sortByRatingAscending());
                         case 'rating_descending':
                             return this.props.dispatch(sortByRatingDescending());
                     }
                 }}>
-                    <Option value="name_ascending">Name - ascending</Option>
-                    <Option value="name_descending">Name - descending</Option>
-                    <Option value="date_ascending">Aired date - ascending</Option>
-                    <Option value="date_descending">Aired date - descending</Option>
-                    <Option value="rating_ascending">Rating - ascending</Option>
-                    <Option value="rating_descending">Rating - descending</Option>
+                    <Option value="name_ascending">Name, ascending</Option>
+                    <Option value="name_descending">Name, descending</Option>
+                    <Option value="date_added_old_first">Date added, oldest first</Option>
+                    <Option value="date_added_new_first">Date added, newest first</Option>
+                    <Option value="rating_ascending">Rating, ascending</Option>
+                    <Option value="rating_descending">Rating, descending</Option>
                 </Select>
             
                 <Search

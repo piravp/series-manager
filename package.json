@@ -25,6 +25,7 @@
     "css-loader": "0.28.4",
     "iso-639-1": "^2.0.3",
     "loadash": "^1.0.0",
+    "moment": "^2.22.1",
     "node-sass": "4.5.3",
     "query-string": "^6.0.0",
     "react": "16.0.0",

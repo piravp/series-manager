@@ -1,7 +1,7 @@
 // Filter reducer
 export const filtersReducerDefaultState = {
     text: '',
-    "sortBy": 'name_ascending'
+    "sortBy": 'date_added_newest_first'
 };
 export const filtersReducer = (state = filtersReducerDefaultState, action) => {
     switch (action.type){
@@ -10,15 +10,15 @@ export const filtersReducer = (state = filtersReducerDefaultState, action) => {
                 ...state,
                 text: action.text
             };
-        case 'SORT_BY_DATE_ASCENDING':
+        case 'SORT_BY_DATE_ADDED_OLDEST_FIRST':
             return {
                 ...state, 
-                sortBy: 'date_ascending'
+                sortBy: 'date_added_oldest_first'
             };
-        case 'SORT_BY_DATE_DESCENDING':
+        case 'SORT_BY_DATE_ADDED_NEWEST_FIRST':
             return {
                 ...state, 
-                sortBy: 'date_descending'
+                sortBy: 'date_added_newest_first'
             };
         case 'SORT_BY_NAME_ASCENDING':
             return {
