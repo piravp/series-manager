@@ -144,7 +144,7 @@ export default class InfiniteListView extends React.Component {
     const titleContent = (item) => (
       <Tooltip title="See details" mouseEnterDelay={0.1}>
         <a onClick={(e) => this.handleCardClick(item.id)}>
-          {item.name}
+          {item && item.name}
         </a>
         </Tooltip>
     );
@@ -167,19 +167,19 @@ export default class InfiniteListView extends React.Component {
                 return (
                   <List.Item
                     className="animated fadeInLeft animation-delay-200"
-                    key={item.name}
+                    key={item && item.name}
                     actions={ [
                       <IconText type="star-o" text="156" />, 
                       <IconText classNameProp="removeIconText" type="close" text="Remove" callbackFunc={() => this.handleRemoveShow(item.id)}/>
                     ]}
-                    extra={item.backdrop_path ? <img width={272} alt="logo" src={`${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
+                    extra={item && item.backdrop_path ? <img width={272} alt="logo" src={`${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
                   >
                     {<List.Item.Meta
-                      avatar={item.backdrop_path ? <Avatar src={`${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
-                      title={titleContent(item)}
+                      avatar={item && item.backdrop_path ? <Avatar src={`${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
+                      title={item && titleContent(item)}
                       description="something something som"
                     />}
-                    {item.description}
+                    {item && item.description}
                   </List.Item>
                 )
               }

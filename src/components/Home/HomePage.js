@@ -9,7 +9,7 @@ import InfiniteListView from './View/InfiniteListView';
 
 class HomePage extends Component {
     state = {
-        view: 'list'
+        view: 'card'
     }
 
     handleChangeView = (viewType) => {

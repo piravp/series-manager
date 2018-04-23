@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'antd';
-const { Meta } = Card;
+import moment from 'moment';
 
 import HomeDetailsModal from '../Details/HomeDetailsModal';
 import { removeShow } from '../../../actions/series';
+import { removeShowTimeline } from '../../../actions/timeline';
 import { POSTER_IMG_185 } from '../../../../config';
 
+const { Meta } = Card;
 
 //import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-available.png';
 import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-icon-15.png';
@@ -32,8 +34,9 @@ export default class CardView extends Component {
         });
     };
 
-    handleRemoveCard = (id) => {
+    handleRemoveCard = (id, name) => {
         this.props.dispatch(removeShow({id: id}))
+        this.props.dispatch(removeShowTimeline({ id, name, removedAt: moment().format('YYYY-MM-DD hh:mm:ss') }))
     };
 
     handleCardClick = (id) => {
@@ -62,7 +65,7 @@ export default class CardView extends Component {
                             />
                         </div>
                         <div className="singleCardRemoveButton">
-                            <Button type="danger" size="default" ghost onClick={(e) => this.handleRemoveCard(show.id)}>Remove</Button>
+                            <Button type="danger" size="default" ghost onClick={(e) => this.handleRemoveCard(show.id, show.name)}>Remove</Button>
                         </div>
                     </Card>
                     

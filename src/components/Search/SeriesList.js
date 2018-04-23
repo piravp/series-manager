@@ -11,7 +11,7 @@ import { doRequest } from '../../utils/utilities'
 import DetailsModal  from './DetailsModal';
 import config from '../../../config.json';
 import { BACKDROP_IMG_300, LOGO_IMG_92 } from '../../../config';
-
+import { addShowToTimeline } from '../../actions/timeline';
 
 // Declare local constants
 const { api_key: API_KEY } = config;
@@ -72,6 +72,11 @@ class SeriesList extends Component {
             }));
             console.log(record);
             message.success(`Successfully added ${record.name} to your list.`, 2)
+            this.props.dispatch(addShowToTimeline({
+                id: record.id,
+                name: record.name,
+                createdAt: moment().format('YYYY-MM-DD hh:mm:ss')
+            }));
           }}>
             Add
           </a>

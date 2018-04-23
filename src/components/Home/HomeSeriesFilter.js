@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Select, Icon, Popover, Tooltip } from 'antd'; 
+import { Input, Button, Select, Icon, Popover, Tooltip, Badge } from 'antd'; 
 const Search = Input.Search;
 const Option = Select.Option;
 import CollapsenMenu from './CollapsedMenu';
@@ -16,6 +16,8 @@ import {
 import { removeAllShows } from '../../actions/series';
 import AddShowModal from './AddShow/AddShowModal';
 import { clearStorage } from '../../utils/localStorage';
+import TimelineModal from './TimelineModal';
+
 
 const popoverContent = (content) =>  (
     <div>
@@ -25,7 +27,8 @@ const popoverContent = (content) =>  (
 
 class HomeSeriesFilter extends Component {
     state = {
-        showAddShowModal: false
+        showAddShowModal: false,
+        showTimelineModal: false
     }
     
     // componentDidUpdate() {
@@ -37,6 +40,13 @@ class HomeSeriesFilter extends Component {
         <div className="homeSeriesFilterContainer">
 
             <div className="homeSeriesFilterChildContainer">
+                    <div className="timeline"  onClick={e => this.setState({ showTimelineModal: true })}>
+                        <Tooltip title="Show timeline (beta)">
+                            <Badge dot> 
+                                <a><Icon type="fork" style={{ fontSize: 22}}/></a>
+                            </Badge>
+                        </Tooltip>
+                    </div>
 
                     <div className="chooseView">
                         <div onClick={e => this.props.handleChangeView('list')} hidden={this.props.currentView==='list' ? true : false}>
@@ -105,7 +115,7 @@ class HomeSeriesFilter extends Component {
                 </div>
             </div>
             {this.state.showAddShowModal && <AddShowModal closeModalInParent={() => this.setState({ showAddShowModal: false })}/>}
-
+            {this.state.showTimelineModal && <TimelineModal closeModalInParent={() => this.setState({ showTimelineModal: false })}/>}
         </div>
     )}
 };                 
