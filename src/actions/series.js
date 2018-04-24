@@ -1,5 +1,7 @@
+import moment from 'moment';
+
 // ADD_SHOW
-export const addShow = ({ id, name, description, vote_avg, first_aired, createdAt, poster_path=null, backdrop_path=null } = {}) => ({
+export const addShow = ({ id, name, description, vote_avg, first_aired, poster_path=null, backdrop_path=null } = {}) => ({
     type: 'ADD_SHOW',
     show: {
         id,
@@ -7,7 +9,7 @@ export const addShow = ({ id, name, description, vote_avg, first_aired, createdA
         vote_avg,
         description,
         first_aired,
-        createdAt,
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         poster_path,
         backdrop_path
     }

@@ -1,21 +1,23 @@
+import moment from 'moment';
+
 // ADD_SHOW
-export const addShowToTimeline = ({ id, name, createdAt } = {}) => ({
+export const addShowToTimeline = ({ id, name } = {}) => ({
     type: 'ADD_SHOW_TIMELINE',
     info: {
         id,
         name,
-        createdAt,
+        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         type: 'add_show'
     }
 });
 
 // REMOVE_SHOW
-export const removeShowTimeline = ({ id, name, removedAt } = {}) => ({
+export const removeShowTimeline = ({ id, name } = {}) => ({
     type: 'REMOVE_SHOW_TIMELINE',
     info: {
         id,
         name,
-        removedAt,
+        removedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         type: 'remove_show'
     }
 });
@@ -23,7 +25,10 @@ export const removeShowTimeline = ({ id, name, removedAt } = {}) => ({
 
 
 // REMOVE_ALL_SHOWS
-export const removeAllShowsFromTimeline = ({ removed }) => ({
+export const removeAllShowsFromTimeline = () => ({
     type: 'REMOVE_ALL_SHOWS_TIMELINE',
-    removed
+    info: {
+        removedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+        type: 'remove_all_shows'
+    }
 });

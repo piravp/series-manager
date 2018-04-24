@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Timeline } from 'antd';
+import { Modal, Timeline, Icon } from 'antd';
 
 import { connect } from 'react-redux';
 
@@ -38,6 +38,8 @@ class TimelineModal extends React.Component {
             return <Timeline.Item key={timelineEvent.createdAt+id} color='green'>You added the show <b>{name}</b> at {timelineEvent.createdAt}.</Timeline.Item>;
         case 'remove_show':
             return <Timeline.Item key={timelineEvent.removedAt+id} color='red'>You removed <b>{name}</b> at {timelineEvent.removedAt}.</Timeline.Item>;
+          case 'remove_all_shows':
+            return <Timeline.Item key={timelineEvent.removedAt+id} dot={<Icon type="tool" style={{ fontSize: '20px' }} />} color='red'>You removed all your shows at {timelineEvent.removedAt}.</Timeline.Item>;
     }
   }
 

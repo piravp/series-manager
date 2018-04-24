@@ -5,6 +5,7 @@ const Search = Input.Search;
 const Option = Select.Option;
 const Panel = Collapse.Panel;
 import CollapsenMenu from './CollapsedMenu';
+import moment from 'moment';
 
 import { 
     setTextFilter, 
@@ -18,6 +19,7 @@ import { removeAllShows } from '../../actions/series';
 import AddShowModal from './AddShow/AddShowModal';
 import { clearStorage } from '../../utils/localStorage';
 import TimelineModal from './TimelineModal';
+import { removeAllShowsFromTimeline } from '../../actions/timeline'
 
 
 class HomeSeriesFilter extends Component {
@@ -76,6 +78,7 @@ class HomeSeriesFilter extends Component {
                             <Button onClick={(e) => {
                                 this.props.dispatch(removeAllShows())
                                 clearStorage
+                                this.props.dispatch(removeAllShowsFromTimeline())
                             }}
                             disabled={this.props.seriesListItems === 0}
                             type="danger"

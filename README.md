@@ -46,6 +46,9 @@ yarn run dev-server
 
 Nice! You can now navigate to http://localhost:8080 to see the result.
 
+## Demo
+[![The Designated Show](https://i.imgur.com/knSiO0d.png)](https://youtu.be/mGudgU-Nn2U "The Designated Show - A series manager")
+
 
 ### Known issues
 * Sometimes opening the `HomeDetailsModal` doesn't fetch the details. The current fix is to close and open the modal again (may require several attempts).

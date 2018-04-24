@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'antd';
-import moment from 'moment';
 
 import HomeDetailsModal from '../Details/HomeDetailsModal';
 import { removeShow } from '../../../actions/series';
@@ -36,7 +35,7 @@ export default class CardView extends Component {
 
     handleRemoveCard = (id, name) => {
         this.props.dispatch(removeShow({id: id}))
-        this.props.dispatch(removeShowTimeline({ id, name, removedAt: moment().format('YYYY-MM-DD HH:mm:ss') }))
+        this.props.dispatch(removeShowTimeline({ id, name }))
     };
 
     handleCardClick = (id) => {
