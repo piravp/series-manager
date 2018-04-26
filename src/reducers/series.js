@@ -3,13 +3,12 @@ const seriesReducerDefaultState = [];
 const seriesReducer = (state = seriesReducerDefaultState, action) => {
     switch (action.type){
         case 'ADD_SHOW':
-            // console.log(state.id)
-            // console.log(action.id)
-            // let index = state.findIndex(show => show.id == action.id);
-            // console.log(index);
-            // if(index == -1)
+            // Does show already exist?
+            let index = state.findIndex(show => show.id == action.show.id);
+            if(index == -1) {
                 return [...state, action.show];
-            return state;
+            }
+            return [...state];
         case 'REMOVE_SHOW':
             return state.filter(show => show.id !== action.id);
         case 'REMOVE_ALL_SHOWS':
