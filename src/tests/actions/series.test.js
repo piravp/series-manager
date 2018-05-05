@@ -1,4 +1,5 @@
 import { addShow, removeShow, removeAllShows, getShowDetails } from '../../actions/series';
+import moment from 'moment';
 
 // Test removeShow action
 test('Should setup removeShow action object', () => {
@@ -30,22 +31,25 @@ test('Should setup getShowDetails action object', () => {
 
 // Test addShow action
 test('Should setup addShow action object', () => {
+    const createdAt = moment().format('YYYY-MM-DD hh:mm:ss');
+    
     const addShowObject = {
         id: 34223,
         name: 'Homeland',
         description: '',
         vote_avg: 7.8,
         first_aired: '2011-08-22',
-        createdAt: 978,
+        createdAt: createdAt,
         poster_path: 'sdjlkajsdajskdj32j.jpg',
         backdrop_path: '03kjrf02jdfj20ifj.png'
     }
     const action = addShow(addShowObject);
-
+    
     expect(action).toEqual({
         type: 'ADD_SHOW',
         show: {
-            ...addShowObject 
+            ...addShowObject, 
+            createdAt: createdAt,
         }
     });
 });
@@ -63,7 +67,7 @@ test('Should setup addShow action object with default values', () => {
             description: undefined,
             vote_avg: undefined,
             first_aired: undefined,
-            createdAt: undefined,
+            createdAt: expect.any(String),
             poster_path: null,
             backdrop_path: null
         }
