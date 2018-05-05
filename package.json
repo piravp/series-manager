@@ -23,6 +23,7 @@
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
     "css-loader": "0.28.4",
+    "downloadjs": "^1.4.7",
     "iso-639-1": "^2.0.3",
     "loadash": "^1.0.0",
     "moment": "^2.22.1",

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Select, Icon, Tooltip, Badge, Collapse } from 'antd'; 
+import { Input, Button, Select, Icon, Tooltip, Badge, Collapse, Upload } from 'antd'; 
 const Search = Input.Search;
 const Option = Select.Option;
 const Panel = Collapse.Panel;
 import CollapsenMenu from './CollapsedMenu';
 import moment from 'moment';
+import downloadjs from 'downloadjs'
 
 import { 
     setTextFilter, 
@@ -112,7 +113,22 @@ class HomeSeriesFilter extends Component {
                             <Option value="rating_descending">Rating, descending</Option>
                         </Select>
 
+                        
 
+                        <Tooltip title="Download a JSON formatted file">
+
+                                <Button onClick={(e) => {
+                                    console.log('clicked on download')
+                                    downloadjs( JSON.stringify(this.props.series), `TDS-${moment().format('YYYYMMDD')}.json`, 'text/json')
+                                }}
+                                disabled={this.props.seriesListItems === 0}
+                                type="primary"
+                                ghost
+                                >
+                                    Download
+                                </Button>
+
+                        </Tooltip>
                 </div>
                 </Panel>
             </Collapse>
@@ -125,6 +141,7 @@ class HomeSeriesFilter extends Component {
 const mapStateToProps = (state) => {
     return {
         filters: state.filters,
+        series: state.series,
         seriesListItems: state.series.length
     }
 }

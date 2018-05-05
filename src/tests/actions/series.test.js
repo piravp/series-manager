@@ -31,7 +31,7 @@ test('Should setup getShowDetails action object', () => {
 
 // Test addShow action
 test('Should setup addShow action object', () => {
-    const createdAt = moment().format('YYYY-MM-DD hh:mm:ss');
+    const createdAt = moment().format('YYYY-MM-DD HH:mm:ss');
     
     const addShowObject = {
         id: 34223,
@@ -44,7 +44,7 @@ test('Should setup addShow action object', () => {
         backdrop_path: '03kjrf02jdfj20ifj.png'
     }
     const action = addShow(addShowObject);
-    
+
     expect(action).toEqual({
         type: 'ADD_SHOW',
         show: {
