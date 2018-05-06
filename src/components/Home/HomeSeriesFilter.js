@@ -67,8 +67,8 @@ class HomeSeriesFilter extends Component {
                         this.props.dispatch(setTextFilter({ text: e.target.value }))
                     }}
                     autoFocus/>
-                <Tooltip title="Can't find the show you're looking for? Fear not! You can manually add one here.">
-                    <Button type="default" icon="plus-circle-o" onClick={(e) => this.setState({ showAddShowModal: true })}>Add new</Button>
+                <Tooltip title="Can't find the show you're looking for? Fear not! You can manually add one here (Coming soon).">
+                    <Button disabled={true} type="default" icon="plus-circle-o" onClick={(e) => this.setState({ showAddShowModal: true })}>Add new</Button>
                 </Tooltip>
 
             </div>

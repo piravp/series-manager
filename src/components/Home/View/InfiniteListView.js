@@ -169,7 +169,7 @@ export default class InfiniteListView extends React.Component {
                     className="animated fadeInLeft animation-delay-200"
                     key={item && item.name}
                     actions={ [
-                      <IconText type="star-o" text="156" />, 
+                      <IconText type="star-o" text="156" callbackFunc={() => console.log('Rating icon pressed. Not yet implemented')}/>, 
                       <IconText classNameProp="removeIconText" type="close" text="Remove" callbackFunc={() => this.handleRemoveShow(item.id, item.name)}/>
                     ]}
                     extra={item && item.backdrop_path ? <img width={272} alt="logo" src={`${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
@@ -177,7 +177,7 @@ export default class InfiniteListView extends React.Component {
                     {<List.Item.Meta
                       avatar={item && item.backdrop_path ? <Avatar src={`${BACKDROP_IMG_185}${item.backdrop_path}`} /> : null}
                       title={item && titleContent(item)}
-                      description="something something som"
+                      description=""
                     />}
                     {item && item.description}
                   </List.Item>

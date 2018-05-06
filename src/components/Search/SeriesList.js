@@ -33,10 +33,11 @@ class SeriesList extends Component {
 
   };
   
+  //FIXME: showModal currently set to false. Set to 'true' to enable
   menu = (
     <Menu>
       <Menu.Item>
-        <a onClick={(e) => this.setState({ showModal: true }) }>More info</a>
+        <a onClick={(e) => this.setState({ showModal: false }) }>More info</a>
       </Menu.Item>
     </Menu>
   );

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Button } from 'antd';
+import {NavLink} from 'react-router-dom';
+
 
 import HomeDetailsModal from '../Details/HomeDetailsModal';
 import { removeShow } from '../../../actions/series';
@@ -70,7 +72,7 @@ export default class CardView extends Component {
                     
                      
             </div>
-            )) : <p>There are no series here - navigate to <a href="/search">&nbsp;Search&nbsp;</a> and add your next designated show!</p>}
+            )) : <p>There are no series here - navigate to <NavLink to="/search">Search</NavLink> and add your next designated show!</p>}
             {this.state.showModal && <HomeDetailsModal className="modalModal" modalShowId={this.state.modalShowId} handleCloseModalInParent={this.handleCloseModalInParent }/>}
          </div>
         );
