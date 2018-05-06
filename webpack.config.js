@@ -1,11 +1,12 @@
 // Node command to import 'path' module
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');  
-
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack')
+const env = process.env.NODE_ENV || 'development'
 
 module.exports = (env) => {
-    const isProduction = env === 'production';
+    const envIsProduction = env === 'production';
     const CSSExtract = new ExtractTextPlugin('styles.css');
 
     return {
@@ -16,7 +17,7 @@ module.exports = (env) => {
         },
         module: {
             rules: [{
-                loader: 'babel-loader',
+                use: ['babel-loader'],
                 test: /\.js$/,
                 exclude: /node_modules/
             }, {
@@ -46,10 +47,29 @@ module.exports = (env) => {
                 }
             }]
         },
-        plugins: [
-            CSSExtract  // Extract css to its own file
-        ],
-        devtool: isProduction ? 'source-map' : 'inline-source-map',
+        plugins: envIsProduction
+        ? [
+            CSSExtract,  // Separate CSS from bundle.js to --> styles.css
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify('production')
+            }),
+            new UglifyJsPlugin({ 
+                uglifyOptions: {
+                    compress: { 
+                        warnings: false, 
+                        drop_console: true 
+                    } 
+                }
+            })
+          ]
+        : [ 
+            CSSExtract,  // Separate CSS from bundle.js to --> styles.css
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify('development')
+            })
+          ], 
+
+        devtool: envIsProduction ? 'source-map' : 'inline-source-map',
         devServer: {
             contentBase: path.join(__dirname, 'public'),
             historyApiFallback: true
