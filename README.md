@@ -20,11 +20,13 @@ git@github.com:piravp/series-manager.git
 TDS uses The Movie Database API (TMDB). [Register](https://www.themoviedb.org/account/signup) an account and [aquire](https://developers.themoviedb.org/3/getting-started/introduction) an `API_KEY`.
 
 #### Copy key into the project
-Create a file called `config.json` in the root folder and insert your API_KEY with a key called `api_key`. Be sure to name the variable in lower case. 
+Adding the key can be done either directly inside the app or by modifying the `configKey.js` file.  
+##### Method 1: In the app
+After you've run `npm run dev-server` and opened the app navigate to `Home` and open the dropdown menu below the search bar. Click on `Add key` and insert your key.
+##### Method 2: Config file
+Find `configKey.js` in the root folder and insert your API_KEY inside the string.
 ```node
-{
-    "api_key": <<your-key>>
-}
+export const API_KEY = getAPIKey() || "YOU-MUST-PROVIDE-AN-API-KEY-HERE";
 ```
 
 ## 3. Getting Started
