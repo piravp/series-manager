@@ -4,11 +4,8 @@ import { Tag } from 'antd';
 
 // Import local constants and components
 import { PROFILE_IMG_185, POPULAR_BASE_URL } from '../../../config';
-import config from '../../../config.json';
+import { API_KEY } from '../../../configKey';
 import { doRequest, getGenre } from '../../utils/utilities';
-
-// Declare local constants
-const { api_key: API_KEY } = config;
 
 // Methods
 const randomHexColor = () => {

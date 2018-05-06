@@ -26,3 +26,19 @@ export const clearStorage = () => {
         // Do nothing
     }
 };
+
+export const getAPIKey = () => {
+    try {
+        return localStorage.getItem('api_key');
+    } catch (err) {
+        // Do nothing
+    }
+};
+
+export const setAPIKey = (api_key) => {
+    try {
+        localStorage.setItem('api_key', api_key);
+    } catch (err) {
+        // Do nothing
+    }
+};

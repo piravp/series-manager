@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Modal, Button, Divider, Tag } from 'antd'; 
 import { doRequest } from '../../../utils/utilities';
 
-import config from '../../../../config.json';
+import { API_KEY } from '../../../../configKey';
 import { POSTER_IMG_154, PROFILE_IMG_185, DETAILS_BASE_URL } from '../../../../config';
 import SimilarShow from './SimilarShow';
 
-const { api_key: API_KEY } = config;
 const NOT_AVAILABLE = (
     <span className="dataNotAvailable">Not available</span>
 );

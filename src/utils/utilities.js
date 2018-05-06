@@ -1,6 +1,6 @@
 import axios from 'axios';
-import config from '../../config.json';
-const { api_key: API_KEY } = config;
+import { API_KEY } from '../../configKey';
+
 export const doRequest = (URL, callback) => {
         
 

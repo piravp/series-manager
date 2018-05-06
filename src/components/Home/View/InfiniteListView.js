@@ -3,14 +3,11 @@ import { List, message, Avatar, Spin, Icon, Tooltip } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import moment from 'moment';
 
-import config from '../../../../config.json';
+import { API_KEY } from '../../../../configKey';
 import HomeDetailsModal from '../Details/HomeDetailsModal';
 import { removeShow } from '../../../actions/series';
 import { BACKDROP_IMG_185 } from '../../../../config';
 import { removeShowTimeline } from '../../../actions/timeline';
-
-// Declare local constants
-const { api_key: API_KEY } = config;
 
 
 const IconText = ({ type, text = "", classNameProp, callbackFunc }) => (

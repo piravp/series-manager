@@ -6,10 +6,9 @@ import { Spin } from 'antd';
 import SeriesList from './SeriesList';
 
 // Config
-import CONFIG from '../../../config.json'
+import { API_KEY } from '../../../configKey'
 
 // Constants
-const API_KEY = CONFIG.api_key;
 const BASE_URL = 'https://api.themoviedb.org/3'
 const SEARCH = `${BASE_URL}/search/tv?api_key=${API_KEY}&language=en-US&query=`; 
 export default class SeriesListRenderer extends React.Component {

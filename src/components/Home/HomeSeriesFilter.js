@@ -18,7 +18,7 @@ import {
     sortByRatingDescending } from '../../actions/filters';
 import { removeAllShows } from '../../actions/series';
 import AddShowModal from './AddShow/AddShowModal';
-import { clearStorage } from '../../utils/localStorage';
+import { clearStorage, setAPIKey } from '../../utils/localStorage';
 import TimelineModal from './TimelineModal';
 import { removeAllShowsFromTimeline } from '../../actions/timeline'
 
@@ -128,6 +128,19 @@ class HomeSeriesFilter extends Component {
                                     Download
                                 </Button>
 
+                        </Tooltip>
+
+                        <Tooltip title="Add TMDB api key (required for app to work)">
+                                <Button onClick={(e) => {
+                                    const key = prompt('Please provide API key here')
+                                    setAPIKey(key)
+                                }}
+                                disabled={false}
+                                type="primary"
+                                ghost
+                                >
+                                    Add key
+                                </Button>
                         </Tooltip>
                 </div>
                 </Panel>
