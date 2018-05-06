@@ -2,6 +2,9 @@
   "name": "series-manager",
   "author": "Piraveen",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.9.4"
+  },
   "main": "index.js",
   "license": "MIT",
   "scripts": {
