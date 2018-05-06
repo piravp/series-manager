@@ -1,34 +1,60 @@
 // Node command to import 'path' module
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');  
 
-module.exports = {
-    entry: './src/app.js',
-    output: {
-        path: path.join(__dirname, 'public'),
-        filename: 'bundle.js'
-    },
-    module: {
-        rules: [{
-            loader: 'babel-loader',
-            test: /\.js$/,
-            exclude: /node_modules/
-        }, {
-            test: /\.s?css$/,
-            use: ['style-loader', 'css-loader', 'sass-loader']
-        }, {
-            test: /\.(?:png|jpg|svg)$/,
-            loader: 'url-loader',
-            query: {
-                // Inline images smaller than 10kb as data URIs
-                limit: 10000
-            }
-        }]
-    },
-    devtool: 'cheap-module-eval-source-map',
-    devServer: {
-        contentBase: path.join(__dirname, 'public'),
-        historyApiFallback: true
-    }
+
+
+module.exports = (env) => {
+    const isProduction = env === 'production';
+    const CSSExtract = new ExtractTextPlugin('styles.css');
+
+    return {
+        entry: './src/app.js',
+        output: {
+            path: path.join(__dirname, 'public'),
+            filename: 'bundle.js'
+        },
+        module: {
+            rules: [{
+                loader: 'babel-loader',
+                test: /\.js$/,
+                exclude: /node_modules/
+            }, {
+                test: /\.s?css$/,
+                use: CSSExtract.extract({
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                sourceMap: true         // Enable source maps for CSS
+                            }
+                        }, 
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true         // Enable source maps for SCSS
+                            }
+                        }
+                    ]
+                }) 
+            }, {
+                test: /\.(?:png|jpg|svg)$/,
+                loader: 'url-loader',
+                query: {
+                    // Inline images smaller than 10kb as data URIs
+                    limit: 10000
+                }
+            }]
+        },
+        plugins: [
+            CSSExtract  // Extract css to its own file
+        ],
+        devtool: isProduction ? 'source-map' : 'inline-source-map',
+        devServer: {
+            contentBase: path.join(__dirname, 'public'),
+            historyApiFallback: true
+        }
+    };
 };
 
 // style-loader:    Injects a <style> tag into the DOM  
