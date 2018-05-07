@@ -15,7 +15,8 @@ const configureStore = () => {
         {
             filters: filtersReducerDefaultState,
             series: loadedState.shows,
-            timeline: loadedState.timeline
+            timeline: loadedState.timeline,
+            calendar: loadedState.calendar
         };
     }
 
@@ -24,11 +25,12 @@ const configureStore = () => {
     // Initialize store
     const store = createStore(rootReducer, preloadedState, storeEnhancer);
 
-    // Save state every 2 s
+    // Save state every 2 s at most
     store.subscribe(throttle(() => {
         saveState({
             shows: store.getState().series,
-            timeline: store.getState().timeline 
+            timeline: store.getState().timeline,
+            calendar: store.getState().calendar 
         });
     }, 2000));
 

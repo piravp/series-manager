@@ -18,10 +18,13 @@ class Calendar extends Component {
         return (
             <div>
                 <BigCalendar
-                events={this.props.events}
-                startAccessor='start'
-                endAccessor='end'
-                views={['month', 'week', 'agenda']}
+                    selectable
+                    events={this.props.events}
+                    startAccessor='start'
+                    endAccessor='end'
+                    views={['month', 'week', 'agenda']}
+                    onSelectSlot={(e) => console.log(e)}
+                    onSelectEvent={(e) => console.log(e)}
                 />
             </div>
         );

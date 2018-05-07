@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Select, Button, Input, DatePicker, TimePicker, Switch, Radio, InputNumber } from 'antd';
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
+import moment from 'moment';
+import uuidv4 from 'uuid/v4';
 
+import { addCalendarEvent, addCalendarLongEvent } from '../../actions/calendar'
 
 class CalendarToolbar extends Component {
     state = {
-        repeat: 'regular'
+        title: '',
+        startDate: '',
+        endDate: '',
+        startTime: '',
+        endTime: '',
+        repeat: 'single'
     }
 
 
@@ -19,32 +28,69 @@ class CalendarToolbar extends Component {
         })
     };
     
+    // Add single event
+    handleAddEvent = (e) => {
+        this.props.dispatch(
+            addCalendarEvent({ 
+                id: uuidv4(), 
+                title: this.state.title, 
+                startDate: this.state.startDate, 
+                startTime: this.state.startTime, 
+                endTime: this.state.endTime, 
+                calendarType: this.state.repeat
+            })
+        )
+    };
+
+    // Add event which extends over several days (regular/recurring series)
+    handleAddLongEvent = (e) => {
+        this.props.dispatch(
+            addCalendarLongEvent({ 
+                id: uuidv4(), 
+                title: this.state.title, 
+                startDate: this.state.startDate, 
+                endDate: this.state.endDate,
+                startTime: this.state.startTime, 
+                endTime: this.state.endTime, 
+                calendarType: this.state.repeat 
+            })
+        )
+    };
+    
     render() {
         return (
             <div className="calendarToolbarParentContainer">
                 <div className="calendarToolbarChildContainer">
-                    <Input placeholder="Series name" />
+                    <Input placeholder="Series name" onChange={e => this.setState({ title: e.target.value })}/>
                     
                     <div className="calendarDatePicker">
                         {
-                            this.state.repeat === 'regular' ? 
-                            <DatePicker onChange={e => console.log(e)} placeholder="Pick date"/> :
-                            <RangePicker onChange={e => console.log(e)} />
-                            
+                            this.state.repeat === 'single' ? 
+                            <DatePicker onChange={e => this.setState({ startDate: moment(e._d).format('YYYY-MM-DD') })} placeholder="Pick date"/> :
+                            <RangePicker onChange={dates => 
+                                this.setState({ 
+                                    startDate: moment(dates[0]._d).format('YYYY-MM-DD'),
+                                    endDate: moment(dates[1]._d).format('YYYY-MM-DD')
+                                 })
+                            }/>
+
                         }
-                        <TimePicker format={'HH:mm'} />
-                        <InputNumber min={1} max={200} onChange={e => console.log(e)} placeholder="min"/>
+                        <TimePicker format={'HH:mm'} onChange={e => this.setState({ startTime: moment(e._d).format('HH:mm') })} />
+                        <InputNumber min={1} 
+                                     max={200} 
+                                     onChange={value =>  this.setState({ endTime: moment(moment(this.state.startTime, 'HH:mm').add(value, 'minutes')._d).format('HH:mm') }) } 
+                                     placeholder="minutes"/>
                     </div>
 
                     <div className="radioEventType">
-                        <RadioGroup defaultValue="regular" size="medium" onChange={this.handleToggleRadioBtn}>
-                            <RadioButton value="regular">Regular</RadioButton>
-                            <RadioButton value="premiere">Premiere</RadioButton>
+                        <RadioGroup defaultValue="single" size="medium" onChange={this.handleToggleRadioBtn}>
+                            <RadioButton value="single">Single</RadioButton>
+                            <RadioButton value="recurring">Recurring</RadioButton>
                         </RadioGroup>
                     </div>
                     
                     <div className="calendarCreateButton">
-                        <Button type="primary">Create</Button>
+                        <Button type="primary" onClick={this.state.repeat==='recurring' ? this.handleAddLongEvent : this.handleAddEvent}>Create</Button>
                     </div>
                 </div>
             </div>
@@ -52,11 +98,5 @@ class CalendarToolbar extends Component {
     }
 };
 
-export default CalendarToolbar;
 
-
-
-// <div className="toggleRepeat">
-// <label>Repeating series</label>
-// <Switch defaultChecked={false} onChange={this.handleToggleRepeat}/>
-// </div>
+export default connect()(CalendarToolbar);
