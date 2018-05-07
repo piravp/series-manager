@@ -32,3 +32,15 @@ export const removeAllShowsFromTimeline = () => ({
         type: 'remove_all_shows'
     }
 });
+
+
+// REMOVE_TIMELINE_ITEM
+export const removeTimelineItem = ({ id } = {}) => ({
+    type: 'REMOVE_TIMELINE_ITEM',
+    id
+});
+
+// REMOVE_EVERY_TIMELINE_ITEMS
+export const removeEveryTimelineItem = () => ({
+    type: 'REMOVE_EVERY_TIMELINE_ITEM'
+});

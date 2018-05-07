@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Table, Icon, Divider, message, Menu, Dropdown } from 'antd';
 import 'antd/lib/table/style/css'; // or antd/lib/button/style/css for css format file
 import ISO6391 from 'iso-639-1';
+import uuidv4 from 'uuid/v4';
 
 // Custom components
 import { addShow } from '../../actions/series';
@@ -71,7 +72,7 @@ class SeriesList extends Component {
             console.log(record);
             message.success(`Successfully added ${record.name} to your list.`, 2)
             this.props.dispatch(addShowToTimeline({
-                id: record.id,
+                id: uuidv4(),
                 name: record.name
             }));
           }}>

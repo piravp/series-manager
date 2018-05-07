@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal, Timeline, Icon } from 'antd';
+import { Modal, Timeline, Icon, Button, Tooltip } from 'antd';
 
 import { connect } from 'react-redux';
+import { removeTimelineItem, removeEveryTimelineItem } from '../../actions/timeline';
 
 class TimelineModal extends React.Component {
   state = { 
@@ -53,13 +54,21 @@ class TimelineModal extends React.Component {
           onCancel={this.handleCancel}
           footer={null}
         >
-            {   this.props.timeline.length > 0 ? 
-                <Timeline>
-                    {this.props.timeline.map(timelineEvent => this.resolveTimelineItem(timelineEvent))}
-                </Timeline> :
-                <i>There are no events to show here... at least not yet!</i>
-            }
+            <div className="timelineModalInnerContainer">
+                {   
+                  this.props.timeline.length > 0 ? 
+                  <Timeline>
+                      {this.props.timeline.map(timelineEvent => this.resolveTimelineItem(timelineEvent))}
+                  </Timeline> :
+                  <i>There are no events to show here... at least not yet!</i>
+                }
+                <Tooltip title="Remove every timeline item" mouseEnterDelay={0.1}>
+                  <Button type="danger" size="default" ghost onClick={(e) => this.props.dispatch(removeEveryTimelineItem())}>Remove all</Button>
+                </Tooltip>
+            </div>
         </Modal>
+
+
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Select, Icon, Tooltip, Badge, Collapse, Upload } from 'antd'; 
+import { Input, Button, Select, Icon, Tooltip, Collapse, Upload } from 'antd'; 
 const Search = Input.Search;
 const Option = Select.Option;
 const Panel = Collapse.Panel;
@@ -40,9 +40,7 @@ class HomeSeriesFilter extends Component {
             <div className="homeSeriesFilterChildContainer">
                     <div className="timeline"  onClick={e => this.setState({ showTimelineModal: true })}>
                         <Tooltip title="Show timeline (Beta)">
-                            <Badge dot> 
-                                <a><Icon type="fork" style={{ fontSize: 22}}/></a>
-                            </Badge>
+                            <a><Icon type="fork" style={{ fontSize: 22}}/></a>
                         </Tooltip>
                     </div>
 

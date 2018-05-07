@@ -1,0 +1,12 @@
+// .timelineModalContainer
+
+.timelineModalInnerContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.timelineItem {
+    display: flex;
+    align-items: baseline;
+}
