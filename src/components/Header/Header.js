@@ -35,6 +35,9 @@ class Header extends React.Component {
               <Menu.Item key="popular">
                 <NavLink to="/popular" activeClassName="is-active" exact>Popular</NavLink>
               </Menu.Item>
+              <Menu.Item key="calendar">
+                <NavLink to="/calendar" activeClassName="is-active" exact>Calendar</NavLink>
+              </Menu.Item>
             </Menu>
           </div>
           

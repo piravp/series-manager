@@ -1,0 +1,25 @@
+// BigCalendar component
+.rbc-calendar {
+    display: flex;
+    height: 50rem;
+    width: 90rem;
+}
+
+.rbc-event {
+    background-color: #ad3155;
+}
+
+.rbc-event-content {
+    text-align: center
+}
+
+// Month-view-day element on hover
+.rbc-day-bg:hover {
+    background-color: #e6f7ff;
+    border-bottom: 0.3rem solid #1890ff
+}
+
+.rbc-toolbar-label {
+    font-size: 2.5rem;
+    font-weight: bold;
+}

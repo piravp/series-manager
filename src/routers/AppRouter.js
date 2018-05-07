@@ -8,6 +8,7 @@ import NotFoundPage from '../components/NotFoundPage';
 import SearchPage from '../components/Search/SearchPage';
 import PopularPage from '../components/Popular/PopularPage';
 import Footer from '../components/Header/Footer';
+import CalendarPage from '../components/Calendar/CalendarPage';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -17,6 +18,7 @@ const AppRouter = () => (
                 <Route path="/" component={HomePage} exact />
                 <Route path="/search" component={SearchPage} />
                 <Route path="/popular" component={PopularPage} />
+                <Route path="/calendar" component={CalendarPage} />
                 <Route component={NotFoundPage} />
             </Switch>
             <Footer />
