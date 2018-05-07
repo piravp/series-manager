@@ -113,33 +113,32 @@ class HomeSeriesFilter extends Component {
 
                         
 
-                        <Tooltip title="Download a JSON formatted file">
-
-                                <Button onClick={(e) => {
-                                    console.log('clicked on download')
-                                    downloadjs( JSON.stringify(this.props.series), `TDS-${moment().format('YYYYMMDD')}.json`, 'text/json')
-                                }}
-                                disabled={this.props.seriesListItems === 0}
-                                type="primary"
-                                ghost
-                                >
-                                    Download
-                                </Button>
-
+                        <Tooltip style={{ marinLeft: 100 }} title="Download a JSON formatted file">
+                            <Button className="btnDownload" onClick={(e) => {
+                                console.log('clicked on download')
+                                downloadjs( JSON.stringify(this.props.series), `TDS-${moment().format('YYYYMMDD')}.json`, 'text/json')
+                            }}
+                            disabled={this.props.seriesListItems === 0}
+                            type="primary"
+                            ghost
+                            >
+                                Download
+                            </Button>
                         </Tooltip>
 
-                        <Tooltip title="Add TMDB api key (required for app to work)">
-                                <Button onClick={(e) => {
-                                    const key = prompt('Please provide API key here')
-                                    setAPIKey(key)
-                                }}
-                                disabled={false}
-                                type="primary"
-                                ghost
-                                >
-                                    Add key
-                                </Button>
-                        </Tooltip>
+
+                    <Tooltip title="Add TMDB api key (required for app to work)">
+                        <Button className="btnAddAPIKey" style={{ marinLeft: 10 }} onClick={(e) => {
+                            const key = prompt('Please provide API key here')
+                            setAPIKey(key)
+                        }}
+                        disabled={false}
+                        type="primary"
+                        ghost
+                        >
+                            Add key
+                        </Button>
+                    </Tooltip>
                 </div>
                 </Panel>
             </Collapse>

@@ -63,7 +63,7 @@ class TimelineModal extends React.Component {
                   <i>There are no events to show here... at least not yet!</i>
                 }
                 <Tooltip title="Remove every timeline item" mouseEnterDelay={0.1}>
-                  <Button type="danger" size="default" ghost onClick={(e) => this.props.dispatch(removeEveryTimelineItem())}>Remove all</Button>
+                  <Button disabled={this.props.timeline.length == 0} type="danger" size="default" ghost onClick={(e) => this.props.dispatch(removeEveryTimelineItem())}>Remove all</Button>
                 </Tooltip>
             </div>
         </Modal>
