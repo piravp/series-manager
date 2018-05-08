@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
+import 'moment/locale/en-gb';
 import { connect } from 'react-redux';
 
 // Actions
@@ -10,9 +11,8 @@ import { removeCalendarEvent } from '../../actions/calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 
-
-// Setup the localizer by providing the moment (or globalize) Object
-// to the correct localizer.
+// Setup the localizer 
+moment.locale('en-gb');
 BigCalendar.momentLocalizer(moment);
 
 const eventStyles = {
@@ -25,8 +25,6 @@ const eventStyles = {
 
 
 class Calendar extends Component {
-    
-    
     render () {
         return (
             <div>
