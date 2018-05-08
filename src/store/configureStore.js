@@ -5,8 +5,6 @@ import { loadState, saveState } from '../utils/localStorage';
 import throttle from 'lodash/throttle';
 
 const configureStore = () => {
-
-    console.log(loadState());
     
     const loadedState = loadState();
     let preloadedState = undefined;

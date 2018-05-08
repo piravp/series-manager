@@ -25,6 +25,7 @@ class Calendar extends Component {
                     views={['month', 'week', 'agenda']}
                     onSelectSlot={(e) => console.log(e)}
                     onSelectEvent={(e) => console.log(e)}
+                    defaultDate={moment().toDate()}
                 />
             </div>
         );

@@ -16,7 +16,8 @@ class CalendarToolbar extends Component {
         endDate: '',
         startTime: '',
         endTime: '',
-        repeat: 'single'
+        repeat: 'single',
+        interval: 7
     }
 
 
@@ -44,19 +45,45 @@ class CalendarToolbar extends Component {
 
     // Add event which extends over several days (regular/recurring series)
     handleAddLongEvent = (e) => {
+        const start = this.state.startDate;
+        const end = this.state.endDate;
+        const interval = this.state.interval;
+        const id = uuidv4();
+        for (let current=moment(start, 'YYYY-MM-DD'); current < moment(end, 'YYYY-MM-DD'); current.add(interval, 'days')){
+            //console.log(current._d)
+            this.addLongEvent(id, moment(current._d).format('YYYY-MM-DD'))
+        }
+        
+
+    };
+
+    // Callback
+    addLongEvent = (id, start) => {
+
         this.props.dispatch(
             addCalendarLongEvent({ 
-                id: uuidv4(), 
+                id: id, 
                 title: this.state.title, 
-                startDate: this.state.startDate, 
-                endDate: this.state.endDate,
+                startDate: start,
                 startTime: this.state.startTime, 
                 endTime: this.state.endTime, 
                 calendarType: this.state.repeat 
             })
         )
     };
-    
+    // // In case range is wanted later
+    // this.props.dispatch(
+    //     addCalendarLongEvent({ 
+    //         id: id, 
+    //         title: this.state.title, 
+    //         startDate: start, 
+    //         endDate: end,
+    //         startTime: this.state.startTime, 
+    //         endTime: this.state.endTime, 
+    //         calendarType: this.state.repeat 
+    //     })
+    // )
+
     render() {
         return (
             <div className="calendarToolbarParentContainer">
@@ -68,19 +95,35 @@ class CalendarToolbar extends Component {
                             this.state.repeat === 'single' ? 
                             <DatePicker onChange={e => this.setState({ startDate: moment(e._d).format('YYYY-MM-DD') })} placeholder="Pick date"/> :
                             <RangePicker onChange={dates => 
-                                this.setState({ 
-                                    startDate: moment(dates[0]._d).format('YYYY-MM-DD'),
+                                this.setState({
+                                    startDate: moment(dates[0]._d).format('YYYY-MM-DD'), 
                                     endDate: moment(dates[1]._d).format('YYYY-MM-DD')
-                                 })
+                                })
                             }/>
 
                         }
-                        <TimePicker format={'HH:mm'} onChange={e => this.setState({ startTime: moment(e._d).format('HH:mm') })} />
-                        <InputNumber min={1} 
-                                     max={200} 
-                                     onChange={value =>  this.setState({ endTime: moment(moment(this.state.startTime, 'HH:mm').add(value, 'minutes')._d).format('HH:mm') }) } 
-                                     placeholder="minutes"/>
+                        <TimePicker style={{ marginLeft: 10 }} format={'HH:mm'} onChange={e => this.setState({ startTime: moment(e._d).format('HH:mm') })} />
+                        <div style={{ marginLeft: 15 }}>
+                            <InputNumber min={1} 
+                                        max={200} 
+                                        onChange={value =>  this.setState({ endTime: moment(moment(this.state.startTime, 'HH:mm').add(value, 'minutes')._d).format('HH:mm') }) } 
+                                        placeholder="duration"/>
+                            <label style={{alignItems: 'flex-end', marginLeft: 5}}>minutes</label>
+                        </div>
                     </div>
+
+                    {
+                        this.state.repeat === 'recurring' && 
+                        <div style={{ marginTop: 30 }}>
+                            <label style={{alignItems: 'flex-end', marginRight: 5}}>Recurring every</label>
+                            <InputNumber min={1} 
+                                        max={31} 
+                                        defaultValue={7}
+                                        onChange={value =>  this.setState({ interval: value }) } 
+                                        placeholder=""/>
+                            <label style={{alignItems: 'flex-end', marginLeft: 5}}>days</label>
+                        </div>  
+                    }
 
                     <div className="radioEventType">
                         <RadioGroup defaultValue="single" size="medium" onChange={this.handleToggleRadioBtn}>
