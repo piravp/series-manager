@@ -17,7 +17,9 @@ class CalendarToolbar extends Component {
         startTime: '',
         endTime: '',
         repeat: 'single',
-        interval: 7
+        interval: 7,
+        existingShow: 'new',
+        shows: []
     }
 
 
@@ -84,12 +86,73 @@ class CalendarToolbar extends Component {
     //     })
     // )
 
+    handleToggleShowExists = (e) => {
+
+        this.setState( prevState => {
+            return {
+                existingShow: e.target.value
+            }
+        })
+
+        // Fetch shows (if not fetched earlier)
+        if (this.state.shows.length === 0)  {
+            console.log('props', this.props);
+            this.props.series.map(show => {
+                console.log(show.name);
+                this.setState( prevState => {
+                    return {
+                        existingShow: 'existing',
+                        shows: prevState.shows.concat(show.name)
+                    }
+                })
+            })
+        }
+    };
+
     render() {
         return (
             <div className="calendarToolbarParentContainer">
                 <div className="calendarToolbarChildContainer">
-                    <Input placeholder="Series name" onChange={e => this.setState({ title: e.target.value })}/>
-                    
+                    <div style={{ marginBottom: 30 }}>
+                        <label style={{alignItems: 'flex-end', marginRight: 5}}>Show already exist in your list?</label>
+                        <RadioGroup defaultValue="new" size="small" onChange={this.handleToggleShowExists}>
+                            <RadioButton value="new">New</RadioButton>
+                            <RadioButton value="existing">Existing</RadioButton>
+                        </RadioGroup>
+                    </div>
+                
+                    {
+                        this.state.existingShow==='new' ? 
+                        <Input placeholder="Series name" onChange={e => this.setState({ title: e.target.value })}/> :
+                        <Select
+                            showSearch
+                            style={{ width: 200 }}
+                            placeholder="Select a series from your list"
+                            optionFilterProp="children"
+                            onChange={value => this.setState({ title: value })}
+                            onFocus={() => console.log('focus')}
+                            onBlur={() => console.log('blur')}
+                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                        >
+                            {
+                                this.state.shows.map(showName => (
+                                    <Select.Option key={showName} value={showName}>{showName}</Select.Option>
+                                ))
+                            }
+                            
+
+                        </Select>
+                    }
+
+                    <div className="radioEventType">
+                        <label style={{alignItems: 'flex-end', marginRight: 5}}>Recurring show?</label>
+                        <RadioGroup defaultValue="single" size="medium" onChange={this.handleToggleRadioBtn}>
+                            <RadioButton value="single">Single</RadioButton>
+                            <RadioButton value="recurring">Recurring</RadioButton>
+                        </RadioGroup>
+                    </div>
+
+
                     <div className="calendarDatePicker">
                         {
                             this.state.repeat === 'single' ? 
@@ -125,12 +188,6 @@ class CalendarToolbar extends Component {
                         </div>  
                     }
 
-                    <div className="radioEventType">
-                        <RadioGroup defaultValue="single" size="medium" onChange={this.handleToggleRadioBtn}>
-                            <RadioButton value="single">Single</RadioButton>
-                            <RadioButton value="recurring">Recurring</RadioButton>
-                        </RadioGroup>
-                    </div>
                     
                     <div className="calendarCreateButton">
                         <Button type="primary" onClick={this.state.repeat==='recurring' ? this.handleAddLongEvent : this.handleAddEvent}>Create</Button>
@@ -141,5 +198,10 @@ class CalendarToolbar extends Component {
     }
 };
 
+const mapStateToProps = (state) => {
+    return {
+        series: state.series
+    }
+}
 
-export default connect()(CalendarToolbar);
+export default connect(mapStateToProps)(CalendarToolbar);
