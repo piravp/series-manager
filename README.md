@@ -7,7 +7,7 @@
 
 The Designated Show is a series manager aimed at the professional binge-watcher. TDS lets you find and keep track of all the series you have going on. 
 
-**[Live demo](https://the-designated-show.herokuapp.com/)**
+**[Live demo](https://the-designated-show.herokuapp.com/)** (remember to add API key - instructions below)
 
 ## 1. Download TDS
 #### Clone this repository or download ZIP.
@@ -54,7 +54,7 @@ Nice! You can now navigate to http://localhost:8080 to see the result.
 ## Demo
 [![The Designated Show - A series manager](https://img.youtube.com/vi/mGudgU-Nn2U/0.jpg)](https://www.youtube.com/watch?v=mGudgU-Nn2U)
 
-**[Click here for live demo](https://the-designated-show.herokuapp.com/)**
+**[Click here for live demo](https://the-designated-show.herokuapp.com/)** (remember to add API key, as discussed above)
 
 ### Known issues
 * Manually adding series has not been implemented yet.
