@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import BigCalendar from 'react-big-calendar';
 import moment from 'moment';
+import { connect } from 'react-redux';
+
+// Actions
+import { removeCalendarEvent } from '../../actions/calendar';
 
 // Import styles
 import 'react-big-calendar/lib/css/react-big-calendar.css'
@@ -10,6 +14,15 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
 BigCalendar.momentLocalizer(moment);
+
+const eventStyles = {
+    event: {
+        backgroundColor:'#ad3155',
+        color: 'white',
+        borderRadius:10
+    },
+}
+
 
 class Calendar extends Component {
     
@@ -23,9 +36,14 @@ class Calendar extends Component {
                     startAccessor='start'
                     endAccessor='end'
                     views={['month', 'week', 'agenda']}
-                    onSelectSlot={(e) => console.log(e)}
-                    onSelectEvent={(e) => console.log(e)}
+                    onSelectSlot={(e) => console.log('slot',e)}
+                    onSelectEvent={({id}) => this.props.dispatch(removeCalendarEvent({ id }))}
                     defaultDate={moment().toDate()}
+                    eventPropGetter={(event,start,end,isSelected)=>{
+                        return {
+                            style: eventStyles.event
+                        }
+                    }}
                 />
             </div>
         );
@@ -33,4 +51,4 @@ class Calendar extends Component {
 } 
 
 
-export default Calendar;
+export default connect()(Calendar);

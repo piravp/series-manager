@@ -113,6 +113,18 @@ class CalendarToolbar extends Component {
         return (
             <div className="calendarToolbarParentContainer">
                 <div className="calendarToolbarChildContainer">
+                <label style={{
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'flex-end', 
+                    marginBottom: '20px',
+                    fontSize: '30px', 
+                    fontWeight: 'bolder', 
+                    fontFamily: 'Raleway, serif'
+                }}>
+                    Add event
+                </label>
+                
                     <div style={{ marginBottom: 30 }}>
                         <label style={{alignItems: 'flex-end', marginRight: 5}}>Show already exist in your list?</label>
                         <RadioGroup defaultValue="new" size="small" onChange={this.handleToggleShowExists}>
@@ -130,8 +142,6 @@ class CalendarToolbar extends Component {
                             placeholder="Select a series from your list"
                             optionFilterProp="children"
                             onChange={value => this.setState({ title: value })}
-                            onFocus={() => console.log('focus')}
-                            onBlur={() => console.log('blur')}
                             filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                         >
                             {

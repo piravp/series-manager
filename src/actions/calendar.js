@@ -28,3 +28,10 @@ export const addCalendarLongEvent = ({ id, title, startDate, /*endDate, */ start
         calendarType
     }
 });
+
+
+// REMOVE_CALENDAR_EVENT
+export const removeCalendarEvent = ({ id } = {}) => ({
+    type: 'REMOVE_CALENDAR_EVENT',
+    id
+});
