@@ -36,6 +36,7 @@
     "moment": "^2.22.1",
     "node-sass": "4.5.3",
     "query-string": "^6.0.0",
+    "re-resizable": "^4.4.8",
     "react": "16.0.0",
     "react-big-calendar": "^0.19.1",
     "react-dom": "16.0.0",

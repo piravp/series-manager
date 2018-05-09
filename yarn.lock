@@ -5873,6 +5873,10 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+re-resizable@^4.4.8:
+  version "4.4.8"
+  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-4.4.8.tgz#1c7eedfd9b9ed1f83b3adfa7a97cda76881e4e57"
+
 react-big-calendar@^0.19.1:
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/react-big-calendar/-/react-big-calendar-0.19.1.tgz#ace5a24009bef21c09378f162c2234f9b34a7975"
