@@ -48,7 +48,7 @@ export default class HomeDetailsModal extends Component {
 
 
         // Get keywords related to the show
-        //TODO: Show tags using antd tags component
+        // Show tags using antd tags component
         // Get details about the actors
         doRequest(`${DETAILS_BASE_URL}${this.props.modalShowId}/keywords?api_key=${API_KEY}&language=en-US`, (response) => {
             //console.log(response);
@@ -89,12 +89,6 @@ export default class HomeDetailsModal extends Component {
           this.getDetailedResponse();
           
     }
-
-    //------------For testing purposes
-    // componentDidUpdate() {
-    //     console.log('State: ', this.state)
-    // };
-    //-------------------------------
 
   handleOk = (e) => {
     this.setState({
