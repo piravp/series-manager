@@ -3,6 +3,8 @@ import { NavLink, Link } from 'react-router-dom';
 import { Divider, Menu, Icon } from 'antd';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+import {withRouter} from 'react-router'
+
 
 class Header extends React.Component {
     state = {
@@ -13,6 +15,24 @@ class Header extends React.Component {
         current: e.key
       });
     }
+
+    checkActiveRoute = () => {
+      const pathname = this.props.location.pathname;
+      const newRoute = pathname.substring(1, pathname.length);
+      const checkHome = newRoute==='' ? 'home' : newRoute;
+      if(checkHome !== this.state.current){
+        this.setState({ current: newRoute })
+      }
+    }
+
+    componentDidMount(){
+      this.checkActiveRoute();
+    }
+
+    componentDidUpdate(){
+      this.checkActiveRoute();
+    }
+
     render() {
       return (
         <div className="headerParentContainer">
@@ -47,4 +67,4 @@ class Header extends React.Component {
     }
   }
 
-export default Header;
+export default withRouter(Header);
