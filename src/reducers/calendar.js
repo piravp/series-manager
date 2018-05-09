@@ -9,11 +9,16 @@ const calendarReducer = (state = calendarReducerDefaultState, action) => {
             }
             return [ ...state];
         case 'ADD_CALENDAR_LONG_EVENT':
-            let indexLong = state.findIndex(calendarLongEvent => calendarLongEvent.title == action.data.event.title);
-            if(indexLong == -1) {
-                return [ ...state, action.data.event];
-            }
-            return [ ...state];
+//             let titleExists = state.findIndex(calendarLongEvent => calendarLongEvent.title == action.data.event.title);
+//             if(titleExists == -1) {
+//                 let idExists = state.findIndex(calendarLongEvent => calendarLongEvent.id == action.data.event.id);
+//                 // Event is recurring, let it pass
+//                 if (idExists !== -1){
+//                     return [ ...state, action.data.event];
+//                 }
+// //                return [ ...state];
+//             }
+            return [ ...state, action.data.event];
         case 'REMOVE_CALENDAR_EVENT':
             return state.filter(calendarEvent => calendarEvent.id !== action.id)
         default:

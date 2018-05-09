@@ -21,7 +21,7 @@ export const addCalendarLongEvent = ({ id, title, startDate, /*endDate, */ start
     data: {
         event: {
             id,
-            title,
+            title: `${title} (Recurring)`,
             start: moment(`${startDate} ${startTime}`, 'YYYY-MM-DD HH:mm').toDate(),
             end: moment(`${startDate} ${endTime}`, 'YYYY-MM-DD HH:mm').toDate(),
         },

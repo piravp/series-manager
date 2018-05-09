@@ -27,13 +27,13 @@ const eventStyles = {
 class Calendar extends Component {
     render () {
         return (
-            <div>
+            <div className="calendarContainer">
                 <BigCalendar
                     selectable
                     events={this.props.events}
                     startAccessor='start'
                     endAccessor='end'
-                    views={['month', 'week', 'agenda']}
+                    views={['month', 'agenda']}
                     onSelectSlot={(e) => console.log('slot',e)}
                     onSelectEvent={({id}) => this.props.dispatch(removeCalendarEvent({ id }))}
                     defaultDate={moment().toDate()}
@@ -41,6 +41,10 @@ class Calendar extends Component {
                         return {
                             style: eventStyles.event
                         }
+                    }}
+                    formats={{
+                        agendaDateFormat: (date, culture, localizer) =>
+                            localizer.format(date, 'DD.MM.YYYY', culture)
                     }}
                 />
             </div>

@@ -1,7 +1,7 @@
 {
   "name": "series-manager",
   "author": "Piraveen",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "engines": {
     "node": "8.9.4"
   },

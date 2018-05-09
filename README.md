@@ -17,9 +17,9 @@ https://github.com/piravp/series-manager.git
 # SSH
 git@github.com:piravp/series-manager.git
 ```
-## 2. Connect to TMDB
+## 2. Connect to TMDb
 #### Get API key
-TDS uses The Movie Database API (TMDB). [Register](https://www.themoviedb.org/account/signup) an account and [aquire](https://developers.themoviedb.org/3/getting-started/introduction) an `API_KEY`.
+TDS uses The Movie Database API (TMDb). [Register](https://www.themoviedb.org/account/signup) an account and [aquire](https://developers.themoviedb.org/3/getting-started/introduction) an `API_KEY`.
 
 #### Copy key into the project
 Adding the key can be done either directly inside the app or by modifying the `configKey.js` file.  
