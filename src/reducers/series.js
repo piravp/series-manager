@@ -13,6 +13,8 @@ const seriesReducer = (state = seriesReducerDefaultState, action) => {
             return state.filter(show => show.id !== action.id);
         case 'REMOVE_ALL_SHOWS':
             return [];
+        case 'REMOVE_SHOWS_WITH_COLLECTION':
+            return state.filter(show => show.collection !== action.value)
         default:
             return state;
     }
@@ -20,8 +22,3 @@ const seriesReducer = (state = seriesReducerDefaultState, action) => {
 
 export default seriesReducer;
 
-// return [
-//     ...state, action.show
-// ];
-
-//state.filter((element, position, array) => state.indexOf(element) === -1) ? [...state, action.show] : state

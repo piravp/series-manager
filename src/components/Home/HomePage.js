@@ -26,7 +26,7 @@ class HomePage extends Component {
             {
                 this.state.view === 'list' ? 
                 <InfiniteListView series={this.props.series} {...this.props}/> : 
-                <CardView {...this.props} />
+                <CardView {...this.props} collections={this.props.collection} />
             }
             <BackTop />
         </div>
@@ -38,7 +38,8 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        series: selectSeries(state.series, state.filters)
+        series: selectSeries(state.series, state.filters),
+        collection: state.collection
     }
 };
 

@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'antd';
-import {NavLink} from 'react-router-dom';
-
+import { Card, Button, Input } from 'antd';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import HomeDetailsModal from '../Details/HomeDetailsModal';
 import { removeShow } from '../../../actions/series';
 import { removeShowTimeline } from '../../../actions/timeline';
 import { POSTER_IMG_185 } from '../../../../config';
 
+// Actions
+import { addCollection, removeCollection } from '../../../actions/collection';
+
 const { Meta } = Card;
 
 //import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-available.png';
 import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-icon-15.png';
 
-export default class CardView extends Component {
+class CardView extends Component {
     state = {
         series: undefined,
         showModal: false,
@@ -48,33 +51,70 @@ export default class CardView extends Component {
         this.setState({ showModal: false, modalShowId: undefined });
     };
     
+    handleAddCollection = (e) => {
+        console.log(e.target.value);
+        this.props.dispatch(addCollection({ name: e.target.value }))
+    }
+
+
     render() {
         return (
-            <div className="cardsContainer">
-            {this.state.series && this.state.series.length !== 0 ? this.state.series.map((show) => (
-           
-            <div className="singleCard animated flipInY" key={show.id} >
-        
-                    <Card
-                        style={{ width: 280 }}
-                        cover={show.poster_path ? <img alt="image" src={ show.poster_path && `${POSTER_IMG_185}${show.poster_path}`} /> : null}
-                    >
-                        <div onClick={(e) => this.handleCardClick(show.id) }>
-                            <Meta
-                                title={show.name}
-                                description={show.description}
-                            />
+            <div>
+            <Input className="inputCreateCollection" placeholder="Create collection (press enter)" onPressEnter={this.handleAddCollection}/>
+            {
+                this.props.collections.map(collection => (
+                    <div key={collection}>
+                            <div className="cardViewCollectionTitle">
+                                <h2>{collection}</h2>
+                                    {
+                                        collection !== 'Standard' &&
+                                            <Button type="danger"  size="small"  onClick={e => this.props.dispatch(removeCollection({ name: collection }))}>
+                                                Remove collection
+                                            </Button>
+                                        
+                                    }
+                            </div>
+                        <div className="cardsContainer">
+                            {               
+                                this.state.series && this.state.series.length !== 0 
+                                ? this.state.series.map(show => {
+                                    if (show.collection === collection) {
+                                        return (
+                            
+                                            <div className="singleCard animated flipInY" key={show.id} >
+                                        
+                                                    <Card
+                                                        style={{ width: 280 }}
+                                                        cover={show.poster_path ? <img alt="image" src={ show.poster_path && `${POSTER_IMG_185}${show.poster_path}`} /> : null}
+                                                    >
+                                                        <div onClick={(e) => this.handleCardClick(show.id) }>
+                                                            <Meta
+                                                                title={show.name}
+                                                                description={show.description}
+                                                            />
+                                                        </div>
+                                                        <div className="singleCardRemoveButton">
+                                                            <Button type="danger" size="default" ghost onClick={(e) => this.handleRemoveCard(show.id, show.name)}>Remove</Button>
+                                                        </div>
+                                                    </Card>
+                                                    
+                                            </div>
+                                            )
+                                    }
+                                }) 
+                                : <p>There are no series here - navigate to <NavLink to="/search">Search</NavLink> and add your next designated show!</p>
+                            }
                         </div>
-                        <div className="singleCardRemoveButton">
-                            <Button type="danger" size="default" ghost onClick={(e) => this.handleRemoveCard(show.id, show.name)}>Remove</Button>
-                        </div>
-                    </Card>
-                    
-                     
-            </div>
-            )) : <p>There are no series here - navigate to <NavLink to="/search">Search</NavLink> and add your next designated show!</p>}
+                    </div>
+                ))
+            }
+
+
             {this.state.showModal && <HomeDetailsModal className="modalModal" modalShowId={this.state.modalShowId} handleCloseModalInParent={this.handleCloseModalInParent }/>}
          </div>
         );
     }
 }
+
+
+export default connect()(CardView);

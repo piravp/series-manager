@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Icon, Divider, message, Menu, Dropdown } from 'antd';
+import { Table, Icon, Divider, message, Menu, Dropdown, Select } from 'antd';
+const Option = Select.Option;
 import 'antd/lib/table/style/css'; // or antd/lib/button/style/css for css format file
 import ISO6391 from 'iso-639-1';
 import uuidv4 from 'uuid/v4';
@@ -53,7 +54,11 @@ class SeriesList extends Component {
       title: 'Action', key: 'action',
       render: (text, record) => (
         <span>
-          <a onClick={(e) => {
+          <span>
+            Add to &nbsp;
+          </span>
+
+          <Select placeholder="collection" size='small' style={{ width: 120 }} onChange={selectedCollection => {
             console.log(record);
             this.props.dispatch(addShow({
                 id: record.id,
@@ -62,7 +67,8 @@ class SeriesList extends Component {
                 first_aired: record.first_air_date,
                 poster_path: record.poster_path,
                 backdrop_path: record.backdrop_path,
-                description: record.overview
+                description: record.overview,
+                collection: selectedCollection
             }));
             console.log(record);
             message.success(`Successfully added ${record.name} to your list.`, 2)
@@ -71,8 +77,13 @@ class SeriesList extends Component {
                 name: record.name
             }));
           }}>
-            Add
-          </a>
+            {
+              this.props.collection.map(collection => (
+                <Option key={collection} value={collection}>{collection}</Option>
+              ))
+            }
+          </Select>
+
           <Divider type="vertical" />
           <Dropdown overlay={
             <Menu>
@@ -150,7 +161,12 @@ class SeriesList extends Component {
     );
 }};
 
+const mapStateToProps = (state) => {
+  return {
+    collection: state.collection
+  }
+};
 
-export default connect()(SeriesList);
+export default connect(mapStateToProps)(SeriesList);
 
 

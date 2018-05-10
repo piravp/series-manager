@@ -1,9 +1,9 @@
 .cardsContainer {
     display: flex;
     flex-direction: row;
-    padding: 3rem 5rem 5rem 5rem;
+    padding: 1rem 5rem 5rem 5rem;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 
     // Center card image
     .ant-card-cover{
@@ -24,7 +24,7 @@
 }
 
 .singleCard {
-    padding: 5rem;
+    padding: 3rem 5rem 5rem 5rem;
 }
 
 .ant-card.ant-card-bordered.ant-card-hoverable {
@@ -50,4 +50,22 @@
 
 .ant-card-meta-detail {
     cursor: pointer;
+}
+
+
+.cardViewCollectionTitle {
+    display: flex;
+    padding-left: 10rem;
+
+    button {
+        margin: 0.6rem 0 0 1rem;
+        background-color: white;
+    }
+}
+
+// Input field for creating new collections
+.inputCreateCollection {
+    width: 55rem;
+    height: 5rem;
+    margin: 2rem 4rem 3rem 10rem;
 }
