@@ -5,8 +5,6 @@ const Search = Input.Search;
 const Option = Select.Option;
 const Panel = Collapse.Panel;
 import CollapsenMenu from './CollapsedMenu';
-import moment from 'moment';
-import downloadjs from 'downloadjs'
 
 import { 
     setTextFilter, 
@@ -111,22 +109,6 @@ class HomeSeriesFilter extends Component {
                             <Option value="rating_descending">Rating, descending</Option>
                         </Select>
 
-                        
-
-                        <Tooltip title="Download a JSON formatted file">
-
-                                <Button onClick={(e) => {
-                                    console.log('clicked on download')
-                                    downloadjs( JSON.stringify(this.props.series), `TDS-${moment().format('YYYYMMDD')}.json`, 'text/json')
-                                }}
-                                disabled={this.props.seriesListItems === 0}
-                                type="primary"
-                                ghost
-                                >
-                                    Download
-                                </Button>
-
-                        </Tooltip>
 
                         <Tooltip title="Add TMDB api key (required for app to work)">
                                 <Button onClick={(e) => {

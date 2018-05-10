@@ -10,6 +10,7 @@ import PopularPage from '../components/Popular/PopularPage';
 import Footer from '../components/Header/Footer';
 import CalendarPage from '../components/Calendar/CalendarPage';
 import AboutPage from '../components/AboutPage';
+import SettingsPage from '../components/Settings/SettingsPage';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -21,6 +22,7 @@ const AppRouter = () => (
                 <Route path="/popular" component={PopularPage} />
                 <Route path="/calendar" component={CalendarPage} />
                 <Route path="/about" component={AboutPage} />
+                <Route path="/settings" component={SettingsPage} />                
                 <Route component={NotFoundPage} />
             </Switch>
             <Footer />

@@ -1,0 +1,38 @@
+
+
+.settingsPageContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 5rem;
+    margin-top: 5rem;
+    
+}
+
+.settingsPageContent{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 8rem;
+    max-width: 90rem;
+
+    h1{
+        font-family: 'Merriweather', sans-serif;
+        font-weight: bold;
+        font-size: 6rem;
+        margin-bottom: 0;
+    }
+
+    h2{
+        font-family: 'Merriweather', sans-serif;
+        font-weight: bold;
+        margin-top: 3rem;
+        
+    }
+
+    h3 {
+        font-family: 'Merriweather', sans-serif;
+        //margin-left: 1rem;
+        margin-top: 1.5rem;
+    }
+}

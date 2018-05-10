@@ -9,7 +9,8 @@ const Footer = () => (
             <div className="footerCol">
                 <h4>General</h4>
                 <a href="/about"><Icon type="team" />&nbsp;&nbsp;About</a>
-                <a><Icon type="phone" />&nbsp;&nbsp;Contact</a>               
+                <a href="/settings"><Icon type="setting" />&nbsp;&nbsp;Settings</a>
+                <a><Icon type="phone" />&nbsp;&nbsp;Contact</a>                                        
             </div>
             
             <div className="footerCol">
