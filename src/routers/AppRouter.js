@@ -9,6 +9,7 @@ import SearchPage from '../components/Search/SearchPage';
 import PopularPage from '../components/Popular/PopularPage';
 import Footer from '../components/Header/Footer';
 import CalendarPage from '../components/Calendar/CalendarPage';
+import AboutPage from '../components/AboutPage';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -19,6 +20,7 @@ const AppRouter = () => (
                 <Route path="/search" component={SearchPage} />
                 <Route path="/popular" component={PopularPage} />
                 <Route path="/calendar" component={CalendarPage} />
+                <Route path="/about" component={AboutPage} />
                 <Route component={NotFoundPage} />
             </Switch>
             <Footer />

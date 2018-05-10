@@ -37,7 +37,7 @@ class Header extends React.Component {
       return (
         <div className="headerParentContainer">
           <div className="topHeader">
-            <h1>The Designated Show</h1>
+            <h1><a style={{color: 'black'}} href="/">The Designated Show</a></h1>
           </div>
           <div className="headerContainer">
             <Menu

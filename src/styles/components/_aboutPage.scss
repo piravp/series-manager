@@ -1,0 +1,50 @@
+
+
+.aboutPageContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 5rem;
+    margin-top: 5rem;
+    
+}
+
+.aboutPageContent{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 8rem;
+    max-width: 90rem;
+
+    h1{
+        font-family: 'Merriweather', sans-serif;
+        font-weight: bold;
+        font-size: 6rem;
+    }
+
+    h2{
+        font-family: 'Merriweather', sans-serif;
+        font-weight: bold;
+        margin-top: 3rem;
+        
+    }
+
+    h3 {
+        font-family: 'Merriweather', sans-serif;
+        //margin-left: 1rem;
+        margin-top: 1.5rem;
+    }
+}
+
+.anchor {
+    opacity: 0;
+    transition: opacity .3s ease;
+    margin-right: 0.8rem;
+    margin-left: -2.2rem;
+    font-size: 2.0rem;
+    font-weight: normal;
+}
+
+.anchor:hover {
+    opacity: 100;
+}
