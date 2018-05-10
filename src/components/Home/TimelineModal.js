@@ -36,11 +36,15 @@ class TimelineModal extends React.Component {
     const { id, name, type } = timelineEvent;
     switch (type){
         case 'add_show':
-            return <Timeline.Item key={timelineEvent.createdAt+id} color='green'>You added the show <b>{name}</b> at {timelineEvent.createdAt}.</Timeline.Item>;
+          return <Timeline.Item key={timelineEvent.createdAt+id} color='green'>You added the show <b>{name}</b> at {timelineEvent.createdAt}.</Timeline.Item>;
         case 'remove_show':
-            return <Timeline.Item key={timelineEvent.removedAt+id} color='red'>You removed <b>{name}</b> at {timelineEvent.removedAt}.</Timeline.Item>;
-          case 'remove_all_shows':
-            return <Timeline.Item key={timelineEvent.removedAt+id} dot={<Icon type="tool" style={{ fontSize: '20px' }} />} color='red'>You removed all your shows at {timelineEvent.removedAt}.</Timeline.Item>;
+          return <Timeline.Item key={timelineEvent.removedAt+id} color='red'>You removed <b>{name}</b> at {timelineEvent.removedAt}.</Timeline.Item>;
+        case 'add_collection':
+          return <Timeline.Item key={timelineEvent.createdAt+id} dot={<Icon type="folder" style={{ fontSize: '20px' }} />} color='green'>You added the collection <i>{name}</i> at {timelineEvent.createdAt}.</Timeline.Item>;
+        case 'remove_collection':
+          return <Timeline.Item key={timelineEvent.removedAt} dot={<Icon type="folder" style={{ fontSize: '20px' }} />} color='red'>You removed the collection <i>{name}</i> at {timelineEvent.removedAt}.</Timeline.Item>;
+        case 'remove_all_shows':
+          return <Timeline.Item key={timelineEvent.removedAt+id} dot={<Icon type="tool" style={{ fontSize: '20px' }} />} color='red'>You removed all your shows at {timelineEvent.removedAt}.</Timeline.Item>;
     }
   }
 

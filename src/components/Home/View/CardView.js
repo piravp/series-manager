@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Card, Button, Input } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import uuidv4 from 'uuid/v4';
 
 import HomeDetailsModal from '../Details/HomeDetailsModal';
-import { removeShow } from '../../../actions/series';
-import { removeShowTimeline } from '../../../actions/timeline';
 import { POSTER_IMG_185 } from '../../../../config';
 
 // Actions
 import { addCollection, removeCollection } from '../../../actions/collection';
+import { removeShow } from '../../../actions/series';
+import { removeShowTimeline, addCollectionToTimeline, removeCollectionTimeline } from '../../../actions/timeline';
 
 const { Meta } = Card;
 
@@ -52,9 +53,15 @@ class CardView extends Component {
     };
     
     handleAddCollection = (e) => {
-        console.log(e.target.value);
-        this.props.dispatch(addCollection({ name: e.target.value }))
+        this.props.dispatch(addCollection({ name: e.target.value }));
+        this.props.dispatch(addCollectionToTimeline({ id: uuidv4, name: e.target.value }));
     }
+
+    handleRemoveCollection = (collection) => {
+        this.props.dispatch(removeCollection({ name: collection }));
+        this.props.dispatch(removeCollectionTimeline({ name: collection }));
+    }
+
 
 
     render() {
@@ -68,7 +75,7 @@ class CardView extends Component {
                                 <h2>{collection}</h2>
                                     {
                                         collection !== 'Standard' &&
-                                            <Button type="danger"  size="small"  onClick={e => this.props.dispatch(removeCollection({ name: collection }))}>
+                                            <Button type="danger"  size="small"  onClick={() => this.handleRemoveCollection(collection)}>
                                                 Remove collection
                                             </Button>
                                         
