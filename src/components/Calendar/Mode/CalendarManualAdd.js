@@ -4,6 +4,7 @@ import { Select, Button, Input, DatePicker, TimePicker, Radio, InputNumber } fro
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
+const { Option, OptGroup } = Select;
 import moment from 'moment';
 import uuidv4 from 'uuid/v4';
 
@@ -13,15 +14,16 @@ import { addCalendarEvent, addCalendarLongEvent } from '../../../actions/calenda
 
 class CalendarManualAdd extends Component {
     state = {
-        title: '',
+        title: '',                          // Title of the event
         startDate: '',
         endDate: '',
         startTime: '',
         endTime: '',
-        repeat: 'single',
-        interval: 7,
-        existingShow: 'existing',
-        shows: []
+        repeat: 'single',                   // Recurring series?
+        interval: 7,                        // If recurring --> interval 
+        existingShow: 'existing',           // Let user choose from existing show dropdown by default
+        shows: [],                          // List of all the users show
+        collections: []
     }
 
 
@@ -73,15 +75,30 @@ class CalendarManualAdd extends Component {
         )
     };
 
+    fetchCollections = (bool, nextState) => {
+        // Fetch collections (if not fetched earlier)
+        // and the user has chosen to choose from an existing show
+        if (this.state.shows.length === 0 && this.state.existingShow === 'existing')  {
+            this.props.collection.map(collection => {
+                this.setState( prevState => {
+                    return {
+                        existingShow: 'existing',
+                        collections: prevState.collections.concat(collection)
+                    }
+                })
+            })
+        }
+    };
 
     fetchShows = () => {
         // Fetch shows (if not fetched earlier)
+        // and the user has chosen to choose from an existing show
         if (this.state.shows.length === 0 && this.state.existingShow === 'existing')  {
             this.props.series.map(show => {
                 this.setState( prevState => {
                     return {
                         existingShow: 'existing',
-                        shows: prevState.shows.concat(show.name)
+                        shows: prevState.shows.concat(show)
                     }
                 })
             })
@@ -89,12 +106,10 @@ class CalendarManualAdd extends Component {
     };
 
     componentDidMount(){
-        // Fetch upon first mount
+        // Fetch shows upon first mount
         this.fetchShows();
-    };
-    componentDidUpdate(){
-        // Fetch when component updates
-        this.fetchShows();
+        // Fetch collections upon first mount
+        this.fetchCollections();
     };
 
 
@@ -112,7 +127,7 @@ class CalendarManualAdd extends Component {
             <div className="calendarManualAddParentContainer">
                 <div className="calendarManualAddChildContainer">                
                     <div style={{ marginBottom: 30 }}>
-                        <label style={{alignItems: 'flex-end', marginRight: 5}}>Show already exist in your list?</label>
+                        <label style={{alignItems: 'flex-end', marginRight: 5}}>Show already exist in your collection?</label>
                         <RadioGroup defaultValue="existing" size="small" onChange={this.handleToggleShowExists}>
                             <RadioButton value="new">New</RadioButton>
                             <RadioButton value="existing">Existing</RadioButton>
@@ -125,18 +140,31 @@ class CalendarManualAdd extends Component {
                         <Select
                             showSearch
                             style={{ width: 200 }}
-                            placeholder="Select a series from your list"
+                            placeholder="Select a series from your collection"
                             optionFilterProp="children"
                             onChange={value => this.setState({ title: value })}
                             filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                         >
                             {
-                                this.state.shows.map(showName => (
-                                    <Select.Option key={showName} value={showName}>{showName}</Select.Option>
+                                this.props.collection && this.props.collection.map(collection => (
+
+                                    <OptGroup key={collection} label={collection}>
+                                        {
+                                            this.state.shows.map(show => {
+                                                if (show.collection === collection){
+                                                    return (
+        
+                                                        <Option key={show.name} value={show.name}>{show.name}</Option>
+        
+                                                    )
+                                                }
+                                            })
+                                        }
+                                    </OptGroup>
+        
+                                    
                                 ))
                             }
-                            
-
                         </Select>
                     }
 
@@ -196,7 +224,8 @@ class CalendarManualAdd extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        series: state.series
+        series: state.series,
+        collection: state.collection
     }
 }
 
