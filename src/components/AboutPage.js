@@ -5,7 +5,7 @@ const { Link } = Anchor;
 const AboutPage = () => (
     <div className="aboutPageContainer">
 
-        <Anchor affix={false}>
+        <Anchor showInkInFixed affix={false}>
             <Link href="#general" title="General" />
             <Link href="#credit" title="Credit" />
             <Link href="#faq" title="FAQ">
