@@ -15,3 +15,10 @@ export const settingsHome_ToggleCardAnimation = ({ animateCard } = {}) => ({
     type: 'SETTINGS_HOME_TOGGLE_ANIMATION_CARD',
     animateCard
 });
+
+
+// SETTINGS_SET_TIMELINE_FILTER
+export const settingsHome_TimelineFilter = ({ timelineFilter } = {}) => ({
+    type: 'SETTINGS_SET_TIMELINE_FILTER',
+    timelineFilter
+});

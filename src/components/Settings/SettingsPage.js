@@ -4,11 +4,10 @@ const { Link } = Anchor;
 import { connect } from 'react-redux';
 
 import { SettingsAddKey, SettingsDownload } from './Heading3/General';
-import { SettingsAnimation } from './Heading3/Home';
+import { SettingsAnimation, SettingsTimeline } from './Heading3/Home';
 
 
 const SettingsPage = (props) => {
-    console.log(props);
     return (
         <div className="settingsPageContainer">
     
@@ -19,6 +18,7 @@ const SettingsPage = (props) => {
                 </Link>   
                 <Link href="#home" title="Home" >
                     <Link href="#animation" title="Animation" />
+                    <Link href="#timeline" title="Timeline" />
                 </Link>
                 <Link href="#search" title="Search" /> 
                 <Link href="#danger" title="Danger" >
@@ -43,7 +43,7 @@ const SettingsPage = (props) => {
                     <span>Home</span>&nbsp;
                 </h2>
                 <SettingsAnimation settings={props.settings} dispatchAction={props.dispatch}/>
-                
+                <SettingsTimeline settings={props.settings} dispatchAction={props.dispatch}/>
     
     
                 <h2 id="search">

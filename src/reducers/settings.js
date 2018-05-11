@@ -1,7 +1,8 @@
 const settingsReducerDefaultState = {
     visible: true,
     animateList: true,
-    animateCard: true
+    animateCard: true,
+    timelineFilter: ['add_show', 'remove_show', 'remove_all_shows', 'add_collection', 'remove_collection', ]
 };
 const settingsReducer = (state = settingsReducerDefaultState, action) => {
     switch(action.type){
@@ -19,7 +20,12 @@ const settingsReducer = (state = settingsReducerDefaultState, action) => {
             return {
                 ...state,
                 animateCard: action.animateCard
-            }
+            };
+        case 'SETTINGS_SET_TIMELINE_FILTER':
+            return {
+                ...state,
+                timelineFilter: action.timelineFilter
+            };
         default:
             return state;
     }

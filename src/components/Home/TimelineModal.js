@@ -4,6 +4,9 @@ import { Modal, Timeline, Icon, Button, Tooltip } from 'antd';
 import { connect } from 'react-redux';
 import { removeTimelineItem, removeEveryTimelineItem } from '../../actions/timeline';
 
+// Selectors
+import getVisibleTimelineEvents from '../../selectors/timeline';
+
 class TimelineModal extends React.Component {
   state = { 
       visible: false 
@@ -81,7 +84,7 @@ class TimelineModal extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        timeline: state.timeline
+        timeline: getVisibleTimelineEvents(state.timeline, state.settings.timelineFilter)
     }
 }
 
