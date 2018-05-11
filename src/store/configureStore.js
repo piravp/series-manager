@@ -16,7 +16,8 @@ const configureStore = () => {
             series: loadedState.shows,
             timeline: loadedState.timeline,
             calendar: loadedState.calendar,
-            collection: loadedState.collection
+            collection: loadedState.collection,
+            settings: loadedState.settings
         };
     }
 
@@ -33,7 +34,8 @@ const configureStore = () => {
             shows: store.getState().series,
             timeline: store.getState().timeline,
             calendar: store.getState().calendar ,
-            collection: store.getState().collection
+            collection: store.getState().collection,
+            settings: store.getState().settings,
         });
     }, 2000));
 

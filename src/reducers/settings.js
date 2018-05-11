@@ -1,5 +1,7 @@
 const settingsReducerDefaultState = {
-    visible: true
+    visible: true,
+    animateList: true,
+    animateCard: true
 };
 const settingsReducer = (state = settingsReducerDefaultState, action) => {
     switch(action.type){
@@ -8,6 +10,16 @@ const settingsReducer = (state = settingsReducerDefaultState, action) => {
                 ...state,
                 visible: action.visible
             };
+        case 'SETTINGS_HOME_TOGGLE_ANIMATION_LIST':
+            return {
+                ...state,
+                animateList: action.animateList
+            };
+        case 'SETTINGS_HOME_TOGGLE_ANIMATION_CARD':
+            return {
+                ...state,
+                animateCard: action.animateCard
+            }
         default:
             return state;
     }

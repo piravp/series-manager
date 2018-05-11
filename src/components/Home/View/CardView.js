@@ -26,11 +26,14 @@ class CardView extends Component {
         showModal: false,
         modalShowId: undefined,
         collection: [],
-        selectedCollectionKeys: ['Standard']
+        selectedCollectionKeys: ['Standard'],
+        animateCardView: undefined                  //Default is defined in reducer
     }
     
     // When view is first mounted
     componentDidMount() {
+        this.setState({ animateCardView: this.props.settings.animateCard })
+
         this.setState({ series: this.props.series })
         this.fetchCollection(this.props);
     };
@@ -134,7 +137,7 @@ class CardView extends Component {
                                     if (show.collection === collection) {
                                         return (
                             
-                                            <div className="singleCard animated flipInY" key={show.id} >
+                                            <div className={this.state.animateCardView ? "singleCard animated flipInY" : ''} key={show.id} >
                                         
                                                     <Card
                                                         style={{ width: 280 }}
@@ -172,7 +175,8 @@ class CardView extends Component {
 
 const mapStateToProps = state => {
     return {
-        collection: state.collection
+        collection: state.collection,
+        settings: state.settings
     }
 };
 

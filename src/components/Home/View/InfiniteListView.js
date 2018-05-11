@@ -2,6 +2,7 @@ import React from 'react';
 import { List, message, Avatar, Spin, Icon, Tooltip } from 'antd';
 import InfiniteScroll from 'react-infinite-scroller';
 import moment from 'moment';
+import { connect } from 'react-redux';
 
 import { API_KEY } from '../../../../configKey';
 import HomeDetailsModal from '../Details/HomeDetailsModal';
@@ -18,7 +19,7 @@ const IconText = ({ type, text = "", classNameProp, callbackFunc }) => (
 );
 
 
-export default class InfiniteListView extends React.Component {
+class InfiniteListView extends React.Component {
   state = {
     data: [],
     pendingData: [],
@@ -29,7 +30,8 @@ export default class InfiniteListView extends React.Component {
     modal: {
       showModal: false,
       modalShowId: undefined
-    }
+    },
+    animateListView: undefined        //Default is defined in reducer
   }
 
   // Loaded when component mounts or if data changes 
@@ -86,6 +88,8 @@ export default class InfiniteListView extends React.Component {
     } catch (err) {
       // Do nothing
     }
+
+    this.setState({ animateListView: this.props.settings.animateList })
   }
 
   // If new data or filtering is activated
@@ -166,7 +170,7 @@ export default class InfiniteListView extends React.Component {
               if (this.props) {
                 return (
                   <List.Item
-                    className="animated fadeInLeft animation-delay-200"
+                    className={this.props.settings.animateList ? "animated fadeInLeft animation-delay-200" : ''}
                     key={item && item.name}
                     actions={ [
                       <IconText type="star-o" text="156" callbackFunc={() => console.log('Rating icon pressed. Not yet implemented')}/>, 
@@ -193,3 +197,11 @@ export default class InfiniteListView extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    settings: state.settings
+  }
+}
+
+export default connect(mapStateToProps)(InfiniteListView);
