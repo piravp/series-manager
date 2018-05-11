@@ -38,8 +38,7 @@ class HomePage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        series: selectSeries(state.series, state.filters),
-        collection: state.collection
+        series: selectSeries(state.series, state.filters)
     }
 };
 

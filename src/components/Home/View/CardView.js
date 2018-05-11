@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button, Input } from 'antd';
+import { Card, Button, Input, TreeSelect } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import uuidv4 from 'uuid/v4';
@@ -12,31 +12,66 @@ import { addCollection, removeCollection } from '../../../actions/collection';
 import { removeShow } from '../../../actions/series';
 import { removeShowTimeline, addCollectionToTimeline, removeCollectionTimeline } from '../../../actions/timeline';
 
+import { arraysEqual } from '../../../utils/utilities';
+
 const { Meta } = Card;
 
 //import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-available.png';
 import NOT_AVAILABLE_IMAGE from '../../../../public/assets/no-image-icon-15.png';
 
+
 class CardView extends Component {
     state = {
         series: undefined,
         showModal: false,
-        modalShowId: undefined
+        modalShowId: undefined,
+        collection: [],
+        selectedCollectionKeys: ['Standard']
     }
     
     // When view is first mounted
     componentDidMount() {
         this.setState({ series: this.props.series })
+        this.fetchCollection(this.props);
+    };
+
+    // FIXME: Can be removed if Adding new collections is done outside of /home
+    // The props is going to be either this.props or nextProps depending on 
+    // if the function is called upon mount or update
+    fetchCollection = (props) => {
+        this.setState({ collection: [] })
+        
+        props && props.collection.map(collection => {
+            this.setState( prevState => {
+                return {
+                    collection: prevState.collection.concat({
+                        label: collection,
+                        value: collection,
+                        key: collection
+                    })
+                }
+            })
+        })
+
+
     };
     
     // If redux state changes due to filtering or something else
     componentWillReceiveProps(nextProps) {
-        console.log("props:", nextProps)
-        
-        this.setState({
-            ...this.state,
-            series: nextProps.series
-        });
+        // Only update if there has been a change
+        if (!arraysEqual(this.props.series, nextProps.series)){
+            this.setState({
+                ...this.state,
+                series: nextProps.series
+            });
+        }
+
+        // Only update if there has been a change
+        if (!arraysEqual(this.props.collection, nextProps.collection)){
+            this.fetchCollection(nextProps);
+            console.log("prevProps:", this.props)
+            console.log("nextProps:", nextProps)
+        }
     };
 
     handleRemoveCard = (id, name) => {
@@ -62,17 +97,28 @@ class CardView extends Component {
         this.props.dispatch(removeCollectionTimeline({ name: collection }));
     }
 
-
+    handleOnCollectionFilterChange = (selectedCollectionArray) => {
+        this.setState({  selectedCollectionKeys: selectedCollectionArray });
+    };
 
     render() {
+        const tProps = {
+            treeData: this.state.collection,
+            value: this.state.selectedCollectionKeys,
+            onChange: this.handleOnCollectionFilterChange,
+            treeCheckable: true,
+            placeholder: 'Please select collection (multiple)',
+            style: { width: 300 },
+          };
         return (
             <div>
             <Input className="inputCreateCollection" placeholder="Create collection (press enter)" onPressEnter={this.handleAddCollection}/>
+            <TreeSelect {...tProps} />
             {
-                this.props.collections.map(collection => (
+                this.props.collection.map(collection => (
                     <div key={collection}>
                             <div className="cardViewCollectionTitle">
-                                <h2>{collection}</h2>
+                                <h2 style={{ fontFamily: 'Lora, sans-serif', fontSize: '2.5rem', fontWeight: 'bold' }}>{collection}</h2>
                                     {
                                         collection !== 'Standard' &&
                                             <Button type="danger"  size="small"  onClick={() => this.handleRemoveCollection(collection)}>
@@ -124,4 +170,10 @@ class CardView extends Component {
 }
 
 
-export default connect()(CardView);
+const mapStateToProps = state => {
+    return {
+        collection: state.collection
+    }
+};
+
+export default connect(mapStateToProps)(CardView);

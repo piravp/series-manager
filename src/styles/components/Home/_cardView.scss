@@ -24,7 +24,7 @@
 }
 
 .singleCard {
-    padding: 3rem 5rem 5rem 5rem;
+    padding: 1rem 5rem 5rem 5rem;
 }
 
 .ant-card.ant-card-bordered.ant-card-hoverable {
@@ -56,6 +56,7 @@
 .cardViewCollectionTitle {
     display: flex;
     padding-left: 10rem;
+    align-items: baseline;
 
     button {
         margin: 0.6rem 0 0 1rem;
