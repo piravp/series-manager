@@ -45,7 +45,7 @@ class TimelineModal extends React.Component {
         case 'add_collection':
           return <Timeline.Item key={timelineEvent.createdAt+id} dot={<Icon type="folder" style={{ fontSize: '20px' }} />} color='green'>You added the collection <i>{name}</i> at {timelineEvent.createdAt}.</Timeline.Item>;
         case 'remove_collection':
-          return <Timeline.Item key={timelineEvent.removedAt} dot={<Icon type="folder" style={{ fontSize: '20px' }} />} color='red'>You removed the collection <i>{name}</i> at {timelineEvent.removedAt}.</Timeline.Item>;
+          return <Timeline.Item key={timelineEvent.removedAt+id} dot={<Icon type="folder" style={{ fontSize: '20px' }} />} color='red'>You removed the collection <i>{name}</i> at {timelineEvent.removedAt}.</Timeline.Item>;
         case 'remove_all_shows':
           return <Timeline.Item key={timelineEvent.removedAt+id} dot={<Icon type="tool" style={{ fontSize: '20px' }} />} color='red'>You removed all your shows at {timelineEvent.removedAt}.</Timeline.Item>;
     }

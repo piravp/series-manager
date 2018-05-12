@@ -4,7 +4,6 @@ import { Table, Icon, Divider, message, Menu, Dropdown, Select } from 'antd';
 const Option = Select.Option;
 import 'antd/lib/table/style/css'; // or antd/lib/button/style/css for css format file
 import ISO6391 from 'iso-639-1';
-import uuidv4 from 'uuid/v4';
 
 // Custom components
 import { doRequest } from '../../utils/utilities'
@@ -59,7 +58,6 @@ class SeriesList extends Component {
           </span>
 
           <Select placeholder="collection" size='small' style={{ width: 120 }} onChange={selectedCollection => {
-            console.log(record);
             this.props.dispatch(addShow({
                 id: record.id,
                 name: record.name,
@@ -70,10 +68,8 @@ class SeriesList extends Component {
                 description: record.overview,
                 collection: selectedCollection
             }));
-            console.log(record);
             message.success(`Successfully added ${record.name} to your list.`, 2)
             this.props.dispatch(addShowToTimeline({
-                id: uuidv4(),
                 name: record.name
             }));
           }}>

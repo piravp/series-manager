@@ -53,7 +53,7 @@ class CardView extends Component {
     handleRemoveCard = (id, name) => {
         this.props.dispatch(removeShow({id: id}))
         // Create new event in timeline to register that show was removed
-        this.props.dispatch(removeShowTimeline({ id, name }))
+        this.props.dispatch(removeShowTimeline({ name }))
     };
 
     handleCardClick = (id) => {
@@ -134,7 +134,6 @@ class CardView extends Component {
 
 const mapStateToProps = state => {
     return {
-        allCollections: state.collection,
         collection: getVisibleCollections(state.collection, state.filters.collectionFilter),
         settings: state.settings
     }

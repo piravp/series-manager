@@ -40,13 +40,13 @@
 
 
 // Danger section
-.settingsDeleteEverything {
+.settingsDeleteEverything, .settingsDeleteShows {
     display: flex;
     flex-direction: row;
     margin-top: 1rem;
 }
 
-.settingsDeleteEverything > p {
+.settingsDeleteEverything > p, .settingsDeleteShows > p {
     margin-left: 2rem;
 }
 

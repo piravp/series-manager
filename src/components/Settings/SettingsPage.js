@@ -62,7 +62,7 @@ const SettingsPage = (props) => {
                 <a href="#danger" className="anchor">#</a>
                 <span style={{color: 'red'}}>Danger</span>&nbsp;
                 </h2>
-                <DangerSection />
+                <DangerSection settings={props.settings} dispatchAction={props.dispatch} seriesListLength={props.series.length}/>
 
     
             </div>

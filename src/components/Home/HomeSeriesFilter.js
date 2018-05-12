@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Select, Icon, Tooltip, Collapse, Upload, TreeSelect } from 'antd'; 
+import { Input, Button, Select, Icon, Tooltip, Collapse, TreeSelect, Popover } from 'antd'; 
 const Search = Input.Search;
 const Option = Select.Option;
 const Panel = Collapse.Panel;
 import CollapsenMenu from './CollapsedMenu';
+import { NavLink } from 'react-router-dom';
 
+// Custom components
+import AddShowModal from './AddShow/AddShowModal';
+import TimelineModal from './TimelineModal';
+
+// Actions
 import { 
     setTextFilter, 
     sortByDateAddedNewestFirst,
@@ -13,21 +19,31 @@ import {
     sortByNameAscending, 
     sortByNameDescending,
     sortByRatingAscending,
-    sortByRatingDescending } from '../../actions/filters';
-import { removeAllShows } from '../../actions/series';
-import AddShowModal from './AddShow/AddShowModal';
-import { clearStorage, setAPIKey } from '../../utils/localStorage';
-import TimelineModal from './TimelineModal';
-
-// Actions
-import { addCollectionToTimeline, removeAllShowsFromTimeline } from '../../actions/timeline';
+    sortByRatingDescending } from '../../actions/filters'; 
+import { addCollectionToTimeline } from '../../actions/timeline';
 import { addCollection } from '../../actions/collection';
 import { filterCollection } from '../../actions/filters';
-
 
 // Utilities
 import { arraysEqual } from '../../utils/utilities';
 
+
+const content = (
+    <div>
+        <b>Get started</b><br/>
+        The application requires an API key. This can be added in <NavLink to="/settings#add-key" activeClassName="is-active" exact>settings</NavLink>. 
+        <br/>
+        <br/>
+        <b>Settings</b><br/>
+        The settings page let's you filter which timeline events you want <br/>
+        registered in the timeline and gives you the option to turn on/off animation.
+
+        <br/>
+        <br/>
+        <b>Home</b><br/>
+        Filtering options can be opened by clicking on the arrow down below.
+    </div>
+);
 
 
 class HomeSeriesFilter extends Component {
@@ -52,12 +68,9 @@ class HomeSeriesFilter extends Component {
         // Only update if there has been a change
         if (!arraysEqual(this.props.allCollections, nextProps.allCollections)){
             this.fetchCollection(nextProps, false);
-            console.log("prevProps:", this.props)
-            console.log("nextProps:", nextProps)
         }
     };
 
-    // FIXME: Can be removed if Adding new collections is done outside of /home
     // The props is going to be either this.props or nextProps depending on 
     // if the function is called upon mount or update
     fetchCollection = (props, first=false) => {
@@ -87,7 +100,7 @@ class HomeSeriesFilter extends Component {
 
     handleAddCollection = (e) => {
         this.props.dispatch(addCollection({ name: e.target.value }));
-        this.props.dispatch(addCollectionToTimeline({ id: uuidv4, name: e.target.value }));
+        this.props.dispatch(addCollectionToTimeline({ name: e.target.value }));
     }
 
     handleOnCollectionFilterChange = (selectedCollectionArray) => {
@@ -140,22 +153,14 @@ class HomeSeriesFilter extends Component {
                 </Tooltip>
 
             </div>
+            <Popover placement="bottomRight" title={'Help'} content={content} trigger="click">
+                <Icon type="question-circle" />
+            </Popover>
+
             <Collapse bordered={false}>
                 <Panel showArrow={true} header="&nbsp;" key="1">
                 <div className="collapseableContent">
-                        <Tooltip title="This will remove every show from your collection. This will also completely wipe it locally.">
-                            <Button onClick={(e) => {
-                                this.props.dispatch(removeAllShows())
-                                clearStorage
-                                this.props.dispatch(removeAllShowsFromTimeline())
-                            }}
-                            disabled={this.props.series.length === 0}
-                            type="danger"
-                            ghost
-                            >
-                                Remove all
-                            </Button>
-                        </Tooltip>
+
 
                         <Select defaultValue="date_added_new_first" style={{ width: 190 }} disabled={this.props.series.length === 0} onChange={value => {
                             switch(value){

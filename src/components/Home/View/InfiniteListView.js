@@ -126,7 +126,7 @@ class InfiniteListView extends React.Component {
 
   handleRemoveShow = (id, name) => {
     this.props.dispatch(removeShow({ id: id }))
-    this.props.dispatch(removeShowTimeline({ id, name, removedAt: moment().format('YYYY-MM-DD HH:mm:ss') }))
+    this.props.dispatch(removeShowTimeline({ name, removedAt: moment().format('YYYY-MM-DD HH:mm:ss') }))
   };
 
   handleCardClick = (id) => {
