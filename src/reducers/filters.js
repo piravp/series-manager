@@ -1,7 +1,8 @@
 // Filter reducer
 export const filtersReducerDefaultState = {
     text: '',
-    "sortBy": 'date_added_newest_first'
+    "sortBy": 'date_added_newest_first',
+    collectionFilter: ['Standard']
 };
 export const filtersReducer = (state = filtersReducerDefaultState, action) => {
     switch (action.type){
@@ -39,6 +40,11 @@ export const filtersReducer = (state = filtersReducerDefaultState, action) => {
             return {
                 ...state, 
                 sortBy: 'rating_descending'
+            };
+        case 'FILTER_COLLECTION':
+            return {
+                ...state, 
+                collectionFilter: action.collectionFilter
             };
         default:
             return state;

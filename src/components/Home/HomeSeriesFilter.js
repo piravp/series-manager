@@ -58,7 +58,7 @@ class HomeSeriesFilter extends Component {
 
                 <Search
                     className="searchbarInHome"
-                    placeholder="Search through your list"
+                    placeholder="Search through your list (across collections)"
                     onChange={(e) => {
                         this.props.dispatch(setTextFilter({ text: e.target.value }))
                     }}

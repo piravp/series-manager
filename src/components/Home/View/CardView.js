@@ -11,8 +11,13 @@ import { POSTER_IMG_185 } from '../../../../config';
 import { addCollection, removeCollection } from '../../../actions/collection';
 import { removeShow } from '../../../actions/series';
 import { removeShowTimeline, addCollectionToTimeline, removeCollectionTimeline } from '../../../actions/timeline';
+import { filterCollection } from '../../../actions/filters';
 
+// Utilities
 import { arraysEqual } from '../../../utils/utilities';
+
+// Selectors
+import getVisibleCollections from '../../../selectors/collection';
 
 const { Meta } = Card;
 
@@ -27,7 +32,8 @@ class CardView extends Component {
         modalShowId: undefined,
         collection: [],
         selectedCollectionKeys: ['Standard'],
-        animateCardView: undefined                  //Default is defined in reducer
+        animateCardView: undefined,                  //Default is defined in reducer
+        unfilteredCollection: []
     }
     
     // When view is first mounted
@@ -35,19 +41,19 @@ class CardView extends Component {
         this.setState({ animateCardView: this.props.settings.animateCard })
 
         this.setState({ series: this.props.series })
-        this.fetchCollection(this.props);
+        this.fetchCollection(this.props, true);
     };
 
     // FIXME: Can be removed if Adding new collections is done outside of /home
     // The props is going to be either this.props or nextProps depending on 
     // if the function is called upon mount or update
-    fetchCollection = (props) => {
-        this.setState({ collection: [] })
+    fetchCollection = (props, first=false) => {
+        this.setState({ unfilteredCollection: [] })
         
-        props && props.collection.map(collection => {
+        props && props.allCollections.map(collection => {
             this.setState( prevState => {
                 return {
-                    collection: prevState.collection.concat({
+                    unfilteredCollection: prevState.unfilteredCollection.concat({
                         label: collection,
                         value: collection,
                         key: collection
@@ -56,6 +62,13 @@ class CardView extends Component {
             })
         })
 
+        // Taking the logic in the if-sentence out will lead to the DOM re-rendering and
+        // checkboxing all collections (including those that were unchecked)
+        // if the user adds a new collection
+        if(first){
+            this.setState({ selectedCollectionKeys: props.allCollections })
+            this.props.dispatch(filterCollection({ collectionFilter:  props.allCollections }))
+        }
 
     };
     
@@ -70,8 +83,8 @@ class CardView extends Component {
         }
 
         // Only update if there has been a change
-        if (!arraysEqual(this.props.collection, nextProps.collection)){
-            this.fetchCollection(nextProps);
+        if (!arraysEqual(this.props.allCollections, nextProps.allCollections)){
+            this.fetchCollection(nextProps, false);
             console.log("prevProps:", this.props)
             console.log("nextProps:", nextProps)
         }
@@ -102,11 +115,13 @@ class CardView extends Component {
 
     handleOnCollectionFilterChange = (selectedCollectionArray) => {
         this.setState({  selectedCollectionKeys: selectedCollectionArray });
+        console.log(selectedCollectionArray);
+        this.props.dispatch(filterCollection({ collectionFilter: selectedCollectionArray }))
     };
 
     render() {
         const tProps = {
-            treeData: this.state.collection,
+            treeData: this.state.unfilteredCollection,
             value: this.state.selectedCollectionKeys,
             onChange: this.handleOnCollectionFilterChange,
             treeCheckable: true,
@@ -175,7 +190,8 @@ class CardView extends Component {
 
 const mapStateToProps = state => {
     return {
-        collection: state.collection,
+        allCollections: state.collection,
+        collection: getVisibleCollections(state.collection, state.filters.collectionFilter),
         settings: state.settings
     }
 };
