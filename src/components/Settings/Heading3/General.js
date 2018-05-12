@@ -48,7 +48,7 @@ export const SettingsDownload = (props) => (
                     Download
                 </Button>
             </div>
-            Download your series collection as a JSON formatted file.
+            Download your collection of series as a JSON formatted file.
         </span>
     </div>
 );

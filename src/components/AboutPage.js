@@ -1,12 +1,11 @@
 import React from 'react';
-import { Anchor, Tag } from 'antd';
+import { Anchor, Tag, Divider } from 'antd';
 const { Link } = Anchor;
 
 const AboutPage = () => (
     <div className="aboutPageContainer">
 
         <Anchor showInkInFixed affix={false}>
-            <Link href="#general" title="General" />
             <Link href="#credit" title="Credit" />
             <Link href="#faq" title="FAQ">
                 <Link href="#what-is-tds" title="What is TDS?" />
@@ -23,11 +22,8 @@ const AboutPage = () => (
             TDS lets you find and keep track of all the series you have going on. Since the app is powered by 
             TMDb, it is able to offer a wide range of series to choose from. You might even find series on your own language.
 
-            <h2 id="general">
-                <a href="#general" className="anchor">#</a>            
-                <span>General</span>&nbsp;
-            </h2>
 
+            <Divider type="horizontal"/>
             <h2 id="credit">
                 <a href="#credit" className="anchor">#</a>                
                 <span>Credits</span>&nbsp;
@@ -35,6 +31,7 @@ const AboutPage = () => (
             <img width="200" height="78" src="https://www.themoviedb.org/static_cache/v4/logos/408x161-powered-by-rectangle-green-bb4301c10ddc749b4e79463811a68afebeae66ef43d17bcfd8ff0e60ded7ce99.png" />
             
 
+            <Divider type="horizontal"/>
             <h2 id="faq">
                 <a href="#faq" className="anchor">#</a>
                 <span>FAQ</span>&nbsp;
@@ -89,6 +86,7 @@ const AboutPage = () => (
                     </span>
                 </div>
 
+            <Divider type="horizontal"/>
             <div>
             <h2 id="known-issues">
                 <a href="#known-issues" className="anchor">#</a>        

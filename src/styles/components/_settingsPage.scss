@@ -26,7 +26,7 @@
     h2{
         font-family: 'Merriweather', sans-serif;
         font-weight: bold;
-        margin-top: 3rem;
+        margin-top: 1rem;
         
     }
 
@@ -35,4 +35,39 @@
         //margin-left: 1rem;
         margin-top: 1.5rem;
     }
+}
+
+
+
+// Danger section
+.settingsDeleteEverything {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+}
+
+.settingsDeleteEverything > p {
+    margin-left: 2rem;
+}
+
+.settingsDeleteEverything > .ant-btn-danger {
+    background-color: white;
+}
+
+.settingsDeleteEverything > .ant-btn-danger:hover {
+    color: #fff;
+    background-color: #cf1322;
+    border-color: #cf1322;
+}
+
+.settingsDeleteEverything > .ant-btn-danger:active {
+    color: #fff;
+    background-color: #960e19;
+    border-color: #960e19;
+}
+
+.settingsDeleteEverything > .ant-btn-danger[disabled] {
+    color: rgba(0, 0, 0, 0.25);
+    background-color: #f5f5f5;
+    border-color: #d9d9d9;
 }
