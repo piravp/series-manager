@@ -56,3 +56,14 @@
         margin-left: 2rem;
     }
 }
+
+.collapseableContent > .inputCreateCollection {
+    max-height: 3.2rem;
+}
+
+// Input field for creating new collections
+.inputCreateCollection {
+    width: 20rem;
+    height: 5rem;
+    margin: 2rem 4rem 3rem 10rem;
+}

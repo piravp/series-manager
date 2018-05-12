@@ -92,7 +92,7 @@ export class SettingsTimeline extends Component {
             onChange: this.handleOnTimelineFilterChange,
             treeCheckable: true,
             placeholder: 'Select events (multiple)',
-            style: { width: 300 },
+            style: { width: 600 },
           };
 
         return (

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Select, Icon, Tooltip, Collapse, Upload } from 'antd'; 
+import { Input, Button, Select, Icon, Tooltip, Collapse, Upload, TreeSelect } from 'antd'; 
 const Search = Input.Search;
 const Option = Select.Option;
 const Panel = Collapse.Panel;
@@ -18,20 +18,92 @@ import { removeAllShows } from '../../actions/series';
 import AddShowModal from './AddShow/AddShowModal';
 import { clearStorage, setAPIKey } from '../../utils/localStorage';
 import TimelineModal from './TimelineModal';
-import { removeAllShowsFromTimeline } from '../../actions/timeline'
+
+// Actions
+import { addCollectionToTimeline, removeAllShowsFromTimeline } from '../../actions/timeline';
+import { addCollection } from '../../actions/collection';
+import { filterCollection } from '../../actions/filters';
+
+
+// Utilities
+import { arraysEqual } from '../../utils/utilities';
+
 
 
 class HomeSeriesFilter extends Component {
     state = {
         showAddShowModal: false,
-        showTimelineModal: false
+        showTimelineModal: false,
+        selectedCollectionKeys: ['Standard'],
+
+        unfilteredCollection: []
     }
     
     // componentDidUpdate() {
     //     {this.state.showAddShowModal && <AddShowModal closeModalInParent={() => this.setState({ showAddShowModal: false })}/>}
     // }
 
+    componentDidMount() {
+        this.fetchCollection(this.props, true);
+    }
+
+    // If redux state changes due to filtering
+    componentWillReceiveProps(nextProps) {
+        // Only update if there has been a change
+        if (!arraysEqual(this.props.allCollections, nextProps.allCollections)){
+            this.fetchCollection(nextProps, false);
+            console.log("prevProps:", this.props)
+            console.log("nextProps:", nextProps)
+        }
+    };
+
+    // FIXME: Can be removed if Adding new collections is done outside of /home
+    // The props is going to be either this.props or nextProps depending on 
+    // if the function is called upon mount or update
+    fetchCollection = (props, first=false) => {
+        this.setState({ unfilteredCollection: [] })
+        
+        props && props.allCollections.map(collection => {
+            this.setState( prevState => {
+                return {
+                    unfilteredCollection: prevState.unfilteredCollection.concat({
+                        label: collection,
+                        value: collection,
+                        key: collection
+                    })
+                }
+            })
+        })
+
+        // Taking the logic in the if-sentence out will lead to the DOM re-rendering and
+        // checkboxing all collections (including those that were unchecked)
+        // if the user adds a new collection
+        if(first){
+            this.setState({ selectedCollectionKeys: props.allCollections })
+            this.props.dispatch(filterCollection({ collectionFilter:  props.allCollections }))
+        }
+
+    };
+
+    handleAddCollection = (e) => {
+        this.props.dispatch(addCollection({ name: e.target.value }));
+        this.props.dispatch(addCollectionToTimeline({ id: uuidv4, name: e.target.value }));
+    }
+
+    handleOnCollectionFilterChange = (selectedCollectionArray) => {
+        this.setState({  selectedCollectionKeys: selectedCollectionArray });
+        this.props.dispatch(filterCollection({ collectionFilter: selectedCollectionArray }))
+    };
+
     render() {
+        const tProps = {
+            treeData: this.state.unfilteredCollection,
+            value: this.state.selectedCollectionKeys,
+            onChange: this.handleOnCollectionFilterChange,
+            treeCheckable: true,
+            placeholder: 'Please select collection (multiple)',
+            style: { width: 300 },
+          };
         return (
         <div className="homeSeriesFilterContainer">
 
@@ -77,7 +149,7 @@ class HomeSeriesFilter extends Component {
                                 clearStorage
                                 this.props.dispatch(removeAllShowsFromTimeline())
                             }}
-                            disabled={this.props.seriesListItems === 0}
+                            disabled={this.props.series.length === 0}
                             type="danger"
                             ghost
                             >
@@ -85,7 +157,7 @@ class HomeSeriesFilter extends Component {
                             </Button>
                         </Tooltip>
 
-                        <Select defaultValue="date_added_new_first" style={{ width: 190 }} disabled={this.props.seriesListItems === 0} onChange={value => {
+                        <Select defaultValue="date_added_new_first" style={{ width: 190 }} disabled={this.props.series.length === 0} onChange={value => {
                             switch(value){
                                 case 'name_ascending':
                                     return this.props.dispatch(sortByNameAscending());
@@ -110,18 +182,8 @@ class HomeSeriesFilter extends Component {
                         </Select>
 
 
-                        <Tooltip title="Add TMDB api key (required for app to work)">
-                                <Button onClick={(e) => {
-                                    const key = prompt('Please provide API key here')
-                                    setAPIKey(key)
-                                }}
-                                disabled={false}
-                                type="primary"
-                                ghost
-                                >
-                                    Add key
-                                </Button>
-                        </Tooltip>
+                        <Input className="inputCreateCollection" placeholder="Create collection (press enter)" onPressEnter={this.handleAddCollection}/>                        
+                        <TreeSelect {...tProps} />
                 </div>
                 </Panel>
             </Collapse>
@@ -135,7 +197,8 @@ const mapStateToProps = (state) => {
     return {
         filters: state.filters,
         series: state.series,
-        seriesListItems: state.series.length
+        allCollections: state.collection,
+        settings: state.settings
     }
 }
 

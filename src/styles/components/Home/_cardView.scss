@@ -1,3 +1,7 @@
+.cardsParentContainer {
+    margin-top: 5rem;
+}
+
 .cardsContainer {
     display: flex;
     flex-direction: row;
@@ -14,6 +18,10 @@
     // Set appropriate width to img in card
     .ant-card-cover > img {
         width: 180px;
+    }
+
+    .ant-card-body {
+        max-height: 26rem;
     }
 }
 
@@ -32,6 +40,9 @@
     border-radius: 1rem;
 }
 
+.ant-card.ant-card-bordered {
+    height: 60rem;
+}
 
 //Limit lines in card description
 .ant-card-meta-description {
@@ -64,9 +75,3 @@
     }
 }
 
-// Input field for creating new collections
-.inputCreateCollection {
-    width: 55rem;
-    height: 5rem;
-    margin: 2rem 4rem 3rem 10rem;
-}
