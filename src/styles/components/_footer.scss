@@ -10,7 +10,7 @@
     background-color: #001529;
     padding: 3rem 2rem 4rem 2rem;
     color: white;
-    height: 30rem;
+    height: 40rem;
 }
 
 .footerContainer > footer > div > .footerCol {
@@ -42,5 +42,19 @@
     color: #40a9ff;
 }
 
+.designedBy {
+    align-self: center;
+    margin-top: 3rem;
+}
+
+.designedBy:hover {
+    color: #00FC87;
+    transition: 0.7s;
+    text-decoration: underline;
+}
 
 
+.poweredBy {
+    align-self: center;
+    margin-top: 2rem;
+}

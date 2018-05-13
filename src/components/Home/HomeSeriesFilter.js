@@ -32,6 +32,7 @@ const content = (
     <div>
         <b>Get started</b><br/>
         The application requires an API key. This can be added in <NavLink to="/settings#add-key" activeClassName="is-active" exact>settings</NavLink>. 
+        
         <br/>
         <br/>
         <b>Settings</b><br/>
@@ -42,6 +43,11 @@ const content = (
         <br/>
         <b>Home</b><br/>
         Filtering options can be opened by clicking on the arrow down below.
+
+        <br/>
+        <br/>
+        <b>About</b><br/>
+        You can read more about the app and see FAQ in <NavLink to="/about" activeClassName="is-active" exact>about</NavLink>.
     </div>
 );
 
