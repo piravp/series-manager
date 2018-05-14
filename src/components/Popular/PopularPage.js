@@ -55,7 +55,7 @@ export default class PopularPage extends Component {
             });
         });
 
-        // TODO: Get genres
+        // Get genres
         //Do a GET request to get the id:genre-name mapping. Then create a dictionary using this.
         doRequest(`https://api.themoviedb.org/3/genre/tv/list?api_key=${API_KEY}`, ({genres}) => {
             this.setState({ 
@@ -90,11 +90,6 @@ export default class PopularPage extends Component {
                         }
                     </Slider>
             }
-                
-            
-
-
-                
             </div>
         );
     }

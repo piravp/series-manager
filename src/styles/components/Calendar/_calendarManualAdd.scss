@@ -1,0 +1,34 @@
+.calendarManualAddParentContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-grow: 2;
+}
+
+.calendarManualAddChildContainer > .calendarCreateButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4rem;
+    margin-right: 1rem;
+}
+
+.toggleRepeat {
+    display: flex;
+    align-self: center;
+
+    label {
+        margin-left: 1rem;
+        margin-right: 0.5rem;
+    }
+}
+
+.calendarDatePicker {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 3rem;
+}
+
+.radioEventType{
+    margin-top: 3rem;
+}
+

@@ -26,7 +26,7 @@ class HomePage extends Component {
             {
                 this.state.view === 'list' ? 
                 <InfiniteListView series={this.props.series} {...this.props}/> : 
-                <CardView {...this.props} />
+                <CardView {...this.props} collections={this.props.collection} />
             }
             <BackTop />
         </div>

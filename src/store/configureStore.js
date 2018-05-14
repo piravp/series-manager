@@ -1,12 +1,11 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { filtersReducerDefaultState } from '../reducers/filters';
 import rootReducer from '../reducers/root';
 import { loadState, saveState } from '../utils/localStorage';
 import throttle from 'lodash/throttle';
+import asyncDispatchMiddleware from '../utils/middlewares';
 
 const configureStore = () => {
-
-    console.log(loadState());
     
     const loadedState = loadState();
     let preloadedState = undefined;
@@ -15,20 +14,28 @@ const configureStore = () => {
         {
             filters: filtersReducerDefaultState,
             series: loadedState.shows,
-            timeline: loadedState.timeline
+            timeline: loadedState.timeline,
+            calendar: loadedState.calendar,
+            collection: loadedState.collection,
+            settings: loadedState.settings
         };
     }
 
     const storeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-    // Initialize store
-    const store = createStore(rootReducer, preloadedState, storeEnhancer);
+    const middlewares = compose(applyMiddleware(asyncDispatchMiddleware), storeEnhancer);
 
-    // Save state every 2 s
+    // Initialize store
+    const store = createStore(rootReducer, preloadedState, middlewares);
+
+    // Save state every 2 s at most
     store.subscribe(throttle(() => {
         saveState({
             shows: store.getState().series,
-            timeline: store.getState().timeline 
+            timeline: store.getState().timeline,
+            calendar: store.getState().calendar ,
+            collection: store.getState().collection,
+            settings: store.getState().settings,
         });
     }, 2000));
 

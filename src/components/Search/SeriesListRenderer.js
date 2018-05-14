@@ -29,7 +29,6 @@ export default class SeriesListRenderer extends React.Component {
                 //result = response.data.results;
                 //callback(result);
                 callback(response);
-                console.log("Shows: ",response);
               }).catch(function(error){
                 console.log(error);
               });

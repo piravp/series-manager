@@ -34,3 +34,10 @@ export const sortByRatingAscending = () => ({
 export const sortByRatingDescending = () => ({
     type: 'SORT_BY_RATING_DESCENDING'
 });
+
+// Filter which collections to show
+// COLLECTION_FILTER
+export const filterCollection = ({ collectionFilter } = {}) => ({
+    type: 'FILTER_COLLECTION',
+    collectionFilter
+});

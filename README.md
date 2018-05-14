@@ -17,9 +17,9 @@ https://github.com/piravp/series-manager.git
 # SSH
 git@github.com:piravp/series-manager.git
 ```
-## 2. Connect to TMDB
+## 2. Connect to TMDb
 #### Get API key
-TDS uses The Movie Database API (TMDB). [Register](https://www.themoviedb.org/account/signup) an account and [aquire](https://developers.themoviedb.org/3/getting-started/introduction) an `API_KEY`.
+TDS uses The Movie Database API (TMDb). [Register](https://www.themoviedb.org/account/signup) an account and [aquire](https://developers.themoviedb.org/3/getting-started/introduction) an `API_KEY`.
 
 #### Copy key into the project
 Adding the key can be done either directly inside the app or by modifying the `configKey.js` file.  
@@ -58,6 +58,9 @@ Nice! You can now navigate to http://localhost:8080 to see the result.
 
 ### Known issues
 * Manually adding series has not been implemented yet.
-* Pressing `More info` on a series in `Search` doesn't do anything - not yet implemented.
 * Sometimes opening the `HomeDetailsModal` doesn't fetch the details. The current fix is to close and re-open the modal (may require several attempts).
 * The list view in `Home` shows two empty items even though list is empty. 
+
+## Contributing
+Please fork this repository and contribute back using pull requests.
+Any contributions, large or small, major features, bug fixes, additional language translations, unit/integration tests are welcomed.

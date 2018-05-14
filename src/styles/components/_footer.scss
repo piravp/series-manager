@@ -5,14 +5,15 @@
 
 .footerContainer > footer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: center;
     background-color: #001529;
     padding: 3rem 2rem 4rem 2rem;
     color: white;
+    height: 40rem;
 }
 
-.footerContainer > footer > .footerRow {
+.footerContainer > footer > div > .footerCol {
     display: flex;
     flex-direction: column;
     margin-left: 5rem;
@@ -22,17 +23,39 @@
         color: white;
         font-weight: bold;
         align-self: center;
+        margin-bottom: 1rem;
     }
 
     a {
         color: white;
+        margin-bottom: 1rem;
     }
 
 }
 
-.footerContainer > footer > .footerRow > a:hover {
+.footerInner {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footerContainer > footer >  div > .footerCol > a:hover {
     color: #40a9ff;
 }
 
+.designedBy {
+    align-self: center;
+    margin-top: 3rem;
+    color: gray;
+}
+
+.designedBy:hover {
+    color: #00FC87;
+    transition: 0.7s;
+    //text-decoration: underline;
+}
 
 
+.poweredBy {
+    align-self: center;
+    margin-top: 2rem;
+}

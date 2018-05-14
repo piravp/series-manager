@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 // ADD_SHOW
-export const addShow = ({ id, name, description, vote_avg, first_aired, poster_path=null, backdrop_path=null } = {}) => ({
+export const addShow = ({ id, name, description, vote_avg, first_aired, poster_path=null, backdrop_path=null, collection } = {}) => ({
     type: 'ADD_SHOW',
     show: {
         id,
@@ -11,7 +11,8 @@ export const addShow = ({ id, name, description, vote_avg, first_aired, poster_p
         first_aired,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         poster_path,
-        backdrop_path
+        backdrop_path,
+        collection
     }
 });
 
@@ -32,5 +33,10 @@ export const getShowDetails = ({ id }) => ({
     id
 });
 
-
+// Remove any show with the provided collection name
+// REMOVE_SHOWS_WITH_COLLECTION
+export const removeShowsWithCollection = ({ collectionName }) => ({
+    type: 'REMOVE_SHOWS_WITH_COLLECTION',
+    collectionName
+});
 

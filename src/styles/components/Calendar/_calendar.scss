@@ -1,0 +1,40 @@
+// Calendar container
+.calendarContainer {
+    display: flex;
+    justify-content: center;
+    flex-grow: 2;
+    max-width: 60%;
+    flex-direction: column;
+}
+
+// // BigCalendar component
+// .rbc-calendar {
+//     min-width: 50rem;
+// }
+
+.rbc-calendar, .rbc-agenda-view {
+    display: flex;
+    flex-grow: inherit;
+    padding: 0 5rem;
+    min-height: 50rem;
+    //width: 70%;
+}
+
+.rbc-event {
+    background-color: #ad3155;
+}
+
+.rbc-event-content {
+    text-align: center
+}
+
+// Month-view-day element on hover
+.rbc-day-bg:hover {
+    background-color: #e6f7ff;
+    border-bottom: 0.3rem solid #1890ff
+}
+
+.rbc-toolbar-label {
+    font-size: 2.5rem;
+    font-weight: bold;
+}

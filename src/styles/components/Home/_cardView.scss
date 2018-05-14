@@ -1,9 +1,13 @@
+.cardsParentContainer {
+    margin-top: 5rem;
+}
+
 .cardsContainer {
     display: flex;
     flex-direction: row;
-    padding: 3rem 5rem 5rem 5rem;
+    padding: 1rem 5rem 5rem 5rem;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
 
     // Center card image
     .ant-card-cover{
@@ -15,16 +19,20 @@
     .ant-card-cover > img {
         width: 180px;
     }
+
+    .ant-card-body {
+        max-height: 26rem;
+    }
 }
 
 // Error message when no cards/series found
 .cardsContainer > p {
-    padding: 5rem 0 0 0;
     color: #8d8989;
+    margin-left: 5rem;
 }
 
 .singleCard {
-    padding: 5rem;
+    padding: 1rem 5rem 5rem 5rem;
 }
 
 .ant-card.ant-card-bordered.ant-card-hoverable {
@@ -32,6 +40,9 @@
     border-radius: 1rem;
 }
 
+.ant-card.ant-card-bordered {
+    height: 60rem;
+}
 
 //Limit lines in card description
 .ant-card-meta-description {
@@ -51,3 +62,16 @@
 .ant-card-meta-detail {
     cursor: pointer;
 }
+
+
+.cardViewCollectionTitle {
+    display: flex;
+    padding-left: 10rem;
+    align-items: baseline;
+
+    button {
+        margin: 0.6rem 0 0 1rem;
+        background-color: white;
+    }
+}
+

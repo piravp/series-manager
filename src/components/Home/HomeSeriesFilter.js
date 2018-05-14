@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Select, Icon, Tooltip, Collapse, Upload } from 'antd'; 
+import { Input, Button, Select, Icon, Tooltip, Collapse, TreeSelect, Popover } from 'antd'; 
 const Search = Input.Search;
 const Option = Select.Option;
 const Panel = Collapse.Panel;
 import CollapsenMenu from './CollapsedMenu';
-import moment from 'moment';
-import downloadjs from 'downloadjs'
+import { NavLink } from 'react-router-dom';
 
+// Custom components
+import AddShowModal from './AddShow/AddShowModal';
+import TimelineModal from './TimelineModal';
+
+// Actions
 import { 
     setTextFilter, 
     sortByDateAddedNewestFirst,
@@ -15,25 +19,110 @@ import {
     sortByNameAscending, 
     sortByNameDescending,
     sortByRatingAscending,
-    sortByRatingDescending } from '../../actions/filters';
-import { removeAllShows } from '../../actions/series';
-import AddShowModal from './AddShow/AddShowModal';
-import { clearStorage, setAPIKey } from '../../utils/localStorage';
-import TimelineModal from './TimelineModal';
-import { removeAllShowsFromTimeline } from '../../actions/timeline'
+    sortByRatingDescending } from '../../actions/filters'; 
+import { addCollectionToTimeline } from '../../actions/timeline';
+import { addCollection } from '../../actions/collection';
+import { filterCollection } from '../../actions/filters';
+
+// Utilities
+import { arraysEqual } from '../../utils/utilities';
+
+
+const content = (
+    <div>
+        <b>Get started</b><br/>
+        The application requires an API key. This can be added in <NavLink to="/settings#add-key" activeClassName="is-active" exact>settings</NavLink>. 
+        
+        <br/>
+        <br/>
+        <b>Settings</b><br/>
+        The settings page let's you filter which timeline events you want <br/>
+        registered in the timeline and gives you the option to turn on/off animation.
+
+        <br/>
+        <br/>
+        <b>Home</b><br/>
+        Filtering options can be opened by clicking on the arrow down below.
+
+        <br/>
+        <br/>
+        <b>About</b><br/>
+        You can read more about the app and see FAQ in <NavLink to="/about" activeClassName="is-active" exact>about</NavLink>.
+    </div>
+);
 
 
 class HomeSeriesFilter extends Component {
     state = {
         showAddShowModal: false,
-        showTimelineModal: false
+        showTimelineModal: false,
+        selectedCollectionKeys: ['Standard'],
+
+        unfilteredCollection: []
     }
     
     // componentDidUpdate() {
     //     {this.state.showAddShowModal && <AddShowModal closeModalInParent={() => this.setState({ showAddShowModal: false })}/>}
     // }
 
+    componentDidMount() {
+        this.fetchCollection(this.props, true);
+    }
+
+    // If redux state changes due to filtering
+    componentWillReceiveProps(nextProps) {
+        // Only update if there has been a change
+        if (!arraysEqual(this.props.allCollections, nextProps.allCollections)){
+            this.fetchCollection(nextProps, false);
+        }
+    };
+
+    // The props is going to be either this.props or nextProps depending on 
+    // if the function is called upon mount or update
+    fetchCollection = (props, first=false) => {
+        this.setState({ unfilteredCollection: [] })
+        
+        props && props.allCollections.map(collection => {
+            this.setState( prevState => {
+                return {
+                    unfilteredCollection: prevState.unfilteredCollection.concat({
+                        label: collection,
+                        value: collection,
+                        key: collection
+                    })
+                }
+            })
+        })
+
+        // Taking the logic in the if-sentence out will lead to the DOM re-rendering and
+        // checkboxing all collections (including those that were unchecked)
+        // if the user adds a new collection
+        if(first){
+            this.setState({ selectedCollectionKeys: props.allCollections })
+            this.props.dispatch(filterCollection({ collectionFilter:  props.allCollections }))
+        }
+
+    };
+
+    handleAddCollection = (e) => {
+        this.props.dispatch(addCollection({ name: e.target.value }));
+        this.props.dispatch(addCollectionToTimeline({ name: e.target.value }));
+    }
+
+    handleOnCollectionFilterChange = (selectedCollectionArray) => {
+        this.setState({  selectedCollectionKeys: selectedCollectionArray });
+        this.props.dispatch(filterCollection({ collectionFilter: selectedCollectionArray }))
+    };
+
     render() {
+        const tProps = {
+            treeData: this.state.unfilteredCollection,
+            value: this.state.selectedCollectionKeys,
+            onChange: this.handleOnCollectionFilterChange,
+            treeCheckable: true,
+            placeholder: 'Please select collection (multiple)',
+            style: { width: 300 },
+          };
         return (
         <div className="homeSeriesFilterContainer">
 
@@ -60,7 +149,7 @@ class HomeSeriesFilter extends Component {
 
                 <Search
                     className="searchbarInHome"
-                    placeholder="Search through your list"
+                    placeholder="Search through your list (across collections)"
                     onChange={(e) => {
                         this.props.dispatch(setTextFilter({ text: e.target.value }))
                     }}
@@ -70,24 +159,16 @@ class HomeSeriesFilter extends Component {
                 </Tooltip>
 
             </div>
+            <Popover placement="bottomRight" title={'Help'} content={content} trigger="click">
+                <Icon type="question-circle" />
+            </Popover>
+
             <Collapse bordered={false}>
                 <Panel showArrow={true} header="&nbsp;" key="1">
                 <div className="collapseableContent">
-                        <Tooltip title="This will remove every show from your collection. This will also completely wipe it locally.">
-                            <Button onClick={(e) => {
-                                this.props.dispatch(removeAllShows())
-                                clearStorage
-                                this.props.dispatch(removeAllShowsFromTimeline())
-                            }}
-                            disabled={this.props.seriesListItems === 0}
-                            type="danger"
-                            ghost
-                            >
-                                Remove all
-                            </Button>
-                        </Tooltip>
 
-                        <Select defaultValue="date_added_new_first" style={{ width: 190 }} disabled={this.props.seriesListItems === 0} onChange={value => {
+
+                        <Select defaultValue="date_added_new_first" style={{ width: 190 }} disabled={this.props.series.length === 0} onChange={value => {
                             switch(value){
                                 case 'name_ascending':
                                     return this.props.dispatch(sortByNameAscending());
@@ -111,34 +192,9 @@ class HomeSeriesFilter extends Component {
                             <Option value="rating_descending">Rating, descending</Option>
                         </Select>
 
-                        
 
-                        <Tooltip style={{ marinLeft: 100 }} title="Download a JSON formatted file">
-                            <Button className="btnDownload" onClick={(e) => {
-                                console.log('clicked on download')
-                                downloadjs( JSON.stringify(this.props.series), `TDS-${moment().format('YYYYMMDD')}.json`, 'text/json')
-                            }}
-                            disabled={this.props.seriesListItems === 0}
-                            type="primary"
-                            ghost
-                            >
-                                Download
-                            </Button>
-                        </Tooltip>
-
-
-                    <Tooltip title="Add TMDB api key (required for app to work)">
-                        <Button className="btnAddAPIKey" style={{ marinLeft: 10 }} onClick={(e) => {
-                            const key = prompt('Please provide API key here')
-                            setAPIKey(key)
-                        }}
-                        disabled={false}
-                        type="primary"
-                        ghost
-                        >
-                            Add key
-                        </Button>
-                    </Tooltip>
+                        <Input className="inputCreateCollection" placeholder="Create collection (press enter)" onPressEnter={this.handleAddCollection}/>                        
+                        <TreeSelect {...tProps} />
                 </div>
                 </Panel>
             </Collapse>
@@ -152,7 +208,8 @@ const mapStateToProps = (state) => {
     return {
         filters: state.filters,
         series: state.series,
-        seriesListItems: state.series.length
+        allCollections: state.collection,
+        settings: state.settings
     }
 }
 
