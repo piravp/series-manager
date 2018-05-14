@@ -41,7 +41,8 @@ test('Should setup addShow action object', () => {
         first_aired: '2011-08-22',
         createdAt: createdAt,
         poster_path: 'sdjlkajsdajskdj32j.jpg',
-        backdrop_path: '03kjrf02jdfj20ifj.png'
+        backdrop_path: '03kjrf02jdfj20ifj.png',
+        collection: 'Standard'
     }
     const action = addShow(addShowObject);
 
@@ -69,7 +70,8 @@ test('Should setup addShow action object with default values', () => {
             first_aired: undefined,
             createdAt: expect.any(String),
             poster_path: null,
-            backdrop_path: null
+            backdrop_path: null,
+            collection: undefined
         }
     });
 });
