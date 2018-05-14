@@ -21,7 +21,6 @@ const timelineReducer = (state = timelineReducerDefaultState, action) => {
             }
             return [...state];
         case 'REMOVE_COLLECTION_TIMELINE':
-            console.log('firing?')
             return [...state, action.info];
         case 'REMOVE_ALL_SHOWS_TIMELINE':
             return [...state, action.info];

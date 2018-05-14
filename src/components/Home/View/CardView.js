@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button, Input } from 'antd';
+import { Card, Button, Input, message } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import uuidv4 from 'uuid/v4';
@@ -69,6 +69,7 @@ class CardView extends Component {
     handleRemoveCollection = (collection) => {
         this.props.dispatch(removeCollection({ name: collection }));
         this.props.dispatch(removeCollectionTimeline({ name: collection }));
+        message.error(`A collection, ${collection}, was removed.`);        
     }
 
 

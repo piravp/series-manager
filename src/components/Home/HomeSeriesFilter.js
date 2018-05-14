@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Select, Icon, Tooltip, Collapse, TreeSelect, Popover } from 'antd'; 
+import { Input, Button, Select, Icon, Tooltip, Collapse, TreeSelect, Popover, message } from 'antd'; 
 const Search = Input.Search;
 const Option = Select.Option;
 const Panel = Collapse.Panel;
@@ -73,7 +73,7 @@ class HomeSeriesFilter extends Component {
     componentWillReceiveProps(nextProps) {
         // Only update if there has been a change
         if (!arraysEqual(this.props.allCollections, nextProps.allCollections)){
-            this.fetchCollection(nextProps, false);
+            this.fetchCollection(nextProps/*, false*/);
         }
     };
 
@@ -96,17 +96,19 @@ class HomeSeriesFilter extends Component {
 
         // Taking the logic in the if-sentence out will lead to the DOM re-rendering and
         // checkboxing all collections (including those that were unchecked)
-        // if the user adds a new collection
-        if(first){
+        // if the user adds a new collection. Also need to remove false when calling 
+        // this.fetchCollection(nextProps, false) from comWillReceiveProps
+        //if(first){
             this.setState({ selectedCollectionKeys: props.allCollections })
             this.props.dispatch(filterCollection({ collectionFilter:  props.allCollections }))
-        }
+        //}
 
     };
 
     handleAddCollection = (e) => {
         this.props.dispatch(addCollection({ name: e.target.value }));
         this.props.dispatch(addCollectionToTimeline({ name: e.target.value }));
+        message.success(`A collection, ${e.target.value}, was created.`);
     }
 
     handleOnCollectionFilterChange = (selectedCollectionArray) => {

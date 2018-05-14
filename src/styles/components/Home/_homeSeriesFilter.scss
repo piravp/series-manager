@@ -52,6 +52,9 @@
 }
 
 .collapseableContent {
+    display: flex;
+    justify-content: space-evenly;
+
     .ant-select {
         margin-left: 2rem;
     }
@@ -76,3 +79,15 @@ i.anticon.anticon-question-circle {
 i.anticon.anticon-question-circle:hover {
     cursor: pointer;
 }
+
+// .ant-select-selection--multiple {
+//     display: flex;
+//     min-height: 32px;
+//     /* cursor: text; */
+//     /* padding-bottom: 5px; */
+//     zoom: 1;
+//     height: 50px;
+//     /* overflow: scroll; */
+//     overflow-x: auto;
+//     overflow-y: hidden;
+// }
