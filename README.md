@@ -60,3 +60,7 @@ Nice! You can now navigate to http://localhost:8080 to see the result.
 * Manually adding series has not been implemented yet.
 * Sometimes opening the `HomeDetailsModal` doesn't fetch the details. The current fix is to close and re-open the modal (may require several attempts).
 * The list view in `Home` shows two empty items even though list is empty. 
+
+## Contributing
+Please fork this repository and contribute back using pull requests.
+Any contributions, large or small, major features, bug fixes, additional language translations, unit/integration tests are welcomed.

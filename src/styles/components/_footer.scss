@@ -45,12 +45,13 @@
 .designedBy {
     align-self: center;
     margin-top: 3rem;
+    color: gray;
 }
 
 .designedBy:hover {
     color: #00FC87;
     transition: 0.7s;
-    text-decoration: underline;
+    //text-decoration: underline;
 }
 
 
