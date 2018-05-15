@@ -1,3 +1,9 @@
 .homePageContainer {
     margin-bottom: 20rem;
 }
+
+
+// First time notification style
+.ant-notification-notice.ant-notification-notice-closable {
+    background-color: lightblue;
+}

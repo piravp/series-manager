@@ -1,10 +1,52 @@
 import React from 'react';
-import { Button, Tooltip } from 'antd'; 
+import { Button, Tooltip, Upload, Icon, message } from 'antd'; 
 import moment from 'moment';
 import downloadjs from 'downloadjs'
 
+const Dragger = Upload.Dragger;
+
 // Local
 import { setAPIKey } from '../../../utils/localStorage';
+
+const props = {
+    name: 'file',
+    multiple: false,
+    action: '/settings',
+    accept: '.json',
+    onChange(info) {
+      const status = info.file.status;
+      if (status !== 'uploading') {
+        console.log(info);
+      }
+      if (status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully.`);
+      } else if (status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    }
+  };
+
+
+export const SettingsUpload = () => (
+    <div>
+        <h3 id="upload">
+            <a href="#upload" className="anchor">#</a>        
+            <span>Upload</span>&nbsp;
+        </h3>
+        <span>
+            <div style={{width: '500px'}}>
+                <Dragger {...props}>
+                    <p className="ant-upload-drag-icon">
+                    <Icon type="inbox" />
+                    </p>
+                    <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                    <p className="ant-upload-hint">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+                </Dragger>
+            </div>
+            Upload your collection of series as a JSON formatted file.
+        </span>
+    </div>
+);
 
 
 export const SettingsAddKey = () => (
@@ -29,6 +71,9 @@ export const SettingsAddKey = () => (
         </span>
     </div>
 );
+
+
+
 
 export const SettingsDownload = (props) => (
     <div>

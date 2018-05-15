@@ -3,7 +3,7 @@ import { Anchor, Tag, Divider } from 'antd';
 const { Link } = Anchor;
 import { connect } from 'react-redux';
 
-import { SettingsAddKey, SettingsDownload } from './Heading3/General';
+import { SettingsAddKey, SettingsDownload, SettingsUpload } from './Heading3/General';
 import { SettingsAnimation, SettingsTimeline } from './Heading3/Home';
 import { DangerSection } from './Heading3/Danger';
 
@@ -39,6 +39,7 @@ const SettingsPage = (props) => {
                 </h2>
                 <SettingsAddKey />
                 <SettingsDownload series={props.series}/>
+                <SettingsUpload />
 
 
                 <Divider type="horizontal"/>
