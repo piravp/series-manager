@@ -9,6 +9,7 @@ const Dragger = Upload.Dragger;
 import { setAPIKey } from '../../../utils/localStorage';
 
 const props = {
+    disabled: true,
     name: 'file',
     multiple: false,
     action: '/settings',
@@ -40,7 +41,7 @@ export const SettingsUpload = () => (
                     <Icon type="inbox" />
                     </p>
                     <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                    <p className="ant-upload-hint">Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files</p>
+                    <p className="ant-upload-hint">Support for a single JSON file with all your shows, collections, settings, calendar- and timeline events.</p>
                 </Dragger>
             </div>
             Upload your collection of series as a JSON formatted file.

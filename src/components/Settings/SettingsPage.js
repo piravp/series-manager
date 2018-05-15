@@ -24,7 +24,8 @@ const SettingsPage = (props) => {
                 </Link>
                 <Link href="#search" title="Search" /> 
                 <Link href="#danger" title="Danger" >
-                    <Link href="#delete-everything" title="Delete everything" />            
+                    <Link href="#remove-shows" title="Remove shows" />                                         
+                    <Link href="#delete-everything" title="Delete everything" />   
                 </Link>
                       
             </Anchor>

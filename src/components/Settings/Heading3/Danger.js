@@ -12,14 +12,14 @@ import { clearStorage } from '../../../utils/localStorage';
 // <span>Delete everything</span>&nbsp;
 // </h3>
 export const DangerSection = (props) => (
-    <div id="delete-everything" style={{ display: 'flex', flexDirection: 'column' }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
         <RemoveShows dispatchAction={props.dispatchAction}/>
         <DeleteEverything settings={props.settings} dispatchAction={props.dispatchAction}/>
     </div>
 );
 
 const RemoveShows = (props) => (
-    <span className="settingsDeleteShows">
+    <span id="remove-shows" className="settingsDeleteShows">
         <Button onClick={(e) => {
             props.dispatchAction(removeAllShows())
             clearStorage
@@ -72,7 +72,7 @@ class DeleteEverything extends Component {
 
     render() {
         return (
-            <span className="settingsDeleteEverything">
+            <span id="delete-everything" className="settingsDeleteEverything">
                 <Popconfirm title="Are you sure about deleting everything?"
 
                     onConfirm={this.confirm}

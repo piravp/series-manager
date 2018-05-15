@@ -72,12 +72,18 @@
 }
 
 i.anticon.anticon-question-circle {
-    align-self: flex-end;
     margin-right: 2rem;
+    margin-left: 2rem;
+    font-size: 2.0rem;
 }
 
 i.anticon.anticon-question-circle:hover {
     cursor: pointer;
+}
+
+i.anticon.anticon-setting {
+    // margin-right: 2rem;
+    font-size: 1.7rem;
 }
 
 // .ant-select-selection--multiple {

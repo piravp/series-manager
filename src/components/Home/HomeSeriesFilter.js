@@ -161,9 +161,20 @@ class HomeSeriesFilter extends Component {
                 </Tooltip>
 
             </div>
-            <Popover placement="bottomRight" title={'Help'} content={content} trigger="click">
-                <Icon type="question-circle" />
-            </Popover>
+                    
+            <div style={{ alignSelf: 'flex-end', marginRight: '1rem' }}>
+                <NavLink to="/settings" activeClassName="is-active" exact>
+                    <Tooltip title="Settings"> 
+                        <Icon type="setting" />  
+                    </Tooltip>          
+                </NavLink>
+                <Popover placement="bottomRight" title={'Help'} content={content} trigger="click">
+                    <Tooltip title="Help"> 
+                        <Icon type="question-circle" />
+                    </Tooltip>
+                </Popover>
+            </div>
+
 
             <Collapse bordered={false}>
                 <Panel showArrow={true} header="&nbsp;" key="1">
