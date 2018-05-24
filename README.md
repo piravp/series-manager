@@ -52,7 +52,7 @@ yarn run dev-server
 Nice! You can now navigate to http://localhost:8080 to see the result.
 
 ## Demo
-[![The Designated Show - A series manager](https://img.youtube.com/vi/mGudgU-Nn2U/0.jpg)](https://www.youtube.com/watch?v=mGudgU-Nn2U)
+[![The Designated Show - A series manager](https://img.youtube.com/vi/wCUCFb-Yr5I/0.jpg)](https://youtu.be/wCUCFb-Yr5I)
 
 **[Click here for live demo](https://the-designated-show.herokuapp.com/)** (remember to add API key, as discussed above)
 
