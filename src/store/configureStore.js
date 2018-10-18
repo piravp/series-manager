@@ -23,7 +23,7 @@ const configureStore = () => {
 
     const storeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-    const middlewares = compose(applyMiddleware(asyncDispatchMiddleware), storeEnhancer);
+    const middlewares = storeEnhancer ? compose(applyMiddleware(asyncDispatchMiddleware), storeEnhancer) : compose(applyMiddleware(asyncDispatchMiddleware));
 
     // Initialize store
     const store = createStore(rootReducer, preloadedState, middlewares);
