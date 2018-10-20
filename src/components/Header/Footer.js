@@ -15,7 +15,7 @@ const Footer = () => (
             <div className="footerCol">
                 <h4>Social media</h4>
                 <a target="_blank" href="https://github.com/piravp/series-manager"><Icon type="github" />&nbsp;&nbsp;GitHub</a>
-                <a target="_blank" href="https://youtu.be/mGudgU-Nn2U"><Icon type="youtube" />&nbsp;&nbsp;YouTube</a>                            
+                <a target="_blank" href="https://youtu.be/wCUCFb-Yr5I"><Icon type="youtube" />&nbsp;&nbsp;YouTube</a>                            
             </div>
             </div>
 

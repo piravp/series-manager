@@ -28,7 +28,7 @@ const AboutPage = () => (
                 <a href="#credit" className="anchor">#</a>                
                 <span>Credits</span>&nbsp;
             </h2>
-            <img width="200" height="78" src="https://www.themoviedb.org/static_cache/v4/logos/408x161-powered-by-rectangle-green-bb4301c10ddc749b4e79463811a68afebeae66ef43d17bcfd8ff0e60ded7ce99.png" />
+            <img width="200" height="78" src="https://www.themoviedb.org/assets/1/v4/logos/408x161-powered-by-rectangle-green-bb4301c10ddc749b4e79463811a68afebeae66ef43d17bcfd8ff0e60ded7ce99.png" />
             
 
             <Divider type="horizontal"/>
@@ -108,7 +108,7 @@ const AboutPage = () => (
                     </li>
                 </ul>
 
-                For the full list, please visit the <a target="_blank" href="https://github.com/piravp/series-manager/issues">GitHub page</a>.
+                For the complete list, please visit the <a target="_blank" href="https://github.com/piravp/series-manager/issues">GitHub page</a>.
             </span>
             </div>
         </div>
